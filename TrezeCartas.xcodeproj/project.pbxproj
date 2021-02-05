@@ -1,0 +1,613 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF225CDB48000D899D2 /* AppDelegate.swift */; };
+		8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF425CDB48000D899D2 /* SceneDelegate.swift */; };
+		8908FAF725CDB48000D899D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF625CDB48000D899D2 /* ContentView.swift */; };
+		8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */; };
+		8908FAFC25CDB48200D899D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8908FAFB25CDB48200D899D2 /* Assets.xcassets */; };
+		8908FAFF25CDB48200D899D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8908FAFE25CDB48200D899D2 /* Preview Assets.xcassets */; };
+		8908FB0225CDB48200D899D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8908FB0025CDB48200D899D2 /* LaunchScreen.storyboard */; };
+		8908FB0D25CDB48200D899D2 /* TrezeCartasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FB0C25CDB48200D899D2 /* TrezeCartasTests.swift */; };
+		8908FB1825CDB48200D899D2 /* TrezeCartasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FB1725CDB48200D899D2 /* TrezeCartasUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8908FB0925CDB48200D899D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8908FAE725CDB48000D899D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8908FAEE25CDB48000D899D2;
+			remoteInfo = TrezeCartas;
+		};
+		8908FB1425CDB48200D899D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8908FAE725CDB48000D899D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8908FAEE25CDB48000D899D2;
+			remoteInfo = TrezeCartas;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8908FAEF25CDB48000D899D2 /* TrezeCartas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrezeCartas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8908FAF225CDB48000D899D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8908FAF425CDB48000D899D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8908FAF625CDB48000D899D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8908FAF925CDB48000D899D2 /* TrezeCartas.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrezeCartas.xcdatamodel; sourceTree = "<group>"; };
+		8908FAFB25CDB48200D899D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8908FAFE25CDB48200D899D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8908FB0125CDB48200D899D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8908FB0325CDB48200D899D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8908FB0825CDB48200D899D2 /* TrezeCartasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrezeCartasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8908FB0C25CDB48200D899D2 /* TrezeCartasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrezeCartasTests.swift; sourceTree = "<group>"; };
+		8908FB0E25CDB48200D899D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8908FB1325CDB48200D899D2 /* TrezeCartasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrezeCartasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8908FB1725CDB48200D899D2 /* TrezeCartasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrezeCartasUITests.swift; sourceTree = "<group>"; };
+		8908FB1925CDB48200D899D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8908FAEC25CDB48000D899D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8908FB0525CDB48200D899D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8908FB1025CDB48200D899D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8908FAE625CDB48000D899D2 = {
+			isa = PBXGroup;
+			children = (
+				8908FAF125CDB48000D899D2 /* TrezeCartas */,
+				8908FB0B25CDB48200D899D2 /* TrezeCartasTests */,
+				8908FB1625CDB48200D899D2 /* TrezeCartasUITests */,
+				8908FAF025CDB48000D899D2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8908FAF025CDB48000D899D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8908FAEF25CDB48000D899D2 /* TrezeCartas.app */,
+				8908FB0825CDB48200D899D2 /* TrezeCartasTests.xctest */,
+				8908FB1325CDB48200D899D2 /* TrezeCartasUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8908FAF125CDB48000D899D2 /* TrezeCartas */ = {
+			isa = PBXGroup;
+			children = (
+				8908FAF225CDB48000D899D2 /* AppDelegate.swift */,
+				8908FAF425CDB48000D899D2 /* SceneDelegate.swift */,
+				8908FAF625CDB48000D899D2 /* ContentView.swift */,
+				8908FAFB25CDB48200D899D2 /* Assets.xcassets */,
+				8908FB0025CDB48200D899D2 /* LaunchScreen.storyboard */,
+				8908FB0325CDB48200D899D2 /* Info.plist */,
+				8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */,
+				8908FAFD25CDB48200D899D2 /* Preview Content */,
+			);
+			path = TrezeCartas;
+			sourceTree = "<group>";
+		};
+		8908FAFD25CDB48200D899D2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8908FAFE25CDB48200D899D2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8908FB0B25CDB48200D899D2 /* TrezeCartasTests */ = {
+			isa = PBXGroup;
+			children = (
+				8908FB0C25CDB48200D899D2 /* TrezeCartasTests.swift */,
+				8908FB0E25CDB48200D899D2 /* Info.plist */,
+			);
+			path = TrezeCartasTests;
+			sourceTree = "<group>";
+		};
+		8908FB1625CDB48200D899D2 /* TrezeCartasUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8908FB1725CDB48200D899D2 /* TrezeCartasUITests.swift */,
+				8908FB1925CDB48200D899D2 /* Info.plist */,
+			);
+			path = TrezeCartasUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8908FAEE25CDB48000D899D2 /* TrezeCartas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8908FB1C25CDB48200D899D2 /* Build configuration list for PBXNativeTarget "TrezeCartas" */;
+			buildPhases = (
+				8908FAEB25CDB48000D899D2 /* Sources */,
+				8908FAEC25CDB48000D899D2 /* Frameworks */,
+				8908FAED25CDB48000D899D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrezeCartas;
+			productName = TrezeCartas;
+			productReference = 8908FAEF25CDB48000D899D2 /* TrezeCartas.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8908FB0725CDB48200D899D2 /* TrezeCartasTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8908FB1F25CDB48200D899D2 /* Build configuration list for PBXNativeTarget "TrezeCartasTests" */;
+			buildPhases = (
+				8908FB0425CDB48200D899D2 /* Sources */,
+				8908FB0525CDB48200D899D2 /* Frameworks */,
+				8908FB0625CDB48200D899D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8908FB0A25CDB48200D899D2 /* PBXTargetDependency */,
+			);
+			name = TrezeCartasTests;
+			productName = TrezeCartasTests;
+			productReference = 8908FB0825CDB48200D899D2 /* TrezeCartasTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8908FB1225CDB48200D899D2 /* TrezeCartasUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8908FB2225CDB48200D899D2 /* Build configuration list for PBXNativeTarget "TrezeCartasUITests" */;
+			buildPhases = (
+				8908FB0F25CDB48200D899D2 /* Sources */,
+				8908FB1025CDB48200D899D2 /* Frameworks */,
+				8908FB1125CDB48200D899D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8908FB1525CDB48200D899D2 /* PBXTargetDependency */,
+			);
+			name = TrezeCartasUITests;
+			productName = TrezeCartasUITests;
+			productReference = 8908FB1325CDB48200D899D2 /* TrezeCartasUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8908FAE725CDB48000D899D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					8908FAEE25CDB48000D899D2 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					8908FB0725CDB48200D899D2 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 8908FAEE25CDB48000D899D2;
+					};
+					8908FB1225CDB48200D899D2 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 8908FAEE25CDB48000D899D2;
+					};
+				};
+			};
+			buildConfigurationList = 8908FAEA25CDB48000D899D2 /* Build configuration list for PBXProject "TrezeCartas" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8908FAE625CDB48000D899D2;
+			productRefGroup = 8908FAF025CDB48000D899D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8908FAEE25CDB48000D899D2 /* TrezeCartas */,
+				8908FB0725CDB48200D899D2 /* TrezeCartasTests */,
+				8908FB1225CDB48200D899D2 /* TrezeCartasUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8908FAED25CDB48000D899D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8908FB0225CDB48200D899D2 /* LaunchScreen.storyboard in Resources */,
+				8908FAFF25CDB48200D899D2 /* Preview Assets.xcassets in Resources */,
+				8908FAFC25CDB48200D899D2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8908FB0625CDB48200D899D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8908FB1125CDB48200D899D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8908FAEB25CDB48000D899D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */,
+				8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */,
+				8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */,
+				8908FAF725CDB48000D899D2 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8908FB0425CDB48200D899D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8908FB0D25CDB48200D899D2 /* TrezeCartasTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8908FB0F25CDB48200D899D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8908FB1825CDB48200D899D2 /* TrezeCartasUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8908FB0A25CDB48200D899D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8908FAEE25CDB48000D899D2 /* TrezeCartas */;
+			targetProxy = 8908FB0925CDB48200D899D2 /* PBXContainerItemProxy */;
+		};
+		8908FB1525CDB48200D899D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8908FAEE25CDB48000D899D2 /* TrezeCartas */;
+			targetProxy = 8908FB1425CDB48200D899D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8908FB0025CDB48200D899D2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8908FB0125CDB48200D899D2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8908FB1A25CDB48200D899D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8908FB1B25CDB48200D899D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8908FB1D25CDB48200D899D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TrezeCartas/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartas;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8908FB1E25CDB48200D899D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TrezeCartas/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartas;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8908FB2025CDB48200D899D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrezeCartasTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrezeCartas.app/TrezeCartas";
+			};
+			name = Debug;
+		};
+		8908FB2125CDB48200D899D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrezeCartasTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrezeCartas.app/TrezeCartas";
+			};
+			name = Release;
+		};
+		8908FB2325CDB48200D899D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrezeCartasUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartasUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrezeCartas;
+			};
+			name = Debug;
+		};
+		8908FB2425CDB48200D899D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrezeCartasUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartasUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrezeCartas;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8908FAEA25CDB48000D899D2 /* Build configuration list for PBXProject "TrezeCartas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8908FB1A25CDB48200D899D2 /* Debug */,
+				8908FB1B25CDB48200D899D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8908FB1C25CDB48200D899D2 /* Build configuration list for PBXNativeTarget "TrezeCartas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8908FB1D25CDB48200D899D2 /* Debug */,
+				8908FB1E25CDB48200D899D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8908FB1F25CDB48200D899D2 /* Build configuration list for PBXNativeTarget "TrezeCartasTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8908FB2025CDB48200D899D2 /* Debug */,
+				8908FB2125CDB48200D899D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8908FB2225CDB48200D899D2 /* Build configuration list for PBXNativeTarget "TrezeCartasUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8908FB2325CDB48200D899D2 /* Debug */,
+				8908FB2425CDB48200D899D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8908FAF925CDB48000D899D2 /* TrezeCartas.xcdatamodel */,
+			);
+			currentVersion = 8908FAF925CDB48000D899D2 /* TrezeCartas.xcdatamodel */;
+			path = TrezeCartas.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8908FAE725CDB48000D899D2 /* Project object */;
+}
