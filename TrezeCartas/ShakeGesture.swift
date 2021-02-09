@@ -24,7 +24,7 @@ struct ShakeGesture: View {
                     self.blur += 1
                     self.message = "Agitei \(blur) vezes"
                 }
-        }
+        }.blur(radius: CGFloat(blur))
     }
 }
 

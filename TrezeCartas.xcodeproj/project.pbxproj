@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08831D9225D1DB810090D3E9 /* ExtensionColor.swift */; };
 		08EFE00425CF3BCD00086BFB /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */; };
 		08EFE00925CF3DD700086BFB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00825CF3DD700086BFB /* CardView.swift */; };
 		08EFE00E25CF4B7D00086BFB /* ContentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00D25CF4B7D00086BFB /* ContentView2.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08831D9225D1DB810090D3E9 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
 		08EFE00825CF3DD700086BFB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		08EFE00D25CF4B7D00086BFB /* ContentView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView2.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				8908FAF625CDB48000D899D2 /* ContentView.swift */,
 				08EFE00825CF3DD700086BFB /* CardView.swift */,
 				08EFE00D25CF4B7D00086BFB /* ContentView2.swift */,
+				08831D9225D1DB810090D3E9 /* ExtensionColor.swift */,
 				08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */,
 				8908FAFB25CDB48200D899D2 /* Assets.xcassets */,
 				8908FB0025CDB48200D899D2 /* LaunchScreen.storyboard */,
@@ -281,6 +284,7 @@
 				8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */,
 				08EFE00425CF3BCD00086BFB /* ShakeGesture.swift in Sources */,
 				8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */,
+				08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */,
 				8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */,
 				08EFE00E25CF4B7D00086BFB /* ContentView2.swift in Sources */,
 				08EFE00925CF3DD700086BFB /* CardView.swift in Sources */,

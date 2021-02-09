@@ -68,7 +68,9 @@ struct ContentView2: View {
             GeometryReader { geometry in
                 // 5
                 VStack {
-                    //DateView()
+                    // aqui entra os status
+                    Spacer()
+                        .frame(height: 155)
                     
                     // 6
                     ZStack {
@@ -81,18 +83,73 @@ struct ContentView2: View {
                             if (self.maxID - 3)...self.maxID ~= user.id {
                                 // Normal Card View being rendered here.
                                 //CardView()
-                                // 8
+                                
                                 CardView(user: user, onRemove: { removedUser in
                                     // Remove that user from our array
                                     self.users.removeAll { $0.id == removedUser.id }
                                 })
                                 .animation(.spring())
-                                .frame(width: self.getCardWidth(geometry, id: user.id), height: 400)
+                                .frame(width: self.getCardWidth(geometry, id: user.id), height: 450)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: user.id))
+                                //.opacity(Double(self.getCardOffset(geometry, id: user.id))/20)
+                                
+                                
                             }
                         }
                     }
+                    
+                    Spacer().frame(height: 50)
+                    HStack {
+                        Button(action: {
+                            // acao do botao
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Text("Primeira escolha")
+                                    //.font(.custom("Raleway-Bold", size: 18))
+                                    .font(.system(size: 20))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                                    .padding()
+                                Spacer()
+                            }
+                            
+                        }).frame(height: 80)
+                        .clipped()
+                        .background(Color.gray)
+                        .cornerRadius(10)
+                        //.shadow(radius: 5)
+                        
+                        Spacer()
+                            .frame(width: 7)
+                        
+                        Button(action: {
+                            // acao do botao
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Text("Segunda escolha")
+                                    .font(.system(size: 20))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                                    .padding()
+                                Spacer()
+                            }
+                            
+                        }).frame(height: 80)
+                        .clipped()
+                        .background(Color.gray)
+                        .cornerRadius(10)
+                        //.shadow(radius: 5)
+                    }
+                    
+                    
                     Spacer()
+                        .frame(height: 100)
                 }
             }
         }.padding()
