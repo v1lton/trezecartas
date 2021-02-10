@@ -13,6 +13,8 @@ struct CardView: View {
     @State private var cardStatus: Cards = .front
     @State var degrees: Double = 0.0
     
+    @Binding var teste: Int
+    
     @Binding var health: Int
     @Binding var money: Int
     @Binding var drugs: Int
@@ -32,12 +34,13 @@ struct CardView: View {
         case back, front, none
     }
     
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void/*, op1: Binding<String>*/, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void/*, op1: Binding<String>*/, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, teste: Binding<Int>) {
         self.card = card
         self.onRemove = onRemove
         self._health = health
         self._money = money
         self._drugs = drugs
+        self._teste = teste
         //self._op1 = op1
     }
     
@@ -56,6 +59,7 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
+            
                 if cardStatus == .front {
                     /// card pergunta
                     ZStack(alignment: self.swipeStatus == .right ? .bottomLeading : .bottomTrailing) {
@@ -66,7 +70,7 @@ struct CardView: View {
                             Image(uiImage: card.cardImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(height: 176)
+                                .frame(height: 200)
                                 .clipped()
                                 .cornerRadius(10)
                                 //.cornerRadius(10, corners: [.topLeft, .topRight])
@@ -105,7 +109,7 @@ struct CardView: View {
                                 .frame(width: 170.0)
                                 .shadow(radius: 5)
                                 .padding(.leading, 50)
-                                .padding(.bottom, 100)
+                                .padding(.bottom, 150)
                                 .rotationEffect(Angle.degrees(-25))
                         } else if self.swipeStatus == .right {
                             Rectangle()
@@ -121,7 +125,7 @@ struct CardView: View {
                                 .frame(width: 170.0)
                                 .shadow(radius: 5)
                                 .padding(.trailing, 50)
-                                .padding(.bottom, 100)
+                                .padding(.bottom, 150)
                                 .rotationEffect(Angle.degrees(25))
                         }
                     }.frame(width: geometry.size.width, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -269,9 +273,16 @@ struct CardView: View {
             .offset(x: cardStatus == .front ? self.translation.width : -self.translation.width, y: 0)
             .rotationEffect(.degrees(Double((cardStatus == .front ? self.translation.width : -self.translation.width) / geometry.size.width) * 25), anchor: .bottom)
             .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
-            //            .onAppear(perform: {
-            //                self.op1 = "\(user.leftOption)"
-            //            })
+//            .onAppear {
+//                if card.id == teste {
+//                    cardStatus = .front
+//                }
+//            }
+//            .onChange(of: /*@START_MENU_TOKEN@*/"Value"/*@END_MENU_TOKEN@*/, perform: { value in
+//                if card.id == teste {
+//                    cardStatus = .front
+//                }
+//            })
             .gesture(
                 DragGesture()
                     .onChanged { value in
@@ -301,7 +312,16 @@ struct CardView: View {
                             if swipeStatus == .right {
                                 self.health += card.rightStatus[0]
                                 self.money += card.rightStatus[1]
-                                self.drugs += card.rightStatus[2]
+                                if card.rightStatus[2] == 0 {
+                                    self.drugs -= 1
+                                } else {
+                                    self.drugs += card.rightStatus[2]
+                                }
+                                // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
+                                self.health = self.health.clamped(to: 0...10)
+                                self.money = self.money.clamped(to: 0...10)
+                                self.drugs = self.drugs.clamped(to: 0...10)
+                                
                                 cardStatus = .back
                                 withAnimation {
                                     self.degrees -= 180
@@ -309,7 +329,16 @@ struct CardView: View {
                             } else if swipeStatus == .left {
                                 self.health += card.leftStatus[0]
                                 self.money += card.leftStatus[1]
-                                self.drugs += card.leftStatus[2]
+                                if card.leftStatus[2] == 0 {
+                                    self.drugs -= 1
+                                } else {
+                                    self.drugs += card.leftStatus[2]
+                                }
+                                // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
+                                self.health = self.health.clamped(to: 0...10)
+                                self.money = self.money.clamped(to: 0...10)
+                                self.drugs = self.drugs.clamped(to: 0...10)
+                                
                                 cardStatus = .back
                                 withAnimation {
                                     self.degrees += 180

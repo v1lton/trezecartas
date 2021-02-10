@@ -16,11 +16,15 @@ struct ContentView2: View {
     
     @State var op1 = "socorro"
     
+    @State var teste: Int = 2
+    
     /// teste de cards
     @State var cards: [Card] = [
         Card(id: 0, cardImage: UIImage(named: "teste")!, cardName: "O Boy Magia", cardText: "Você está pulando atrás de um bloco com seus amigos e o seu crush aparece no meio da multidão. Calma, ele está te chamando?", leftOption: "Encontrar o boy", rightOption: "Dar um tchauzinho", leftAnswer: "Você foi até o boy e ele já foi te beijando. PQP, o boy beija bem demais! Mas calma, onde foram parar o bloco e seus amigo? Acho que você se perdeu deles.", rightAnswer: "Você vê o boy acenando de volta, ele parece um pouco desapontado. Mas calma, não se desespere, logo ali o latão é 3 é 10! Bom que já afoga a mágoa com os amigos e segue o bloco.", leftStatus: [-2, 0, 0], rightStatus: [1, -1, 1]),
         Card(id: 1, cardImage: UIImage(named: "teste")!, cardName: "O Boy Magia", cardText: "Você está pulando atrás de um bloco com seus amigos e o seu crush aparece no meio da multidão. Calma, ele está te chamando?", leftOption: "meu cu ", rightOption: "Dar um tchauzinho", leftAnswer: "Você foi até o boy e ele já foi te beijando. PQP, o boy beija bem demais! Mas calma, onde foram parar o bloco e seus amigo? Acho que você se perdeu deles.", rightAnswer: "Você vê o boy acenando de volta, ele parece um pouco desapontado. Mas calma, não se desespere, logo ali o latão é 3 é 10! Bom que já afoga a mágoa com os amigos e segue o bloco.", leftStatus: [-2, 0, 0], rightStatus: [1, -1, 1]),
-        Card(id: 2, cardImage: UIImage(named: "teste")!, cardName: "O Boy Magia", cardText: "Você está pulando atrás de um bloco com seus amigos e o seu crush aparece no meio da multidão. Calma, ele está te chamando?", leftOption: "Encontrar o boy", rightOption: "Dar um tchauzinho", leftAnswer: "Você foi até o boy e ele já foi te beijando. PQP, o boy beija bem demais! Mas calma, onde foram parar o bloco e seus amigo? Acho que você se perdeu deles.", rightAnswer: "Você vê o boy acenando de volta, ele parece um pouco desapontado. Mas calma, não se desespere, logo ali o latão é 3 é 10! Bom que já afoga a mágoa com os amigos e segue o bloco.", leftStatus: [-2, 0, 0], rightStatus: [1, -1, 1])
+        Card(id: 2, cardImage: UIImage(named: "teste")!, cardName: "O Boy Magia", cardText: "Você está pulando atrás de um bloco com seus amigos e o seu crush aparece no meio da multidão. Calma, ele está te chamando?", leftOption: "Encontrar o boy", rightOption: "Dar um tchauzinho", leftAnswer: "Você foi até o boy e ele já foi te beijando. PQP, o boy beija bem demais! Mas calma, onde foram parar o bloco e seus amigo? Acho que você se perdeu deles.", rightAnswer: "Você vê o boy acenando de volta, ele parece um pouco desapontado. Mas calma, não se desespere, logo ali o latão é 3 é 10! Bom que já afoga a mágoa com os amigos e segue o bloco.", leftStatus: [-2, 0, 0], rightStatus: [1, -1, 1]),
+        Card(id: 3, cardImage: UIImage(named: "teste")!, cardName: "O Boy Magia", cardText: "Você está pulando atrás de um bloco com seus amigos e o seu crush aparece no meio da multidão. Calma, ele está te chamando?", leftOption: "Encontrar o boy", rightOption: "Dar um tchauzinho", leftAnswer: "Você foi até o boy e ele já foi te beijando. PQP, o boy beija bem demais! Mas calma, onde foram parar o bloco e seus amigo? Acho que você se perdeu deles.", rightAnswer: "Você vê o boy acenando de volta, ele parece um pouco desapontado. Mas calma, não se desespere, logo ali o latão é 3 é 10! Bom que já afoga a mágoa com os amigos e segue o bloco.", leftStatus: [-2, 0, 0], rightStatus: [1, -1, 1]),
+        Card(id: 4, cardImage: UIImage(named: "teste")!, cardName: "O Boy Magia", cardText: "Você está pulando atrás de um bloco com seus amigos e o seu crush aparece no meio da multidão. Calma, ele está te chamando?", leftOption: "Encontrar o boy", rightOption: "Dar um tchauzinho", leftAnswer: "Você foi até o boy e ele já foi te beijando. PQP, o boy beija bem demais! Mas calma, onde foram parar o bloco e seus amigo? Acho que você se perdeu deles.", rightAnswer: "Você vê o boy acenando de volta, ele parece um pouco desapontado. Mas calma, não se desespere, logo ali o latão é 3 é 10! Bom que já afoga a mágoa com os amigos e segue o bloco.", leftStatus: [-2, 0, 0], rightStatus: [1, -1, 1])
     ]
     
     /// Return the CardViews width for the given offset in the array
@@ -46,30 +50,29 @@ struct ContentView2: View {
     }
     
     var body: some View {
-        VStack {
+        VStack (alignment: .center){
             GeometryReader { geometry in
                 VStack {
-                    // aqui entra os status
+                    Spacer()
+                    
+                    // status
                     VStack {
-                        Text("health: \(health)")
-                        Text("money: \(money)")
-                        Text("drugs: \(drugs)")
-                    }.frame(height: 155)
-//                    Spacer()
-//                        .frame(height: 155)
+                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(height: 50)
+                            .clipped()
+                    }.padding()
                     
                     ZStack {
                         ForEach(self.cards, id: \.self) { cardss in
-                            
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
                             if (self.maxID - 3)...self.maxID ~= cardss.id {
                                 CardView(card: cardss, onRemove: { removedCard in
                                     // Remove that user from our array
+                                    teste -= teste
                                     self.cards.removeAll { $0.id == removedCard.id }
-                                }, health: $health, money: $money, drugs: $drugs)
+                                }, health: $health, money: $money, drugs: $drugs, teste: $teste)
                                 .animation(.spring())
-                                .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 450)
+                                .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
   
                             }
@@ -79,7 +82,7 @@ struct ContentView2: View {
                     Spacer().frame(height: 50)
                     HStack {
                         Button(action: {
-                            // acao do botao
+                            //self.teste = true
                         }, label: {
                             HStack {
                                 Spacer()
@@ -127,12 +130,26 @@ struct ContentView2: View {
                         .frame(height: 100)
                 }
             }
-        }.padding()
+        }
+        .preferredColorScheme(.light)
+        .blur(radius: CGFloat(drugs)/2)
+        .padding()
+        .background(Color.brancoColor)
+        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
+            self.drugs += 1
+        }
     }
 }
 
 struct ContentView2_Previews: PreviewProvider {
     static var previews: some View {
         ContentView2()
+    }
+}
+
+extension Comparable {
+    func clamped(to limits: ClosedRange<Self>) -> Self {
+        return min(max(self, limits.lowerBound), limits.upperBound)
     }
 }
