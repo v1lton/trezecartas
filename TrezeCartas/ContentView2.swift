@@ -6,8 +6,6 @@
 //
 import SwiftUI
 
-
-
 struct ContentView2: View {
     
     @State var health = 10
@@ -15,6 +13,8 @@ struct ContentView2: View {
     @State var drugs = 0
     @State var leftOption: String = ""
     @State var rightOption: String = ""
+    @State var leftBool: Bool = false
+    @State var rightBool: Bool = false
     
     /// teste de cards
     @State var cards: [Card] = [
@@ -39,7 +39,7 @@ struct ContentView2: View {
     private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
         return  CGFloat(cards.count - 1 - id) * 10
     }
-    
+        
     // Compute what the max ID in the given users array is.
     private var maxID: Int {
         return self.cards.map { $0.id }.max() ?? 0
@@ -55,31 +55,31 @@ struct ContentView2: View {
                         Text("money: \(money)")
                         Text("drugs: \(drugs)")
                     }.frame(height: 155)
-//                    Spacer()
-//                        .frame(height: 155)
                     
+                    // CardView
                     ZStack {
+                    
                         ForEach(self.cards, id: \.self) { cardss in
-                            
+                        
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
                             if (self.maxID)...self.maxID ~= cardss.id {
                                 CardView(card: cardss, onRemove: { removedCard in
                                     // Remove that user from our array
                                     self.cards.removeAll { $0.id == removedCard.id }
-                                }, leftOption: $leftOption, rightOption: $rightOption, health: $health, money: $money, drugs: $drugs)
+                                }, leftOption: $leftOption, rightOption: $rightOption, leftBool: $leftBool, rightBool: $rightBool, health: $health, money: $money, drugs: $drugs)
                                 .animation(.spring())
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 450)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
-  
                             }
                         }
+                        
                     }
                     
-                    Spacer().frame(height: 50)
+                    //Spacer().frame(height: 50)
                     HStack {
                         Button(action: {
-                            // acao do botao
+                            self.leftBool = !self.leftBool
                         }, label: {
                             HStack {
                                 Spacer()
@@ -100,10 +100,10 @@ struct ContentView2: View {
                         .cornerRadius(10)
                         
                         Spacer()
-                            .frame(width: 7)
+                            //.frame(width:)
                         
                         Button(action: {
-                            // acao do botao
+                            self.rightBool = !self.rightBool
                         }, label: {
                             HStack {
                                 Spacer()
@@ -123,8 +123,22 @@ struct ContentView2: View {
                         .cornerRadius(10)
                     }
                     
-                    Spacer()
-                        .frame(height: 100)
+                    //Spacer()
+                                            
+                    HStack {
+                        HStack {
+                            Spacer()
+                            Image("lata")
+                                .offset(x: -10)
+                            Text("Agite para o \nsucesso")
+                                .font(.system(size: 16))
+                                .fontWeight(.semibold)
+                                .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                                .padding(0.0)
+                            Spacer()
+                            
+                        }
+                    }
                 }
             }
         }.padding()

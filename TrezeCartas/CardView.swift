@@ -18,6 +18,8 @@ struct CardView: View {
     @Binding var health: Int
     @Binding var money: Int
     @Binding var drugs: Int
+    @Binding var leftBool: Bool
+    @Binding var rightBool: Bool
     
     private var card: Card
     private var onRemove: (_ user: Card) -> Void
@@ -32,11 +34,13 @@ struct CardView: View {
         case back, front, none
     }
     
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, leftOption: Binding<String>, rightOption: Binding<String>, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, leftOption: Binding<String>, rightOption: Binding<String>, leftBool: Binding<Bool>, rightBool: Binding<Bool>, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>) {
         self.card = card
         self.onRemove = onRemove
         self._leftOption = leftOption
         self._rightOption = rightOption
+        self._leftBool = leftBool
+        self._rightBool = rightBool
         self._health = health
         self._money = money
         self._drugs = drugs
@@ -57,6 +61,14 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
+                Toggle("", isOn: $leftBool)
+                    .onReceive([self.leftBool].publisher.first()) { (value) in
+                        if leftBool {
+                            cardStatus = .back
+                        }
+                    }
+                    .frame(width: 0, height: 0)
+                    .hidden()
                 if cardStatus == .front {
                     /// card pergunta
                     ZStack(alignment: self.swipeStatus == .right ? .bottomLeading : .bottomTrailing) {
@@ -274,9 +286,6 @@ struct CardView: View {
             .offset(x: cardStatus == .front ? self.translation.width : -self.translation.width, y: 0)
             .rotationEffect(.degrees(Double((cardStatus == .front ? self.translation.width : -self.translation.width) / geometry.size.width) * 25), anchor: .bottom)
             .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
-            //            .onAppear(perform: {
-            //                self.op1 = "\(user.leftOption)"
-            //            })
             .gesture(
                 DragGesture()
                     .onChanged { value in
@@ -323,7 +332,6 @@ struct CardView: View {
                                 self.translation = .zero
                             }
                             self.translation = .zero
-                            
                         }
                         
                     }
