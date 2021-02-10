@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0872A21325D30C0C00E2A466 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0872A21225D30C0C00E2A466 /* Card.swift */; };
 		08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08831D9225D1DB810090D3E9 /* ExtensionColor.swift */; };
 		08EFE00425CF3BCD00086BFB /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */; };
 		08EFE00925CF3DD700086BFB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00825CF3DD700086BFB /* CardView.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0872A21225D30C0C00E2A466 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		08831D9225D1DB810090D3E9 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
 		08EFE00825CF3DD700086BFB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				8908FAF625CDB48000D899D2 /* ContentView.swift */,
 				08EFE00825CF3DD700086BFB /* CardView.swift */,
 				08EFE00D25CF4B7D00086BFB /* ContentView2.swift */,
+				0872A21225D30C0C00E2A466 /* Card.swift */,
 				08831D9225D1DB810090D3E9 /* ExtensionColor.swift */,
 				08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */,
 				8908FAFB25CDB48200D899D2 /* Assets.xcassets */,
@@ -282,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */,
+				0872A21325D30C0C00E2A466 /* Card.swift in Sources */,
 				08EFE00425CF3BCD00086BFB /* ShakeGesture.swift in Sources */,
 				8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */,
 				08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */,
