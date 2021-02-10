@@ -13,8 +13,8 @@ struct ContentView2: View {
     @State var health = 10
     @State var money = 10
     @State var drugs = 0
-    
-    @State var op1 = "socorro"
+    @State var leftOption: String = ""
+    @State var rightOption: String = ""
     
     /// teste de cards
     @State var cards: [Card] = [
@@ -63,11 +63,11 @@ struct ContentView2: View {
                             
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
-                            if (self.maxID - 3)...self.maxID ~= cardss.id {
+                            if (self.maxID)...self.maxID ~= cardss.id {
                                 CardView(card: cardss, onRemove: { removedCard in
                                     // Remove that user from our array
                                     self.cards.removeAll { $0.id == removedCard.id }
-                                }, health: $health, money: $money, drugs: $drugs)
+                                }, leftOption: $leftOption, rightOption: $rightOption, health: $health, money: $money, drugs: $drugs)
                                 .animation(.spring())
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 450)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
@@ -83,7 +83,7 @@ struct ContentView2: View {
                         }, label: {
                             HStack {
                                 Spacer()
-                                Text(op1)
+                                Text(leftOption)
                                     //.font(.custom("Raleway-Bold", size: 18))
                                     .font(.system(size: 20))
                                     .fontWeight(.semibold)
@@ -107,7 +107,7 @@ struct ContentView2: View {
                         }, label: {
                             HStack {
                                 Spacer()
-                                Text("Segunda escolha")
+                                Text(rightOption)
                                     .font(.system(size: 20))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
