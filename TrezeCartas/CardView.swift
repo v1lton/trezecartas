@@ -13,11 +13,11 @@ struct CardView: View {
     @State private var cardStatus: Cards = .front
     @State var degrees: Double = 0.0
     
+    @Binding var leftOption: String
+    @Binding var rightOption: String
     @Binding var health: Int
     @Binding var money: Int
     @Binding var drugs: Int
-    
-    //@Binding var op1: String
     
     private var card: Card
     private var onRemove: (_ user: Card) -> Void
@@ -32,13 +32,14 @@ struct CardView: View {
         case back, front, none
     }
     
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void/*, op1: Binding<String>*/, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, leftOption: Binding<String>, rightOption: Binding<String>, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>) {
         self.card = card
         self.onRemove = onRemove
+        self._leftOption = leftOption
+        self._rightOption = rightOption
         self._health = health
         self._money = money
         self._drugs = drugs
-        //self._op1 = op1
     }
     
     /// What percentage of our own width have we swipped
@@ -262,6 +263,10 @@ struct CardView: View {
                     }
                 }
             }
+            .onAppear(perform: {
+                self.leftOption = card.leftOption
+                self.rightOption = card.rightOption
+            })
             .background(Color.roxoColor)
             .cornerRadius(10)
             .shadow(radius: 5)
