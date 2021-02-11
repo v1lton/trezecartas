@@ -19,7 +19,7 @@ struct ContentView2: View {
     
     @State var maxIntID: Int = 12
     
-    @State var cards = CardData().cards
+    @State var cards = CardData().getShuffledCards()
 
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
