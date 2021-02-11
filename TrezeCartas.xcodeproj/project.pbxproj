@@ -25,6 +25,7 @@
 		8908FB0225CDB48200D899D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8908FB0025CDB48200D899D2 /* LaunchScreen.storyboard */; };
 		8908FB0D25CDB48200D899D2 /* TrezeCartasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FB0C25CDB48200D899D2 /* TrezeCartasTests.swift */; };
 		8908FB1825CDB48200D899D2 /* TrezeCartasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FB1725CDB48200D899D2 /* TrezeCartasUITests.swift */; };
+		89A8E99025D5BAD3005868A8 /* FinalGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A8E98F25D5BAD3005868A8 /* FinalGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		8908FB1325CDB48200D899D2 /* TrezeCartasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrezeCartasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8908FB1725CDB48200D899D2 /* TrezeCartasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrezeCartasUITests.swift; sourceTree = "<group>"; };
 		8908FB1925CDB48200D899D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89A8E98F25D5BAD3005868A8 /* FinalGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				0872A21225D30C0C00E2A466 /* Card.swift */,
 				08EEAD9E25D44162002461DF /* ProgressBar.swift */,
 				08CA4FB525D4955400BFE2BE /* EndGame.swift */,
+				89A8E98F25D5BAD3005868A8 /* FinalGame.swift */,
 				0894A10725D4B15C0007B370 /* CardData.swift */,
 				08CA4FBA25D4A39E00BFE2BE /* StartGame.swift */,
 				08831D9225D1DB810090D3E9 /* ExtensionColor.swift */,
@@ -302,6 +305,7 @@
 				08CA4FB625D4955400BFE2BE /* EndGame.swift in Sources */,
 				8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */,
 				08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */,
+				89A8E99025D5BAD3005868A8 /* FinalGame.swift in Sources */,
 				8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */,
 				08EFE00E25CF4B7D00086BFB /* ContentView2.swift in Sources */,
 				08EFE00925CF3DD700086BFB /* CardView.swift in Sources */,
@@ -478,7 +482,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
-				DEVELOPMENT_TEAM = SJND557DN4;
+				DEVELOPMENT_TEAM = D84M4LK87S;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrezeCartas/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -499,7 +503,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
-				DEVELOPMENT_TEAM = SJND557DN4;
+				DEVELOPMENT_TEAM = D84M4LK87S;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrezeCartas/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
