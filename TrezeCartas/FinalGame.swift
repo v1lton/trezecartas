@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FinalGame: View {
     
-    @State var description: String
     @State var isPresented = false
     
     var body: some View {
@@ -28,7 +27,7 @@ struct FinalGame: View {
                         .fontWeight(.bold)
                         .foregroundColor(.brancoColor)
                         .multilineTextAlignment(.center)
-                    Text("\(description)")
+                    Text("Parabéns! Talvez não tenha restado dignidade, mas você conseguiu sobreviver a mais um Carnaval na 13.")
                         .font(.system(size: 18))
                         .fontWeight(.regular)
                         .foregroundColor(.brancoColor)
@@ -73,8 +72,8 @@ struct FinalGame: View {
 struct FinalGame_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            FinalGame(description: "Parabéns! Talvez não tenha restado dignidade, mas você conseguiu sobreviver a mais um Carnaval na 13.")
-            FinalGame(description: "Parabéns! Talvez não tenha restado dignidade, mas você conseguiu sobreviver a mais um Carnaval na 13.")
+            FinalGame()
+            FinalGame()
                 .previewDevice("iPhone SE (2nd generation)")
         }
     }
