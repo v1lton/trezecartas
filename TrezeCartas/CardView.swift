@@ -13,7 +13,7 @@ struct CardView: View {
     @State private var cardStatus: Cards = .none
     @State var degrees: Double = 0.0
     
-    @Binding var teste: Int
+    @Binding var maxID: Int
     
     @Binding var health: Int
     @Binding var money: Int
@@ -21,7 +21,8 @@ struct CardView: View {
     
     @State var isPresented = false
     
-    //@Binding var op1: String
+    @Binding var leftOption: String
+    @Binding var rightOption: String
     
     private var card: Card
     private var onRemove: (_ user: Card) -> Void
@@ -36,14 +37,15 @@ struct CardView: View {
         case back, front, none
     }
     
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void/*, op1: Binding<String>*/, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, teste: Binding<Int>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>) {
         self.card = card
         self.onRemove = onRemove
         self._health = health
         self._money = money
         self._drugs = drugs
-        self._teste = teste
-        //self._op1 = op1
+        self._maxID = maxID
+        self._leftOption = leftOption
+        self._rightOption = rightOption
     }
     
     /// What percentage of our own width have we swipped
@@ -80,8 +82,6 @@ struct CardView: View {
                                 .padding([.top, .leading, .trailing], 10)
                             Spacer()
                             VStack(alignment: .center, spacing: 0){
-                                //                                Text("\(teste)")
-                                //                                Text("\(card.id)")
                                 Text("\(card.cardName)")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
@@ -144,7 +144,7 @@ struct CardView: View {
                                 Text("\(card.cardName)")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
-                                    .foregroundColor(.brancoColor)
+                                    .foregroundColor(.amareloColor)
                                     .multilineTextAlignment(.center)
                                     .padding(.bottom, 10.0)
                                 Text(swipeStatus == .left ? "\(card.leftAnswer)" : "\(card.rightAnswer)")
@@ -268,10 +268,11 @@ struct CardView: View {
                     ZStack {
                         Rectangle().fill(Color.black).opacity(0.25)
                         CardArt(complete: true)
-                    }.onChange(of: teste) { newValue in
-                        if card.id == teste {
+                    }.onChange(of: maxID) { newValue in
+                        if card.id == maxID {
                             cardStatus = .front
-                            
+                            self.leftOption = card.leftOption
+                            self.rightOption = card.rightOption
                         }
                     }
                 }
@@ -287,8 +288,10 @@ struct CardView: View {
                 EndGame(description: "Você deu pt. Melhor sorte no próximo carnaval, se não tiver pandemia.")
             })
             .onAppear {
-                if card.id == teste {
+                if card.id == maxID {
                     cardStatus = .front
+                    self.leftOption = card.leftOption
+                    self.rightOption = card.rightOption
                 }
             }
             .gesture(

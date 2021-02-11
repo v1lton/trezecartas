@@ -14,13 +14,13 @@ struct ContentView2: View {
     @State var money = 10
     @State var drugs = 0
     
-    @State var op1 = "socorro"
+    @State var leftOption: String = ""
+    @State var rightOption: String = ""
     
-    @State var teste: Int = 12
+    @State var maxIntID: Int = 12
     
     @State var cards = CardData().cards
 
-    
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
@@ -61,9 +61,9 @@ struct ContentView2: View {
                             if (self.maxID - 3)...self.maxID ~= cardss.id {
                                 CardView(card: cardss, onRemove: { removedCard in
                                     // Remove that user from our array
-                                    teste -= 1
+                                    maxIntID -= 1 // reduz o id maximo
                                     self.cards.removeAll { $0.id == removedCard.id }
-                                }, health: $health, money: $money, drugs: $drugs, teste: $teste)
+                                }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption)
                                 .animation(.spring())
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
@@ -79,20 +79,20 @@ struct ContentView2: View {
                         }, label: {
                             HStack {
                                 Spacer()
-                                Text(op1)
+                                Text(leftOption)
                                     //.font(.custom("Raleway-Bold", size: 18))
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 17)) // era 20
                                     .fontWeight(.semibold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.brancoColor)
                                     .multilineTextAlignment(.center)
                                     .lineLimit(2)
-                                    .padding()
+                                    .padding(10)
                                 Spacer()
                             }
                             
-                        }).frame(height: 80)
+                        }).frame(height: 65)
                         .clipped()
-                        .background(Color.gray)
+                        .background(Color.roxoClaroColor)
                         .cornerRadius(10)
                         
                         Spacer()
@@ -103,21 +103,22 @@ struct ContentView2: View {
                         }, label: {
                             HStack {
                                 Spacer()
-                                Text("Segunda escolha")
-                                    .font(.system(size: 20))
+                                Text(rightOption)
+                                    .font(.system(size: 17)) // era 20
                                     .fontWeight(.semibold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.brancoColor)
                                     .multilineTextAlignment(.center)
                                     .lineLimit(2)
-                                    .padding()
+                                    .padding(10)
                                 Spacer()
                             }
                             
-                        }).frame(height: 80)
+                        }).frame(height: 65)
                         .clipped()
-                        .background(Color.gray)
+                        .background(Color.roxoClaroColor)
                         .cornerRadius(10)
                     }
+                    .shadow(radius: 5)
                     
                     Spacer()
                         .frame(height: 100)
