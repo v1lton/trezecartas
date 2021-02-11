@@ -10,7 +10,7 @@ import SwiftUI
 struct CardView: View {
     @State private var translation: CGSize = .zero
     @State private var swipeStatus: LeftRight = .none
-    @State private var cardStatus: Cards = .front
+    @State private var cardStatus: Cards = .none
     @State var degrees: Double = 0.0
     
     @Binding var teste: Int
@@ -18,6 +18,8 @@ struct CardView: View {
     @Binding var health: Int
     @Binding var money: Int
     @Binding var drugs: Int
+    
+    @State var isPresented = false
     
     //@Binding var op1: String
     
@@ -59,7 +61,7 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-            
+                
                 if cardStatus == .front {
                     /// card pergunta
                     ZStack(alignment: self.swipeStatus == .right ? .bottomLeading : .bottomTrailing) {
@@ -78,10 +80,12 @@ struct CardView: View {
                                 .padding([.top, .leading, .trailing], 10)
                             Spacer()
                             VStack(alignment: .center, spacing: 0){
+                                //                                Text("\(teste)")
+                                //                                Text("\(card.id)")
                                 Text("\(card.cardName)")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
-                                    .foregroundColor(.brancoColor)
+                                    .foregroundColor(.amareloColor)
                                     .multilineTextAlignment(.center)
                                     .padding(.bottom, 10.0)
                                 Text("\(card.cardText)")
@@ -262,7 +266,13 @@ struct CardView: View {
                 } else {
                     /// card inicial
                     ZStack {
+                        Rectangle().fill(Color.black).opacity(0.25)
                         CardArt(complete: true)
+                    }.onChange(of: teste) { newValue in
+                        if card.id == teste {
+                            cardStatus = .front
+                            
+                        }
                     }
                 }
             }
@@ -273,16 +283,14 @@ struct CardView: View {
             .offset(x: cardStatus == .front ? self.translation.width : -self.translation.width, y: 0)
             .rotationEffect(.degrees(Double((cardStatus == .front ? self.translation.width : -self.translation.width) / geometry.size.width) * 25), anchor: .bottom)
             .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
-//            .onAppear {
-//                if card.id == teste {
-//                    cardStatus = .front
-//                }
-//            }
-//            .onChange(of: /*@START_MENU_TOKEN@*/"Value"/*@END_MENU_TOKEN@*/, perform: { value in
-//                if card.id == teste {
-//                    cardStatus = .front
-//                }
-//            })
+            .fullScreenCover(isPresented: $isPresented, content: {
+                EndGame(description: "Você deu pt. Melhor sorte no próximo carnaval, se não tiver pandemia.")
+            })
+            .onAppear {
+                if card.id == teste {
+                    cardStatus = .front
+                }
+            }
             .gesture(
                 DragGesture()
                     .onChanged { value in
@@ -339,6 +347,9 @@ struct CardView: View {
                                 self.money = self.money.clamped(to: 0...10)
                                 self.drugs = self.drugs.clamped(to: 0...10)
                                 
+                                if health == 0 {
+                                    self.isPresented.toggle()
+                                }
                                 cardStatus = .back
                                 withAnimation {
                                     self.degrees += 180
@@ -424,6 +435,7 @@ struct CardArt: View {
                         )
                 }
             }
+            
         }.padding()
     }
 }
