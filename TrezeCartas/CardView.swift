@@ -13,24 +13,17 @@ struct CardView: View {
     @State private var cardStatus: Cards = .none
     @State var degrees: Double = 0.0
     
-    
     @Binding var maxID: Int
-    
     @Binding var health: Int
     @Binding var money: Int
     @Binding var drugs: Int
-    
     @State var isPresented = false
-    
     @Binding var leftOption: String
     @Binding var rightOption: String
     @Binding var isCardShowingBack: Bool
-    
-    
     @Binding var leftButton: Bool
     @Binding var rightButton: Bool
     @Binding var pass: Bool
-    
     @Binding var end : Bool
     
     private var card: Card
@@ -392,12 +385,14 @@ struct CardView: View {
             }
             .onChange(of: leftButton) { newValue in
                 if card.id == maxID {
-                    leftChoice()
+                    self.swipeStatus = .left
+                    self.leftChoice()
                 }
             }
             .onChange(of: rightButton) { newValue in
                 if card.id == maxID {
-                    rightChoice()
+                    self.swipeStatus = .right
+                    self.rightChoice()
                 }
             }
             .background(end ? Color.pretoColor : Color.roxoColor)
