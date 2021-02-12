@@ -10,6 +10,15 @@ import SwiftUI
 
 class CardData {
     
+    public func getShuffledCards() -> [Card]{
+        var shuffledCards = cards.shuffled()
+        for i in 0 ..<  shuffledCards.count {
+            shuffledCards[i].id = i
+        }
+        self.cards = shuffledCards // Colocando caso tenha algum local do código que pegue diretamente de CardData().cards
+        return shuffledCards
+    }
+    
     @State var cards: [Card] = [
         Card(id: 0, cardImage: UIImage(named: "__Sede")!, cardName: "Tá com Sede?", cardText: "Eita, calor tá grande demais. Tu tais lembrando de beber água? Trata de fazer algo que tu não vai aguentar assim.", leftOption: "Beber água", rightOption: "Tirar a camisa", leftAnswer: "Bebeu água, não \n Tá com sede, tô \n Olha, olha, olha, olha a água mineral \n Água mineral \n Água mineral \n Água mineral \n Do Candeal \n Você vai ficar legal", rightAnswer: "Lá vai a biscoiteira tirando a camisa pra chamar atenção dos boys... Mas tu não se lembra de passar o protetor solar nunca, né? Em resumo, ficou todo queimado, desidratou e terminou com uma insolação. Bebe água, menino!", leftStatus: [3, -2, -1], rightStatus: [-3, 0, -3]),
         Card(id: 1, cardImage: UIImage(named: "__Ele_quer")!, cardName: "Será que Ele Quer?", cardText: "Você vai chegar em um boy que estava trocando olhares com você, mas ele fala com jeitinho que não esta a fim. Será que isso é apenas timidez?", leftOption: "Insistir em beijar", rightOption: "Voltar pros amigos", leftAnswer: "Insistir em beijar alguém não é brincadeira de Carnaval, é assédio. Então, aprende a respeitar o espaço do outro e que as pessoas podem não estar a fim. Não é não e ponto final. Vê se deixa de escrotisse no próximo carnaval.", rightAnswer: "Você sabe muito bem que Não é Não. Agora fica tranquilo e continua curtindo teu Carnaval, que ainda tem muita coisa boa pra acontecer. Compra um 3 é 10, chama os amigos e segue o bloco!", leftStatus: [-10, -10, -10], rightStatus: [3, 0, 1]),

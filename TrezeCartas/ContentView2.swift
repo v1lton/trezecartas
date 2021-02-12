@@ -10,22 +10,23 @@ import SwiftUI
 
 struct ContentView2: View {
     
+    
     @State var health = 10
     @State var money = 10
     @State var drugs = 0
-    
     @State var leftOption: String = ""
     @State var rightOption: String = ""
+
     
     @State var isPresentedGameOver = false
     @State var isPresentedFinished = false
     @Binding var rootIsActive : Bool
     @State var end = false
     @State var description = ""
-    
+   
     @State var maxIntID: Int = 12
-    
-    @State var cards = CardData().cards
+    @State var cards = CardData().getShuffledCards()
+    @State var isCardShowingBack = false
     
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
@@ -80,7 +81,8 @@ struct ContentView2: View {
                                         }
                                     }
                                     self.cards.removeAll { $0.id == removedCard.id }
-                                }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end)
+
+                                }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack)
                                 .animation(.spring())
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
@@ -88,7 +90,7 @@ struct ContentView2: View {
                             }
                         }
                     }
-                    
+
                     Spacer().frame(height: 40)
                     
                     HStack (alignment: .bottom) {
@@ -129,6 +131,64 @@ struct ContentView2: View {
                                 .padding(.top, -10)
                         }
                         Spacer()
+
+                    Spacer().frame(height: 50)
+                    
+                    if !self.isCardShowingBack {
+                        HStack {
+                            Button(action: {
+                                //self.teste = true
+                            }, label: {
+                                HStack {
+                                    Spacer()
+                                    Text(leftOption)
+                                        //.font(.custom("Raleway-Bold", size: 18))
+                                        .font(.system(size: 17)) // era 20
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.brancoColor)
+                                        .multilineTextAlignment(.center)
+                                        .lineLimit(2)
+                                        .padding(10)
+                                    Spacer()
+                                }
+                                
+                            })
+                            .frame(height: 65)
+                            .clipped()
+                            .background(Color.roxoClaroColor)
+                            .cornerRadius(10)
+                            if isCardShowingBack {
+                                Text("Aimds")
+                            }
+                            
+                            Spacer()
+                                .frame(width: 7)
+                            
+                            Button(action: {
+                                //action
+                            }, label: {
+                                HStack {
+                                    Spacer()
+                                    Text(rightOption)
+                                        .font(.system(size: 17)) // era 20
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.brancoColor)
+                                        .multilineTextAlignment(.center)
+                                        .lineLimit(2)
+                                        .padding(10)
+                                    Spacer()
+                                }
+                                
+                            }).frame(height: 65)
+                            .clipped()
+                            .background(Color.roxoClaroColor)
+                            .cornerRadius(10)
+                        }
+                        .shadow(radius: 5)
+                    } else {
+                        Text("Bora dale!")
+                            .frame(height: 65)
+
                     }
                     
                     //                    HStack {

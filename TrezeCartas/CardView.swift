@@ -24,6 +24,7 @@ struct CardView: View {
     
     @Binding var leftOption: String
     @Binding var rightOption: String
+    @Binding var isCardShowingBack: Bool
     
     @Binding var end : Bool
     
@@ -40,7 +41,9 @@ struct CardView: View {
         case back, front, none
     }
     
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>) {
+
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>) {
+
         self.card = card
         self.onRemove = onRemove
         self._health = health
@@ -50,6 +53,7 @@ struct CardView: View {
         self._leftOption = leftOption
         self._rightOption = rightOption
         self._end = end
+        self._isCardShowingBack = isCardShowingBack
     }
     
     /// What percentage of our own width have we swipped
@@ -292,10 +296,12 @@ struct CardView: View {
                         CardArt(complete: true)
                     }.onChange(of: maxID) { newValue in
                         if card.id == maxID {
+                            self.isCardShowingBack = false
                             cardStatus = .front
                             self.leftOption = card.leftOption
                             self.rightOption = card.rightOption
                         }
+                        
                     }
                 }
             }
@@ -320,8 +326,10 @@ struct CardView: View {
                         if cardStatus == .front {
                             self.translation = value.translation
                             if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
+                                self.isCardShowingBack = true
                                 self.swipeStatus = .right
                             } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
+                                self.isCardShowingBack = true
                                 self.swipeStatus = .left
                             } else {
                                 self.swipeStatus = .none
