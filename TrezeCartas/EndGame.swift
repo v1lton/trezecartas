@@ -10,7 +10,11 @@ import SwiftUI
 
 struct EndGame: View {
 
-    @State var description: String
+//    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+//    @EnvironmentObject var appState: AppState
+//    @Environment(\.presentationMode) var presentationMode
+    @Binding var shouldPopToRootView : Bool
+    @Binding var description: String
     @State var isPresented = false
     
     var body: some View {
@@ -19,10 +23,11 @@ struct EndGame: View {
                 VStack{
                     Spacer()
                     // substituir a foto depois
-                    Image("tempMorte")
+                    Image("caveira1")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 130)
+                        .frame(height: 180)
+                        .padding(.bottom)
                         .clipped()
                     Text("Game Over!")
                         .font(.system(size: 30))
@@ -40,7 +45,7 @@ struct EndGame: View {
                 }
                 
                 VStack {
-                    Text("Agite para tentar novamente.")
+                    Text("Toque para tentar novamente")
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                         .foregroundColor(.brancoColor)
@@ -51,22 +56,30 @@ struct EndGame: View {
                 }
                 
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .frame(width: geometry.size.width, height: geometry.size.height)
             .background(Color.black)
-            .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
-                self.isPresented.toggle()
+            .onTapGesture {
+                //presentationMode.wrappedValue.dismiss()
+                self.shouldPopToRootView = false
             }
+//            .onChange(of: isPresented, perform: { value in
+//                self.mode.wrappedValue.dismiss()
+//            })
             .fullScreenCover(isPresented: $isPresented, content: {
                 StartGame()
             })
             
         }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .preferredColorScheme(.light)
+        .statusBar(hidden: true)
     }
 }
 
-struct EndGame_Previews: PreviewProvider {
-    static var previews: some View {
-        EndGame(description: "Você deu pt. Melhor sorte no próximo carnaval, se não tiver pandemia.")
-    }
-}
+//struct EndGame_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EndGame(description: "Você deu pt. Melhor sorte no próximo carnaval, se não tiver pandemia.")
+//    }
+//}

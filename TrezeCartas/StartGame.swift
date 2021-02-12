@@ -10,47 +10,60 @@ import SwiftUI
 
 struct StartGame: View {
     
+    //@EnvironmentObject var appState: AppState
     @State var isPresented = false
     @Namespace var namespace
     
     var body: some View {
-        
-        GeometryReader { geometry in
-            ZStack(alignment: .bottom){
-                VStack{
-                    Spacer()
-                    // coloquei essa carta aqui pra nao ficar sem nada, mas tem que decidir o que vai ter na carta inicial
-//                    CardArt(complete: true)
-//                        .frame(height: 450)
-//                        .background(Color.roxoColor)
-//                        .cornerRadius(10)
-//                        .padding()
-                    Spacer()
+        NavigationView {
+            GeometryReader { geometry in
+                ZStack(alignment: .bottom){
+                    
+                    NavigationLink(destination: ContentView2(rootIsActive: self.$isPresented), isActive: $isPresented) { EmptyView()}.isDetailLink(false)
+                    
+                    
+                    VStack{
+                        Spacer()
+                        // coloquei essa carta aqui pra nao ficar sem nada, mas tem que decidir o que vai ter na carta inicial
+                        //                    CardArt(complete: true)
+                        //                        .frame(height: 450)
+                        //                        .background(Color.roxoColor)
+                        //                        .cornerRadius(10)
+                        //                        .padding()
+                        
+                        Image("logo2")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geometry.size.width, height: 500, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        
+                        Spacer()
+                    }
+                    
+                    VStack {
+                        Text("Toque para iniciar o jogo")
+                            .font(.system(size: 14))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.pretoColor)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        Spacer()
+                            .frame(height: 60)
+                    }
+                    
                 }
-                
-                VStack {
-                    Text("Agite para iniciar o jogo.")
-                        .font(.system(size: 14))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.pretoColor)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    Spacer()
-                        .frame(height: 60)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color.brancoColor)
+                .onTapGesture {
+                    self.isPresented.toggle()
                 }
-                
             }
-            .fullScreenCover(isPresented: $isPresented, content: {
-                ContentView2()
-                    .matchedGeometryEffect(id: "UniqueViewID", in: namespace, properties: .frame, isSource: isPresented)
-            })
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(Color.brancoColor)
-            .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
-                self.isPresented.toggle()
-            }
-            
-        }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+        }
+        .accentColor(Color.roxoColor)
+        .navigationBarBackButtonHidden(false)
+        .navigationBarHidden(true)
     }
 }
 
@@ -59,4 +72,5 @@ struct StartGame_Previews: PreviewProvider {
         StartGame()
     }
 }
+
 
