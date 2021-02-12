@@ -172,6 +172,7 @@ struct CardView: View {
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 70.0)
                                     .padding(.bottom)
+                                    .minimumScaleFactor(0.5)
                             }
                             Spacer()
                         }
@@ -242,6 +243,7 @@ struct CardView: View {
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 70.0)
                                     .padding(.bottom)
+                                    .minimumScaleFactor(0.5)
                             }.padding(.top, 80)
                             Spacer()
                             HStack {
