@@ -5,12 +5,10 @@
 //  Created by Evaldo Garcia de Souza Júnior on 06/02/21.
 //
 import SwiftUI
-
-
+import AVFoundation
+import AudioToolbox
 
 struct ContentView2: View {
-    
-    
     @State var health = 10
     @State var money = 10
     @State var drugs = 0
@@ -385,6 +383,7 @@ struct ContentView2: View {
         .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
             //self.drugs += 1
             if !end {
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                 self.drugs += 1
             }
             if drugs == 10 {
