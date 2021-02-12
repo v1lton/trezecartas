@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FinalGame: View {
     
-    @State var isPresented = false
+    @Binding var shouldPopToRootView : Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -56,12 +56,10 @@ struct FinalGame: View {
                     .scaledToFill()
             )
             .background(Color("roxoClaro"))
-            .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
-                self.isPresented.toggle()
+            .onTapGesture {
+                //presentationMode.wrappedValue.dismiss()
+                self.shouldPopToRootView = false
             }
-            .fullScreenCover(isPresented: $isPresented, content: {
-                StartGame()
-            })
             
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -69,12 +67,12 @@ struct FinalGame: View {
     }
 }
 
-struct FinalGame_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            FinalGame()
-            FinalGame()
-                .previewDevice("iPhone SE (2nd generation)")
-        }
-    }
-}
+//struct FinalGame_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            FinalGame()
+//            FinalGame()
+//                .previewDevice("iPhone SE (2nd generation)")
+//        }
+//    }
+//}

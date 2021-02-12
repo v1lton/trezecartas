@@ -15,7 +15,7 @@ struct EndGame: View {
 //    @Environment(\.presentationMode) var presentationMode
     @Binding var shouldPopToRootView : Bool
     @Binding var description: String
-    @State var isPresented = false
+//    @State var isPresented = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -68,9 +68,9 @@ struct EndGame: View {
 //            .onChange(of: isPresented, perform: { value in
 //                self.mode.wrappedValue.dismiss()
 //            })
-            .fullScreenCover(isPresented: $isPresented, content: {
-                StartGame()
-            })
+//            .fullScreenCover(isPresented: $isPresented, content: {
+//                StartGame()
+//            })
             
         }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .preferredColorScheme(.light)

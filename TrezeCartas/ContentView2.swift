@@ -16,14 +16,16 @@ struct ContentView2: View {
     @State var drugs = 0
     @State var leftOption: String = ""
     @State var rightOption: String = ""
-
+    @State var leftButton = false
+    @State var rightButton = false
+    @State var pass = false
     
     @State var isPresentedGameOver = false
     @State var isPresentedFinished = false
     @Binding var rootIsActive : Bool
     @State var end = false
     @State var description = ""
-   
+    
     @State var maxIntID: Int = 12
     @State var cards = CardData().getShuffledCards()
     @State var isCardShowingBack = false
@@ -63,15 +65,21 @@ struct ContentView2: View {
                     }.padding()
                     
                     ZStack {
-                        Spacer ().frame(height: 500)
-                        // colocar a nossa logo aqui com uma opacidade pequena
+                        
+                        VStack {
+                            Image("logo2")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: geometry.size.width, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).opacity(0.3)
+                            
+                        }.frame(height: 500)
                         
                         ForEach(self.cards, id: \.self) { cardss in
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
                             if (self.maxID - 3)...self.maxID ~= cardss.id {
                                 CardView(card: cardss, onRemove: { removedCard in
-                                    // Remove that user from our array
+                                    // Remove that card from our array
                                     if end {
                                         self.isPresentedGameOver.toggle()
                                     } else {
@@ -81,8 +89,7 @@ struct ContentView2: View {
                                         }
                                     }
                                     self.cards.removeAll { $0.id == removedCard.id }
-
-                                }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack)
+                                }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
@@ -90,54 +97,15 @@ struct ContentView2: View {
                             }
                         }
                     }
-
-                    Spacer().frame(height: 40)
                     
-                    HStack (alignment: .bottom) {
-                        Spacer()
-                        VStack(alignment: .trailing) {
-                            Image("arrow")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 136, height: 20)
-                                .clipped()
-                            Text(leftOption)
-                                //.font(.custom("Raleway-Bold", size: 18))
-                                .font(.system(size: 18)) // era 20
-                                .fontWeight(.semibold)
-                                .foregroundColor(.pretoColor)
-                                .multilineTextAlignment(.trailing)
-                                .lineLimit(2)
-                                .frame(width: 120, height: 50)
-                                .padding(.top, -10)
-                        }
-                        Spacer().frame(width: 20)
-                        
-                        VStack(alignment: .leading) {
-                            Image("arrow2")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 136, height: 20)
-                                .clipped()
-                            Text(rightOption)
-                                //.font(.custom("Raleway-Bold", size: 18))
-                                .font(.system(size: 18)) // era 20
-                                .fontWeight(.semibold)
-                                .foregroundColor(.pretoColor)
-                                .multilineTextAlignment(.leading)
-                                .lineLimit(2)
-                                .frame(width: 120, height: 50)
-                                //.padding(.trailing, 100)
-                                .padding(.top, -10)
-                        }
-                        Spacer()
-
                     Spacer().frame(height: 50)
                     
                     if !self.isCardShowingBack {
+                        
                         HStack {
+                            
                             Button(action: {
-                                //self.teste = true
+                                self.leftButton.toggle()
                             }, label: {
                                 HStack {
                                     Spacer()
@@ -152,20 +120,16 @@ struct ContentView2: View {
                                     Spacer()
                                 }
                                 
-                            })
-                            .frame(height: 65)
+                            }).frame(height: 65)
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
-                            if isCardShowingBack {
-                                Text("Aimds")
-                            }
                             
                             Spacer()
                                 .frame(width: 7)
                             
                             Button(action: {
-                                //action
+                                self.rightButton.toggle()
                             }, label: {
                                 HStack {
                                     Spacer()
@@ -184,13 +148,151 @@ struct ContentView2: View {
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
                         }
-                        .shadow(radius: 5)
+                        
+                        //                        VStack (alignment: .center) {
+                        //                            Image("setas")
+                        //                                .resizable()
+                        //                                .aspectRatio(contentMode: .fit)
+                        //                                .frame(width: 306, height: 20)
+                        //                                .clipped()
+                        //                            HStack {
+                        //                                Spacer()
+                        //                                Text(leftOption)
+                        //                                    //.font(.custom("Raleway-Bold", size: 18))
+                        //                                    .font(.system(size: 18)) // era 20
+                        //                                    .fontWeight(.semibold)
+                        //                                    .frame(width: 100, height: 50)
+                        //                                    .foregroundColor(.pretoColor)
+                        //                                    .multilineTextAlignment(.trailing)
+                        //                                    .lineLimit(2)
+                        //                                //Spacer().frame(width: 34)
+                        //                                Text(rightOption)
+                        //                                    //.font(.custom("Raleway-Bold", size: 18))
+                        //                                    .font(.system(size: 18)) // era 20
+                        //                                    .fontWeight(.semibold)
+                        //                                    .frame(width: 100, height: 50)
+                        //                                    .foregroundColor(.pretoColor)
+                        //                                    .multilineTextAlignment(.leading)
+                        //                                    .lineLimit(2)
+                        //                                Spacer()
+                        //                            }.padding(.top, -10)
+                        //                        }
+                        //                        HStack (alignment: .bottom) {
+                        //                            Spacer()
+                        //                            VStack(alignment: .trailing) {
+                        //                                Image("arrow")
+                        //                                    .resizable()
+                        //                                    .aspectRatio(contentMode: .fit)
+                        //                                    .frame(width: 136, height: 20)
+                        //                                    .clipped()
+                        //                                Text(leftOption)
+                        //                                    //.font(.custom("Raleway-Bold", size: 18))
+                        //                                    .font(.system(size: 18)) // era 20
+                        //                                    .fontWeight(.semibold)
+                        //                                    .foregroundColor(.pretoColor)
+                        //                                    .multilineTextAlignment(.trailing)
+                        //                                    .lineLimit(2)
+                        //                                    .frame(width: 120, height: 50)
+                        //                                    .padding(.top, -10)
+                        //                            }
+                        //                            Spacer().frame(width: 20)
+                        //
+                        //                            VStack(alignment: .leading) {
+                        //                                Image("arrow2")
+                        //                                    .resizable()
+                        //                                    .aspectRatio(contentMode: .fit)
+                        //                                    .frame(width: 136, height: 20)
+                        //                                    .clipped()
+                        //                                Text(rightOption)
+                        //                                    //.font(.custom("Raleway-Bold", size: 18))
+                        //                                    .font(.system(size: 18)) // era 20
+                        //                                    .fontWeight(.semibold)
+                        //                                    .foregroundColor(.pretoColor)
+                        //                                    .multilineTextAlignment(.leading)
+                        //                                    .lineLimit(2)
+                        //                                    .frame(width: 120, height: 50)
+                        //                                    //.padding(.trailing, 100)
+                        //                                    .padding(.top, -10)
+                        //                            }
+                        //                            Spacer()
+                        //                        }
                     } else {
-                        Text("Bora dale!")
-                            .frame(height: 65)
-
+                        
+                        //HStack {
+                            
+                            Button(action: {
+                                self.pass.toggle()
+                            }, label: {
+                                HStack {
+                                    Spacer()
+                                    Text("Bora Dale")
+                                        //.font(.custom("Raleway-Bold", size: 18))
+                                        .font(.system(size: 17)) // era 20
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.brancoColor)
+                                        .multilineTextAlignment(.center)
+                                        .lineLimit(2)
+                                        .padding(10)
+                                    Spacer()
+                                }
+                                
+                            }).frame(height: 65)
+                            .clipped()
+                            .background(Color.roxoClaroColor)
+                            .cornerRadius(10)
+                            
+                            
+                        //}
+                        //                        HStack (alignment: .bottom) {
+                        //                            Spacer()
+                        //                            VStack(alignment: .trailing) {
+                        //                                Image("arrow")
+                        //                                    .resizable()
+                        //                                    .aspectRatio(contentMode: .fit)
+                        //                                    .frame(width: 136, height: 20)
+                        //                                    .clipped()
+                        //                                Text(leftOption)
+                        //                                    //.font(.custom("Raleway-Bold", size: 18))
+                        //                                    .font(.system(size: 18)) // era 20
+                        //                                    .fontWeight(.semibold)
+                        //                                    .foregroundColor(.pretoColor)
+                        //                                    .multilineTextAlignment(.trailing)
+                        //                                    .lineLimit(2)
+                        //                                    .frame(width: 120, height: 50)
+                        //                                    .padding(.top, -10)
+                        //                            }
+                        //                            Spacer().frame(width: 20)
+                        //
+                        //                            VStack(alignment: .leading) {
+                        //                                Image("arrow2")
+                        //                                    .resizable()
+                        //                                    .aspectRatio(contentMode: .fit)
+                        //                                    .frame(width: 136, height: 20)
+                        //                                    .clipped()
+                        //                                Text(rightOption)
+                        //                                    //.font(.custom("Raleway-Bold", size: 18))
+                        //                                    .font(.system(size: 18)) // era 20
+                        //                                    .fontWeight(.semibold)
+                        //                                    .foregroundColor(.pretoColor)
+                        //                                    .multilineTextAlignment(.leading)
+                        //                                    .lineLimit(2)
+                        //                                    .frame(width: 120, height: 50)
+                        //                                    //.padding(.trailing, 100)
+                        //                                    .padding(.top, -10)
+                        //                            }
+                        //                            Spacer()
+                        //                        }
+                        
+//                        VStack (alignment: .center) {
+//                            Text("Bora dale!")
+//                                .font(.system(size: 18)) // era 20
+//                                .fontWeight(.semibold)
+//                                .foregroundColor(.pretoColor)
+//                                .multilineTextAlignment(.center)
+//                        }
+                        
                     }
-                    
+                    Spacer().frame(height: 30)
                     //                    HStack {
                     //
                     //                        Button(action: {
@@ -237,7 +339,7 @@ struct ContentView2: View {
                     //                        .background(Color.roxoClaroColor)
                     //                        .cornerRadius(10)
                     //                    }
-                    Spacer().frame(height: 20)
+                    //Spacer().frame(height: 20)
                     
                     HStack {
                         HStack {
@@ -262,7 +364,7 @@ struct ContentView2: View {
         }
         .onChange(of: end, perform: { value in
             if health == 0 && money == 0 &&  drugs == 0 {
-                self.description = "Assédio não é brincadeira. Aqui é só um jogo, mas pra assédio nao existe espaço em nenhum lugar. Você foi cancelado!"
+                self.description = "Assédio não é brincadeira. Aqui é só um jogo, mas pra assédio não existe espaço em nenhum lugar. Você foi cancelado!"
             } else if health == 0 {
                 self.description = "Bicha, nem assim tu sobrevive um rolê na 13! Bora se preparar pra o ano que vem pois o estrago vai ser grande!"
             } else if money == 0 {
@@ -292,7 +394,7 @@ struct ContentView2: View {
         }
         .overlay(EndGame(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
         // trocar para a tela de ganhou
-        .overlay(EndGame(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+        .overlay(FinalGame(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
 

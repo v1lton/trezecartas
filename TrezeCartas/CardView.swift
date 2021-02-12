@@ -26,6 +26,11 @@ struct CardView: View {
     @Binding var rightOption: String
     @Binding var isCardShowingBack: Bool
     
+    
+    @Binding var leftButton: Bool
+    @Binding var rightButton: Bool
+    @Binding var pass: Bool
+    
     @Binding var end : Bool
     
     private var card: Card
@@ -42,7 +47,7 @@ struct CardView: View {
     }
     
 
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>, leftButton: Binding<Bool>, rightButton: Binding<Bool>, pass: Binding<Bool>) {
 
         self.card = card
         self.onRemove = onRemove
@@ -54,6 +59,9 @@ struct CardView: View {
         self._rightOption = rightOption
         self._end = end
         self._isCardShowingBack = isCardShowingBack
+        self._leftButton = leftButton
+        self._rightButton = rightButton
+        self._pass = pass
     }
     
     /// What percentage of our own width have we swipped
@@ -66,6 +74,49 @@ struct CardView: View {
     
     var gradient: LinearGradient {
         LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), Color.black.opacity(0.0)]), startPoint: .bottom, endPoint: .top)
+    }
+    
+    func leftChoice() {
+        self.health += card.leftStatus[0]
+        self.money += card.leftStatus[1]
+        if card.leftStatus[2] == 0 {
+            self.drugs -= 1
+        } else {
+            self.drugs += card.leftStatus[2]
+        }
+        // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
+        self.health = self.health.clamped(to: 0...10)
+        self.money = self.money.clamped(to: 0...10)
+        self.drugs = self.drugs.clamped(to: 0...10)
+        
+        if health == 0 || money == 0 || drugs == 10 {
+            self.end.toggle()
+        }
+        cardStatus = .back
+        withAnimation {
+            self.degrees += 180
+            self.isCardShowingBack = true
+        }
+    }
+    
+    func rightChoice() {
+        self.health += card.rightStatus[0]
+        self.money += card.rightStatus[1]
+        if card.rightStatus[2] == 0 {
+            self.drugs -= 1
+        } else {
+            self.drugs += card.rightStatus[2]
+        }
+        // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
+        self.health = self.health.clamped(to: 0...10)
+        self.money = self.money.clamped(to: 0...10)
+        self.drugs = self.drugs.clamped(to: 0...10)
+        
+        cardStatus = .back
+        withAnimation {
+            self.degrees -= 180
+            self.isCardShowingBack = true
+        }
     }
     
     var body: some View {
@@ -158,7 +209,18 @@ struct CardView: View {
                                 .padding(.bottom, 150)
                                 .rotationEffect(Angle.degrees(25))
                         }
-                    }.frame(width: geometry.size.width, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//                    .onChange(of: leftButton) { newValue in
+//                        if card.id == maxID {
+//                            leftChoice()
+//                        }
+//                    }
+//                    .onChange(of: rightButton) { newValue in
+//                        if card.id == maxID {
+//                            rightChoice()
+//                        }
+//                    }
                     
                 } else if cardStatus == .back {
                     /// card resposta
@@ -288,6 +350,12 @@ struct CardView: View {
                             
                         }
                     }.rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .onChange(of: pass) { newValue in
+                        if end {
+                            self.isPresented.toggle()
+                        }
+                        self.onRemove(self.card)
+                    }
                     
                 } else {
                     /// card inicial
@@ -296,13 +364,38 @@ struct CardView: View {
                         CardArt(complete: true)
                     }.onChange(of: maxID) { newValue in
                         if card.id == maxID {
-                            self.isCardShowingBack = false
+                            withAnimation(.easeIn(duration: 0.2)) {
+                                self.isCardShowingBack = false
+                            }
                             cardStatus = .front
                             self.leftOption = card.leftOption
                             self.rightOption = card.rightOption
                         }
                         
                     }
+//                    .onChange(of: cardStatus) { newValue in
+//                        withAnimation(.easeIn(duration: 0.2)) {
+//                            self.isCardShowingBack = true
+//                        }
+//
+//                    }
+                    
+//                    .onChange(of: cardStatus, perform: { value in
+//                        withAnimation(.easeIn(duration: 0.2)) {
+//                            self.isCardShowingBack = true
+//                        }
+//                    })
+                    
+                }
+            }
+            .onChange(of: leftButton) { newValue in
+                if card.id == maxID {
+                    leftChoice()
+                }
+            }
+            .onChange(of: rightButton) { newValue in
+                if card.id == maxID {
+                    rightChoice()
                 }
             }
             .background(end ? Color.pretoColor : Color.roxoColor)
@@ -326,10 +419,10 @@ struct CardView: View {
                         if cardStatus == .front {
                             self.translation = value.translation
                             if (self.getGesturePercentage(geometry, from: value)) >= self.thresholdPercentage {
-                                self.isCardShowingBack = true
+                                //self.isCardShowingBack = true
                                 self.swipeStatus = .right
                             } else if self.getGesturePercentage(geometry, from: value) <= -self.thresholdPercentage {
-                                self.isCardShowingBack = true
+                                //self.isCardShowingBack = true
                                 self.swipeStatus = .left
                             } else {
                                 self.swipeStatus = .none
@@ -352,42 +445,9 @@ struct CardView: View {
                             }
                         } else if cardStatus == .front {
                             if swipeStatus == .right {
-                                self.health += card.rightStatus[0]
-                                self.money += card.rightStatus[1]
-                                if card.rightStatus[2] == 0 {
-                                    self.drugs -= 1
-                                } else {
-                                    self.drugs += card.rightStatus[2]
-                                }
-                                // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
-                                self.health = self.health.clamped(to: 0...10)
-                                self.money = self.money.clamped(to: 0...10)
-                                self.drugs = self.drugs.clamped(to: 0...10)
-                                
-                                cardStatus = .back
-                                withAnimation {
-                                    self.degrees -= 180
-                                }
+                                rightChoice()
                             } else if swipeStatus == .left {
-                                self.health += card.leftStatus[0]
-                                self.money += card.leftStatus[1]
-                                if card.leftStatus[2] == 0 {
-                                    self.drugs -= 1
-                                } else {
-                                    self.drugs += card.leftStatus[2]
-                                }
-                                // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
-                                self.health = self.health.clamped(to: 0...10)
-                                self.money = self.money.clamped(to: 0...10)
-                                self.drugs = self.drugs.clamped(to: 0...10)
-                                
-                                if health == 0 || money == 0 || drugs == 10 {
-                                    self.end.toggle()
-                                }
-                                cardStatus = .back
-                                withAnimation {
-                                    self.degrees += 180
-                                }
+                                leftChoice()
                             } else {
                                 self.translation = .zero
                             }
