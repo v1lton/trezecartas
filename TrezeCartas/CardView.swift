@@ -13,6 +13,7 @@ struct CardView: View {
     @State private var cardStatus: Cards = .none
     @State var degrees: Double = 0.0
     
+    
     @Binding var maxID: Int
     
     @Binding var health: Int
@@ -23,6 +24,8 @@ struct CardView: View {
     
     @Binding var leftOption: String
     @Binding var rightOption: String
+    
+    @Binding var end : Bool
     
     private var card: Card
     private var onRemove: (_ user: Card) -> Void
@@ -37,7 +40,7 @@ struct CardView: View {
         case back, front, none
     }
     
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>) {
         self.card = card
         self.onRemove = onRemove
         self._health = health
@@ -46,6 +49,7 @@ struct CardView: View {
         self._maxID = maxID
         self._leftOption = leftOption
         self._rightOption = rightOption
+        self._end = end
     }
     
     /// What percentage of our own width have we swipped
@@ -70,16 +74,34 @@ struct CardView: View {
                         /// chamada do codigo para a arte da carta
                         CardArt(complete: false)
                         
-                        VStack(alignment: .center, spacing: 0) {
-                            Image(uiImage: card.cardImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: 200)
-                                .clipped()
-                                .cornerRadius(10)
-                                //.cornerRadius(10, corners: [.topLeft, .topRight])
-                                .padding([.top, .leading, .trailing])
-                                .padding([.top, .leading, .trailing], 10)
+                        VStack(alignment: .center) {
+                            VStack {
+//                                Rectangle().fill(Color.black)
+//                                    .padding([.top, .leading, .trailing])
+                                Image(uiImage: card.cardImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 330, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .cornerRadius(10)
+                                    .padding([.top, .leading, .trailing])
+                                    .padding([.top, .leading, .trailing], 10)
+                                    .clipShape(Rectangle(), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .aspectRatio(1.6, contentMode: .fill)
+//                                    .frame(height: 200)
+//                                    //.scaledToFill()
+//                                    .cornerRadius(10)
+//                                    .clipped()
+//                                    .padding([.top, .leading, .trailing])
+//                                    .padding([.top, .leading, .trailing], 10)
+//                                    //.padding(.top, 10)
+                            }
+                            //.cornerRadius(10)
+                            //.padding([.top, .leading, .trailing], 10)
+                            .clipped()
+                           
+                                
                             Spacer()
                             VStack(alignment: .center, spacing: 0){
                                 Text("\(card.cardName)")
@@ -277,16 +299,14 @@ struct CardView: View {
                     }
                 }
             }
-            .background(Color.roxoColor)
+            .background(end ? Color.pretoColor : Color.roxoColor)
+            //.saturation(end ? 0 : 1)
             .cornerRadius(10)
             .shadow(radius: 5)
             .animation(.interactiveSpring())
             .offset(x: cardStatus == .front ? self.translation.width : -self.translation.width, y: 0)
             .rotationEffect(.degrees(Double((cardStatus == .front ? self.translation.width : -self.translation.width) / geometry.size.width) * 25), anchor: .bottom)
             .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
-            .fullScreenCover(isPresented: $isPresented, content: {
-                EndGame(description: "Você deu pt. Melhor sorte no próximo carnaval, se não tiver pandemia.")
-            })
             .onAppear {
                 if card.id == maxID {
                     cardStatus = .front
@@ -315,6 +335,9 @@ struct CardView: View {
                     }.onEnded { value in
                         if cardStatus == .back {
                             if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
+                                if end {
+                                    self.isPresented.toggle()
+                                }
                                 self.onRemove(self.card)
                             } else {
                                 self.translation = .zero
@@ -350,8 +373,8 @@ struct CardView: View {
                                 self.money = self.money.clamped(to: 0...10)
                                 self.drugs = self.drugs.clamped(to: 0...10)
                                 
-                                if health == 0 {
-                                    self.isPresented.toggle()
+                                if health == 0 || money == 0 || drugs == 10 {
+                                    self.end.toggle()
                                 }
                                 cardStatus = .back
                                 withAnimation {
@@ -380,8 +403,6 @@ struct CardView: View {
 //            .padding()
 //    }
 //}
-
-/// flip
 
 /// codido da arte
 struct CardArt: View {
