@@ -220,7 +220,7 @@ struct ContentView2: View {
         .blur(radius: CGFloat(drugs)/2)
         .padding()
         .background(Color.brancoColor)
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .edgesIgnoringSafeArea(.all)
         .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
             //self.drugs += 1
             if !end {
@@ -237,12 +237,6 @@ struct ContentView2: View {
         .overlay(FinalGame(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
-
-//struct ContentView2_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView2(rootIsActive: <#Binding<Bool>#>)
-//    }
-//}
 
 extension Comparable {
     func clamped(to limits: ClosedRange<Self>) -> Self {
