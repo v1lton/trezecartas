@@ -25,7 +25,7 @@ struct ContentView2: View {
     @State var description = ""
     
     @State var maxIntID: Int = 12
-    @State var cards = CardData().getShuffledCards()
+    @ObservedObject var cardsData = CardData()
     @State var isCardShowingBack = false
     
     /// Return the CardViews width for the given offset in the array
@@ -33,7 +33,7 @@ struct ContentView2: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardWidth(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        let offset: CGFloat = CGFloat(cards.count - 1 - id) * 10
+        let offset: CGFloat = CGFloat(cardsData.cards.count - 1 - id) * 10
         return geometry.size.width - offset
     }
     
@@ -42,12 +42,12 @@ struct ContentView2: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        return  CGFloat(cards.count - 1 - id) * 10
+        return  CGFloat(cardsData.cards.count - 1 - id) * 10
     }
     
     // Compute what the max ID in the given users array is.
     private var maxID: Int {
-        return self.cards.map { $0.id }.max() ?? 0
+        return self.cardsData.cards.map { $0.id }.max() ?? 0
     }
     
     var body: some View {
@@ -72,21 +72,26 @@ struct ContentView2: View {
                             
                         }.frame(height: 500)
                         
-                        ForEach(self.cards, id: \.self) { cardss in
+                        ForEach(self.cardsData.cards, id: \.self) { cardss in
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
                             if (self.maxID - 3)...self.maxID ~= cardss.id {
                                 CardView(card: cardss, onRemove: { removedCard in
                                     // Remove that card from our array
                                     if end {
+                                        print("terminou")
                                         self.isPresentedGameOver.toggle()
+                                        self.cardsData.shuffleCards()
+                                        
                                     } else {
                                         maxIntID -= 1 // reduz o id maximo
                                         if maxID == 0 {
                                             self.isPresentedFinished.toggle()
+                                            self.cardsData.shuffleCards()
                                         }
+                                        self.cardsData.cards.removeAll { $0.id == removedCard.id }
                                     }
-                                    self.cards.removeAll { $0.id == removedCard.id }
+                                    
                                 }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
@@ -230,6 +235,7 @@ struct ContentView2: View {
             if drugs == 10 {
                 self.description = "Viado, tu já desse pt de novo, foi? Melhor sorte no próximo carnaval, se não tiver pandemia."
                 self.isPresentedGameOver.toggle()
+                
             }
         }
         .overlay(EndGame(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))

@@ -8,18 +8,27 @@
 import Foundation
 import SwiftUI
 
-class CardData {
+class CardData: ObservableObject {
     
-    public func getShuffledCards() -> [Card]{
-        var shuffledCards = cards.shuffled()
+    @Published var cards = originalCards
+    
+    init(){
+        shuffleCards()
+        
+    }
+    
+    public func shuffleCards(){
+        var shuffledCards = CardData.originalCards.shuffled()
         for i in 0 ..<  shuffledCards.count {
             shuffledCards[i].id = i
         }
         self.cards = shuffledCards // Colocando caso tenha algum local do código que pegue diretamente de CardData().cards
-        return shuffledCards
+        //return shuffledCards
+        self.objectWillChange.send()
     }
+
     
-    @State var cards: [Card] = [
+    static var originalCards: [Card] = [
         Card(id: 0, cardImage: UIImage(named: "__Sede")!, cardName: "Tá com Sede?", cardText: "Eita, calor tá grande demais. Tu tais lembrando de beber água? Trata de fazer algo que tu não vai aguentar assim.", leftOption: "Beber água", rightOption: "Tirar a camisa", leftAnswer: "Bebeu água, não \n Tá com sede, tô \n Olha, olha, olha, olha a água mineral \n Água mineral \n Água mineral \n Água mineral \n Do Candeal \n Você vai ficar legal", rightAnswer: "Lá vai a biscoiteira tirando a camisa pra chamar atenção dos boys... Mas tu não se lembra de passar o protetor solar nunca, né? Em resumo, ficou todo queimado, desidratou e terminou com uma insolação. Bebe água, menino!", leftStatus: [3, -2, -1], rightStatus: [-3, 0, -3]),
         Card(id: 1, cardImage: UIImage(named: "__Ele_quer")!, cardName: "Será que Ele Quer?", cardText: "Você vai chegar em um boy que estava trocando olhares com você, mas ele fala com jeitinho que não esta a fim. Será que isso é apenas timidez?", leftOption: "Insistir em beijar", rightOption: "Voltar pros amigos", leftAnswer: "Insistir em beijar alguém não é brincadeira de Carnaval, é assédio. Então, aprende a respeitar o espaço do outro e que as pessoas podem não estar a fim. Não é não e ponto final. Vê se deixa de escrotisse no próximo carnaval.", rightAnswer: "Você sabe muito bem que Não é Não. Agora fica tranquilo e continua curtindo teu Carnaval, que ainda tem muita coisa boa pra acontecer. Compra um 3 é 10, chama os amigos e segue o bloco!", leftStatus: [-10, -10, -10], rightStatus: [3, 0, 1]),
         Card(id: 2, cardImage: UIImage(named: "__Pirata")!, cardName: "O Pirata", cardText: "Você olha pro lado e vê um pirata chegando em você. Com tapa olho, bigode enroladinho e uma cara de mal. Eita, olha o tamanho da espada dele... Vai andar na prancha ou vai se entregar ao perigo?", leftOption: "Andar na prancha", rightOption: "AHOY!", leftAnswer: "O pirata parecia perigoso demais e você preferiu pular daquele barco. Agora é esperar outro marujos cairem nos seus encantos de sereia. Mas espera, o que é aquilo ali no chão? Será que o pirata derrubou o fruto da sua pirataria? Achasse 30 reais no chão!", rightAnswer: "O pirata vem e lhe dá um beijão. Você sente ele apalpando todo seu corpo, você fica enlouquecido. Vocês passam um bom tempo se beijando, mas ele sai quase sem falar nada. Espera, não tá sentindo seu bolso leve demais? Amigo, acho que além de roubar seu coração, ele roubou junto a sua carteira...", leftStatus: [0, 2, 0], rightStatus: [-1, -3, 0]),
