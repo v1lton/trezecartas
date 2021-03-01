@@ -147,73 +147,7 @@ struct ContentView2: View {
                             .cornerRadius(10)
                         }
                         
-                        //                        VStack (alignment: .center) {
-                        //                            Image("setas")
-                        //                                .resizable()
-                        //                                .aspectRatio(contentMode: .fit)
-                        //                                .frame(width: 306, height: 20)
-                        //                                .clipped()
-                        //                            HStack {
-                        //                                Spacer()
-                        //                                Text(leftOption)
-                        //                                    //.font(.custom("Raleway-Bold", size: 18))
-                        //                                    .font(.system(size: 18)) // era 20
-                        //                                    .fontWeight(.semibold)
-                        //                                    .frame(width: 100, height: 50)
-                        //                                    .foregroundColor(.pretoColor)
-                        //                                    .multilineTextAlignment(.trailing)
-                        //                                    .lineLimit(2)
-                        //                                //Spacer().frame(width: 34)
-                        //                                Text(rightOption)
-                        //                                    //.font(.custom("Raleway-Bold", size: 18))
-                        //                                    .font(.system(size: 18)) // era 20
-                        //                                    .fontWeight(.semibold)
-                        //                                    .frame(width: 100, height: 50)
-                        //                                    .foregroundColor(.pretoColor)
-                        //                                    .multilineTextAlignment(.leading)
-                        //                                    .lineLimit(2)
-                        //                                Spacer()
-                        //                            }.padding(.top, -10)
-                        //                        }
-                        //                        HStack (alignment: .bottom) {
-                        //                            Spacer()
-                        //                            VStack(alignment: .trailing) {
-                        //                                Image("arrow")
-                        //                                    .resizable()
-                        //                                    .aspectRatio(contentMode: .fit)
-                        //                                    .frame(width: 136, height: 20)
-                        //                                    .clipped()
-                        //                                Text(leftOption)
-                        //                                    //.font(.custom("Raleway-Bold", size: 18))
-                        //                                    .font(.system(size: 18)) // era 20
-                        //                                    .fontWeight(.semibold)
-                        //                                    .foregroundColor(.pretoColor)
-                        //                                    .multilineTextAlignment(.trailing)
-                        //                                    .lineLimit(2)
-                        //                                    .frame(width: 120, height: 50)
-                        //                                    .padding(.top, -10)
-                        //                            }
-                        //                            Spacer().frame(width: 20)
-                        //
-                        //                            VStack(alignment: .leading) {
-                        //                                Image("arrow2")
-                        //                                    .resizable()
-                        //                                    .aspectRatio(contentMode: .fit)
-                        //                                    .frame(width: 136, height: 20)
-                        //                                    .clipped()
-                        //                                Text(rightOption)
-                        //                                    //.font(.custom("Raleway-Bold", size: 18))
-                        //                                    .font(.system(size: 18)) // era 20
-                        //                                    .fontWeight(.semibold)
-                        //                                    .foregroundColor(.pretoColor)
-                        //                                    .multilineTextAlignment(.leading)
-                        //                                    .lineLimit(2)
-                        //                                    .frame(width: 120, height: 50)
-                        //                                    //.padding(.trailing, 100)
-                        //                                    .padding(.top, -10)
-                        //                            }
-                        //                            Spacer()
-                        //                        }
+                       
                     } else {
                         
                         //HStack {
@@ -240,104 +174,11 @@ struct ContentView2: View {
                             .cornerRadius(10)
                             
                             
-                        //}
-                        //                        HStack (alignment: .bottom) {
-                        //                            Spacer()
-                        //                            VStack(alignment: .trailing) {
-                        //                                Image("arrow")
-                        //                                    .resizable()
-                        //                                    .aspectRatio(contentMode: .fit)
-                        //                                    .frame(width: 136, height: 20)
-                        //                                    .clipped()
-                        //                                Text(leftOption)
-                        //                                    //.font(.custom("Raleway-Bold", size: 18))
-                        //                                    .font(.system(size: 18)) // era 20
-                        //                                    .fontWeight(.semibold)
-                        //                                    .foregroundColor(.pretoColor)
-                        //                                    .multilineTextAlignment(.trailing)
-                        //                                    .lineLimit(2)
-                        //                                    .frame(width: 120, height: 50)
-                        //                                    .padding(.top, -10)
-                        //                            }
-                        //                            Spacer().frame(width: 20)
-                        //
-                        //                            VStack(alignment: .leading) {
-                        //                                Image("arrow2")
-                        //                                    .resizable()
-                        //                                    .aspectRatio(contentMode: .fit)
-                        //                                    .frame(width: 136, height: 20)
-                        //                                    .clipped()
-                        //                                Text(rightOption)
-                        //                                    //.font(.custom("Raleway-Bold", size: 18))
-                        //                                    .font(.system(size: 18)) // era 20
-                        //                                    .fontWeight(.semibold)
-                        //                                    .foregroundColor(.pretoColor)
-                        //                                    .multilineTextAlignment(.leading)
-                        //                                    .lineLimit(2)
-                        //                                    .frame(width: 120, height: 50)
-                        //                                    //.padding(.trailing, 100)
-                        //                                    .padding(.top, -10)
-                        //                            }
-                        //                            Spacer()
-                        //                        }
-                        
-//                        VStack (alignment: .center) {
-//                            Text("Bora dale!")
-//                                .font(.system(size: 18)) // era 20
-//                                .fontWeight(.semibold)
-//                                .foregroundColor(.pretoColor)
-//                                .multilineTextAlignment(.center)
-//                        }
+                       
                         
                     }
                     Spacer().frame(height: 30)
-                    //                    HStack {
-                    //
-                    //                        Button(action: {
-                    //                            //self.teste = true
-                    //                        }, label: {
-                    //                            HStack {
-                    //                                Spacer()
-                    //                                Text(leftOption)
-                    //                                    //.font(.custom("Raleway-Bold", size: 18))
-                    //                                    .font(.system(size: 17)) // era 20
-                    //                                    .fontWeight(.semibold)
-                    //                                    .foregroundColor(.brancoColor)
-                    //                                    .multilineTextAlignment(.center)
-                    //                                    .lineLimit(2)
-                    //                                    .padding(10)
-                    //                                Spacer()
-                    //                            }
-                    //
-                    //                        }).frame(height: 65)
-                    //                        .clipped()
-                    //                        .background(Color.roxoClaroColor)
-                    //                        .cornerRadius(10)
-                    //
-                    //                        Spacer()
-                    //                            .frame(width: 7)
-                    //
-                    //                        Button(action: {
-                    //                            // acao do botao
-                    //                        }, label: {
-                    //                            HStack {
-                    //                                Spacer()
-                    //                                Text(rightOption)
-                    //                                    .font(.system(size: 17)) // era 20
-                    //                                    .fontWeight(.semibold)
-                    //                                    .foregroundColor(.brancoColor)
-                    //                                    .multilineTextAlignment(.center)
-                    //                                    .lineLimit(2)
-                    //                                    .padding(10)
-                    //                                Spacer()
-                    //                            }
-                    //
-                    //                        }).frame(height: 65)
-                    //                        .clipped()
-                    //                        .background(Color.roxoClaroColor)
-                    //                        .cornerRadius(10)
-                    //                    }
-                    //Spacer().frame(height: 20)
+                    
                     
                     HStack {
                         HStack {

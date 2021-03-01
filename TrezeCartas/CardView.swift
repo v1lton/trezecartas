@@ -124,8 +124,6 @@ struct CardView: View {
                         
                         VStack(alignment: .center) {
                             VStack {
-//                                Rectangle().fill(Color.black)
-//                                    .padding([.top, .leading, .trailing])
                                 Image(uiImage: card.cardImage)
                                     .resizable()
                                     .scaledToFill()
@@ -134,19 +132,7 @@ struct CardView: View {
                                     .padding([.top, .leading, .trailing])
                                     .padding([.top, .leading, .trailing], 10)
                                     .clipShape(Rectangle(), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .aspectRatio(1.6, contentMode: .fill)
-//                                    .frame(height: 200)
-//                                    //.scaledToFill()
-//                                    .cornerRadius(10)
-//                                    .clipped()
-//                                    .padding([.top, .leading, .trailing])
-//                                    .padding([.top, .leading, .trailing], 10)
-//                                    //.padding(.top, 10)
                             }
-                            //.cornerRadius(10)
-                            //.padding([.top, .leading, .trailing], 10)
                             .clipped()
                            
                                 
@@ -205,16 +191,7 @@ struct CardView: View {
                         }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                    .onChange(of: leftButton) { newValue in
-//                        if card.id == maxID {
-//                            leftChoice()
-//                        }
-//                    }
-//                    .onChange(of: rightButton) { newValue in
-//                        if card.id == maxID {
-//                            rightChoice()
-//                        }
-//                    }
+
                     
                 } else if cardStatus == .back {
                     /// card resposta
@@ -368,18 +345,6 @@ struct CardView: View {
                         }
                         
                     }
-//                    .onChange(of: cardStatus) { newValue in
-//                        withAnimation(.easeIn(duration: 0.2)) {
-//                            self.isCardShowingBack = true
-//                        }
-//
-//                    }
-                    
-//                    .onChange(of: cardStatus, perform: { value in
-//                        withAnimation(.easeIn(duration: 0.2)) {
-//                            self.isCardShowingBack = true
-//                        }
-//                    })
                     
                 }
             }
