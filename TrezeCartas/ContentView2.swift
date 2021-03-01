@@ -162,7 +162,7 @@ struct ContentView2: View {
                             }, label: {
                                 HStack {
                                     Spacer()
-                                    Text("Bora Dale")
+                                    Text(end ? "Eita..." : "Bora Dale")
                                         //.font(.custom("Raleway-Bold", size: 18))
                                         .font(.system(size: 17)) // era 20
                                         .fontWeight(.semibold)
