@@ -28,7 +28,7 @@ struct ProgressBar: View {
                         .animation(.linear)
                     Image("coracao1")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 50)
                 }
                 
@@ -42,8 +42,9 @@ struct ProgressBar: View {
                         .animation(.linear)
                     Image("dinheiro1")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 50)
+                        
                 }
                 
                 // noia
@@ -56,13 +57,25 @@ struct ProgressBar: View {
                         .animation(.linear)
                     Image("noia1")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 50)
                 }
             }.frame(width: geometry.size.width, height: 50)
+            .background(Color(red: 0xf5/0xff, green: 0xf5/0xff, blue: 0xf5/0xff))
             .clipped()
         }
     }
 }
 
 
+struct ProgressBar_PreviewProvider: PreviewProvider{
+    static var previews: some View{
+        ProgressBar(health: .constant(4), money: .constant(4), drugs: .constant(10)).frame(height: 50)
+            .clipped()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+            
+        ProgressBar(health: .constant(4), money: .constant(4), drugs: .constant(10)).frame(height: 50)
+            .clipped()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+    }
+}
