@@ -450,7 +450,7 @@ struct CardArt: View {
                 if complete {
                     HStack {
                         Circle()
-                            .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: 12, height: 12, alignment: .center)
                             .foregroundColor(Color.azulColor)
                             .padding(6)
                             .overlay(
@@ -459,7 +459,7 @@ struct CardArt: View {
                             )
                         Spacer()
                         Circle()
-                            .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: 12, height: 12, alignment: .center)
                             .foregroundColor(Color.azulColor)
                             .padding(6)
                             .overlay(

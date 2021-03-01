@@ -28,6 +28,8 @@ struct ContentView2: View {
     @ObservedObject var cardsData = CardData()
     @State var isCardShowingBack = false
     
+    
+    @State var areButtonsActive = true
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
@@ -108,7 +110,11 @@ struct ContentView2: View {
                         HStack {
                             
                             Button(action: {
+                                self.areButtonsActive = false
                                 self.leftButton.toggle()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    self.areButtonsActive = true
+                                }
                             }, label: {
                                 HStack {
                                     Spacer()
@@ -127,12 +133,17 @@ struct ContentView2: View {
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
+                            .disabled(!areButtonsActive)
                             
                             Spacer()
                                 .frame(width: 7)
                             
                             Button(action: {
+                                self.areButtonsActive = false
                                 self.rightButton.toggle()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                    self.areButtonsActive = true
+                                }
                             }, label: {
                                 HStack {
                                     Spacer()
@@ -150,6 +161,7 @@ struct ContentView2: View {
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
+                            .disabled(!areButtonsActive)
                         }
                         
                        
@@ -159,6 +171,10 @@ struct ContentView2: View {
                             
                             Button(action: {
                                 self.pass.toggle()
+                                self.areButtonsActive = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                    self.areButtonsActive = true
+                                }
                             }, label: {
                                 HStack {
                                     Spacer()
@@ -177,7 +193,7 @@ struct ContentView2: View {
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
-                            
+                            .disabled(!self.areButtonsActive)
                             
                        
                         
