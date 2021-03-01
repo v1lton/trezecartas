@@ -127,7 +127,7 @@ struct CardView: View {
                                 Image(uiImage: card.cardImage)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 330, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .frame(width: UIScreen.main.bounds.width * 0.797, height: UIScreen.main.bounds.height * 0.223, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                     .cornerRadius(10)
                                     .padding([.top, .leading, .trailing])
                                     .padding([.top, .leading, .trailing], 10)
