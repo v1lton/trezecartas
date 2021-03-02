@@ -72,7 +72,9 @@ struct ContentView2: View {
                                 .scaledToFit()
                                 .frame(width: geometry.size.width, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).opacity(0.3)
                             
-                        }.frame(height: 500)
+                        }
+                        .frame(maxHeight: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(height: 500)
                         
                         ForEach(self.cardsData.cards, id: \.self) { cardss in
                             /// Using the pattern-match operator ~=, we can determine if our
@@ -98,12 +100,14 @@ struct ContentView2: View {
                                     
                                 }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
+                                .frame(maxHeight: geometry.size.height*0.6, alignment: .top)
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
                                 
                             }
                         }
                     }
+                    .frame(height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     
                     Spacer().frame(height: 50)
                     
@@ -122,7 +126,7 @@ struct ContentView2: View {
                                     Spacer()
                                     Text(leftOption)
                                         //.font(.custom("Raleway-Bold", size: 18))
-                                        .font(.system(size: 17)) // era 20
+                                        .font(.system(size: 15)) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
@@ -131,7 +135,7 @@ struct ContentView2: View {
                                     Spacer()
                                 }
                                 
-                            }).frame(height: 65)
+                            }).frame(height: 55)
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
@@ -150,7 +154,7 @@ struct ContentView2: View {
                                 HStack {
                                     Spacer()
                                     Text(rightOption)
-                                        .font(.system(size: 17)) // era 20
+                                        .font(.system(size: 15)) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
@@ -159,7 +163,7 @@ struct ContentView2: View {
                                     Spacer()
                                 }
                                 
-                            }).frame(height: 65)
+                            }).frame(height: 55)
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
@@ -182,7 +186,7 @@ struct ContentView2: View {
                                     Spacer()
                                     Text(end ? "Eita..." : "Bora Dale")
                                         //.font(.custom("Raleway-Bold", size: 18))
-                                        .font(.system(size: 17)) // era 20
+                                        .font(.system(size: 15)) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
@@ -191,7 +195,7 @@ struct ContentView2: View {
                                     Spacer()
                                 }
                                 
-                            }).frame(height: 65)
+                            }).frame(height: 55)
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
@@ -200,7 +204,7 @@ struct ContentView2: View {
                        
                         
                     }
-                    Spacer().frame(height: 30)
+                    Spacer().frame(height: geometry.size.height*0.03)
                     
                     
                     HStack {
@@ -259,6 +263,25 @@ struct ContentView2: View {
         .overlay(EndGame(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
         // trocar para a tela de ganhou
         .overlay(FinalGame(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+    }
+}
+
+struct ContentView2_PreviewProvider: PreviewProvider{
+    
+    @State static var active = false
+    
+    static var previews: some View{
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+          
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPod touch (7th generation)"))
+        
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
 }
 
