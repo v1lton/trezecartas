@@ -60,7 +60,7 @@ struct ContentView2: View {
                     Spacer()
                     // status
                     VStack {
-                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(height: 50)
+                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(height: geometry.size.height*0.0558)
                             .clipped()
                     }.padding()
                     

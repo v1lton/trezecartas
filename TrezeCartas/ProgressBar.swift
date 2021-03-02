@@ -23,13 +23,13 @@ struct ProgressBar: View {
                     Rectangle().frame(width: 60, height: geometry.size.height)
                         .foregroundColor(Color(UIColor.lightGray))
                         .opacity(0.4)
-                    Rectangle().frame(width: 60, height: min(CGFloat(Float(health))*5, 50))
+                    Rectangle().frame(width: 60, height: min(CGFloat(Float(health))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.rosaColor)
                         .animation(.linear)
                     Image("coracao1")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 60, height: 50)
+                        .frame(width: 60, height: geometry.size.height)
                 }
                 
                 // dinheiro
@@ -37,13 +37,13 @@ struct ProgressBar: View {
                     Rectangle().frame(width: 60 , height: geometry.size.height)
                         .foregroundColor(Color(UIColor.lightGray))
                         .opacity(0.4)
-                    Rectangle().frame(width: 60, height: min(CGFloat(Float(money))*5, 50))
+                    Rectangle().frame(width: 60, height: min(CGFloat(Float(money))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.amareloColor)
                         .animation(.linear)
                     Image("dinheiro1")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 60, height: 50)
+                        .frame(width: 60, height: geometry.size.height)
                         
                 }
                 
@@ -52,15 +52,15 @@ struct ProgressBar: View {
                     Rectangle().frame(width: 60, height: geometry.size.height)
                         .foregroundColor(Color(UIColor.lightGray))
                         .opacity(0.4)
-                    Rectangle().frame(width: 60, height: min(CGFloat(Float(drugs))*5, 50))
+                    Rectangle().frame(width: 60, height: min(CGFloat(Float(drugs))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.azulColor)
                         .animation(.linear)
                     Image("noia1")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 60, height: 50)
+                        .frame(width: 60, height: geometry.size.height)
                 }
-            }.frame(width: geometry.size.width, height: 50)
+            }.frame(width: geometry.size.width, height: geometry.size.height)
             .background(Color(red: 0xf5/0xff, green: 0xf5/0xff, blue: 0xf5/0xff))
             .clipped()
         }
