@@ -24,7 +24,7 @@ struct ContentView2: View {
     @State var end = false
     @State var description = ""
     
-    @State var maxIntID: Int = 12
+    @State var maxIntID: Int = UserDefaults.standard.bool(forKey: "has_completed_onboarding_once_key") ? 12 : 16
     @ObservedObject var cardsData = CardData()
     @State var isCardShowingBack = false
     
@@ -83,8 +83,10 @@ struct ContentView2: View {
                                     if end {
                                         print("terminou")
                                         self.isPresentedGameOver.toggle()
-                                        self.cardsData.shuffleCards()
                                         
+                                        maxIntID = UserDefaults.standard.bool(forKey: "has_completed_onboarding_once_key") ? 12 : 16
+                                        UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
+                                        self.cardsData.shuffleCards()
                                     } else {
                                         maxIntID -= 1 // reduz o id maximo
                                         if maxID == 0 {
