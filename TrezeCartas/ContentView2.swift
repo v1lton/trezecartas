@@ -59,9 +59,14 @@ struct ContentView2: View {
                     Spacer()
                     // status
                     VStack {
-                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(minHeight: 45).frame(height: geometry.size.height*0.0558)
-                            //.clipped()
-                    }.padding()
+                        
+                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(minHeight: 45)
+                            .frame(height: geometry.size.height*0.0558)
+
+                    }
+                    .padding()
+                    .opacity(cardsData.maxID < 16 ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.3))
                     
                     ZStack {
                         
@@ -223,7 +228,10 @@ struct ContentView2: View {
                                 .lineLimit(2)
                                 .padding(.top, 4.0)
                         }.padding()
-                    }.opacity(end ? 0 : 1)
+                    }
+                    .opacity(cardsData.maxID < 14 ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.3))
+                    .opacity(end ? 0 : 1)
                     //Spacer()
                 }
             }
