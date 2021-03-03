@@ -216,7 +216,7 @@ struct ContentView2: View {
                                 .clipped()
                                 .cornerRadius(10)
                                 .padding(.trailing, -10)
-                            Text((geometry.size.height<600) ? "Agite para o sucesso" : "Agite para o \nsucesso")
+                            Text((geometry.size.height<600) ? "Agite para o sucesso" : "Agite para\no sucesso")
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.pretoColor)

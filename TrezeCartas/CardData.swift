@@ -23,6 +23,9 @@ class CardData: ObservableObject {
         if !UserDefaults.standard.bool(forKey: "has_completed_onboarding_once_key"){
             shuffledCards.insert(contentsOf: CardData.onboardingCards.reversed(), at: shuffledCards.count)
         }
+        else{
+            shuffledCards.insert(CardData.onboardingCards[0], at: shuffledCards.count)
+        }
         
         for i in 0 ..<  shuffledCards.count {
             shuffledCards[i].id = i
