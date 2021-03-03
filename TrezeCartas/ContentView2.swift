@@ -44,7 +44,7 @@ struct ContentView2: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        return  CGFloat(cardsData.cards.count - 1 - id) * 10
+        return  CGFloat(cardsData.cards.count - 1 - id) * 8 // era 10
     }
     
     // Compute what the max ID in the given users array is.
@@ -60,8 +60,8 @@ struct ContentView2: View {
                     Spacer()
                     // status
                     VStack {
-                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(height: geometry.size.height*0.0558)
-                            .clipped()
+                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(minHeight: 45).frame(height: geometry.size.height*0.0558)
+                            //.clipped()
                     }.padding()
                     
                     ZStack {
@@ -70,7 +70,7 @@ struct ContentView2: View {
                             Image("logo2")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: geometry.size.width, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).opacity(0.3)
+                                .frame(width: geometry.size.width, height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).opacity(0.3)
                             
                         }
                         .frame(maxHeight: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -109,7 +109,7 @@ struct ContentView2: View {
                     }
                     .frame(height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     
-                    Spacer().frame(height: 50)
+                    Spacer().frame(height: 38)
                     
                     if !self.isCardShowingBack {
                         
@@ -126,12 +126,12 @@ struct ContentView2: View {
                                     Spacer()
                                     Text(leftOption)
                                         //.font(.custom("Raleway-Bold", size: 18))
-                                        .font(.system(size: 15)) // era 20
+                                        .font(.callout) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
                                         .lineLimit(2)
-                                        .padding(10)
+                                        .padding(7)
                                     Spacer()
                                 }
                                 
@@ -154,12 +154,12 @@ struct ContentView2: View {
                                 HStack {
                                     Spacer()
                                     Text(rightOption)
-                                        .font(.system(size: 15)) // era 20
+                                        .font(.callout) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
                                         .lineLimit(2)
-                                        .padding(10)
+                                        .padding(7)
                                     Spacer()
                                 }
                                 
@@ -186,12 +186,12 @@ struct ContentView2: View {
                                     Spacer()
                                     Text(end ? "Eita..." : "Bora Dale")
                                         //.font(.custom("Raleway-Bold", size: 18))
-                                        .font(.system(size: 15)) // era 20
+                                        .font(.callout) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
                                         .lineLimit(2)
-                                        .padding(10)
+                                        .padding(7)
                                     Spacer()
                                 }
                                 
@@ -204,7 +204,7 @@ struct ContentView2: View {
                        
                         
                     }
-                    Spacer().frame(height: geometry.size.height*0.03)
+                    Spacer()
                     
                     
                     HStack {
@@ -212,12 +212,12 @@ struct ContentView2: View {
                             Image("lata")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(height: 50)
+                                .frame(height: (geometry.size.height<600) ? 36 : 50)
                                 .clipped()
                                 .cornerRadius(10)
                                 .padding(.trailing, -10)
-                            Text("Agite para o \nsucesso")
-                                .font(.system(size: 16))
+                            Text((geometry.size.height<600) ? "Agite para o sucesso" : "Agite para o \nsucesso")
+                                .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.pretoColor)
                                 .lineLimit(2)

@@ -18,48 +18,54 @@ struct ProgressBar: View {
     var body: some View {
         GeometryReader { geometry in
             HStack(alignment: .center) {
+                Spacer()
                 // coracao
                 ZStack(alignment: .bottom) {
-                    Rectangle().frame(width: 60, height: geometry.size.height)
+                    Rectangle().frame(width: geometry.size.height*1.15, height: geometry.size.height)
                         .foregroundColor(Color(UIColor.lightGray))
                         .opacity(0.4)
-                    Rectangle().frame(width: 60, height: min(CGFloat(Float(health))*(0.1*geometry.size.height), geometry.size.height))
+                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(health))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.rosaColor)
                         .animation(.linear)
+                    
                     Image("coracao1")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 60, height: geometry.size.height)
+                    
+                    
                 }
-                
+                //Spacer()
+                    //.frame(width: 0)
                 // dinheiro
                 ZStack(alignment: .bottom) {
-                    Rectangle().frame(width: 60 , height: geometry.size.height)
+                    Rectangle().frame(width: geometry.size.height*1.15 , height: geometry.size.height)
                         .foregroundColor(Color(UIColor.lightGray))
                         .opacity(0.4)
-                    Rectangle().frame(width: 60, height: min(CGFloat(Float(money))*(0.1*geometry.size.height), geometry.size.height))
+                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(money))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.amareloColor)
                         .animation(.linear)
                     Image("dinheiro1")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 60, height: geometry.size.height)
-                        
+                    
                 }
                 
                 // noia
                 ZStack(alignment: .bottom) {
-                    Rectangle().frame(width: 60, height: geometry.size.height)
+                    Rectangle().frame(width: geometry.size.height*1.15, height: geometry.size.height)
                         .foregroundColor(Color(UIColor.lightGray))
                         .opacity(0.4)
-                    Rectangle().frame(width: 60, height: min(CGFloat(Float(drugs))*(0.1*geometry.size.height), geometry.size.height))
+                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(drugs))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.azulColor)
                         .animation(.linear)
                     Image("noia1")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 60, height: geometry.size.height)
                 }
+                Spacer()
             }.frame(width: geometry.size.width, height: geometry.size.height)
             .background(Color(red: 0xf5/0xff, green: 0xf5/0xff, blue: 0xf5/0xff))
             .clipped()
@@ -73,7 +79,7 @@ struct ProgressBar_PreviewProvider: PreviewProvider{
         ProgressBar(health: .constant(4), money: .constant(4), drugs: .constant(10)).frame(height: 50)
             .clipped()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-            
+        
         ProgressBar(health: .constant(4), money: .constant(4), drugs: .constant(10)).frame(height: 50)
             .clipped()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
