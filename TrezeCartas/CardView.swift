@@ -13,7 +13,7 @@ struct CardView: View {
     @State private var cardStatus: Cards = .none
     @State var degrees: Double = 0.0
     
-    @Binding var maxID: Int
+    @ObservedObject var cardData: CardData
     @Binding var health: Int
     @Binding var money: Int
     @Binding var drugs: Int
@@ -40,14 +40,14 @@ struct CardView: View {
     }
     
 
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, maxID: Binding<Int>, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>, leftButton: Binding<Bool>, rightButton: Binding<Bool>, pass: Binding<Bool>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, cardData: CardData, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>, leftButton: Binding<Bool>, rightButton: Binding<Bool>, pass: Binding<Bool>) {
 
         self.card = card
         self.onRemove = onRemove
         self._health = health
         self._money = money
         self._drugs = drugs
-        self._maxID = maxID
+        self.cardData = cardData
         self._leftOption = leftOption
         self._rightOption = rightOption
         self._end = end
@@ -334,8 +334,8 @@ struct CardView: View {
                     ZStack {
                         Rectangle().fill(Color.black).opacity(0.25)
                         CardArt(complete: true)
-                    }.onChange(of: maxID) { newValue in
-                        if card.id == maxID {
+                    }.onChange(of: cardData.maxID) { newValue in
+                        if card.id == cardData.maxID {
                             withAnimation(.easeIn(duration: 0.2)) {
                                 self.isCardShowingBack = false
                             }
@@ -349,13 +349,13 @@ struct CardView: View {
                 }
             }
             .onChange(of: leftButton) { newValue in
-                if card.id == maxID {
+                if card.id == cardData.maxID {
                     self.swipeStatus = .left
                     self.leftChoice()
                 }
             }
             .onChange(of: rightButton) { newValue in
-                if card.id == maxID {
+                if card.id == cardData.maxID {
                     self.swipeStatus = .right
                     self.rightChoice()
                 }
@@ -369,7 +369,7 @@ struct CardView: View {
             .rotationEffect(.degrees(Double((cardStatus == .front ? self.translation.width : -self.translation.width) / geometry.size.width) * 25), anchor: .bottom)
             .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
             .onAppear {
-                if card.id == maxID {
+                if card.id == cardData.maxID {
                     cardStatus = .front
                     self.leftOption = card.leftOption
                     self.rightOption = card.rightOption

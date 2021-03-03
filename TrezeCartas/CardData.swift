@@ -11,7 +11,7 @@ import SwiftUI
 class CardData: ObservableObject {
     
     @Published var cards = originalCards
-    
+    @Published var maxID = originalCards.count - 1
     init(){
         shuffleCards()
         
@@ -28,6 +28,7 @@ class CardData: ObservableObject {
             shuffledCards[i].id = i
         }
         self.cards = shuffledCards // Colocando caso tenha algum local do código que pegue diretamente de CardData().cards
+        self.maxID = shuffledCards.count - 1
         
         self.objectWillChange.send()
     }

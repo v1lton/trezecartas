@@ -24,7 +24,6 @@ struct ContentView2: View {
     @State var end = false
     @State var description = ""
     
-    @State var maxIntID: Int = UserDefaults.standard.bool(forKey: "has_completed_onboarding_once_key") ? 12 : 16
     @ObservedObject var cardsData = CardData()
     @State var isCardShowingBack = false
     
@@ -70,10 +69,10 @@ struct ContentView2: View {
                             Image("logo2")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: geometry.size.width, height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).opacity(0.3)
+                                .frame(width: geometry.size.width, height: geometry.size.height*0.6, alignment: .center).opacity(0.3)
                             
                         }
-                        .frame(maxHeight: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(maxHeight: geometry.size.height*0.6, alignment: .center)
                         .frame(height: 500)
                         
                         ForEach(self.cardsData.cards, id: \.self) { cardss in
@@ -86,19 +85,20 @@ struct ContentView2: View {
                                         print("terminou")
                                         self.isPresentedGameOver.toggle()
                                         
-                                        maxIntID = UserDefaults.standard.bool(forKey: "has_completed_onboarding_once_key") ? 12 : 16
                                         UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
                                         self.cardsData.shuffleCards()
                                     } else {
-                                        maxIntID -= 1 // reduz o id maximo
+                                        cardsData.maxID -= 1 // reduz o id maximo
                                         if maxID == 0 {
                                             self.isPresentedFinished.toggle()
+                                            
+                                            UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
                                             self.cardsData.shuffleCards()
                                         }
                                         self.cardsData.cards.removeAll { $0.id == removedCard.id }
                                     }
                                     
-                                }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
+                                }, health: $health, money: $money, drugs: $drugs, cardData: cardsData, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
                                 .frame(maxHeight: geometry.size.height*0.6, alignment: .top)
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
