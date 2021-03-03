@@ -34,15 +34,15 @@ struct StartGame: View {
                         Image("logo2")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: geometry.size.width, height: 500, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: geometry.size.width, height: UIScreen.main.bounds.height * 0.558, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         
                         Spacer()
                     }
                     
                     VStack {
                         Text("Toque para iniciar o jogo")
-                            .font(.system(size: 14))
-                            .fontWeight(.semibold)
+                            .font(.subheadline)
+                            .fontWeight(.regular)
                             .foregroundColor(.pretoColor)
                             .multilineTextAlignment(.center)
                             .padding()

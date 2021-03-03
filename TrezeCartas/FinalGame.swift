@@ -17,19 +17,19 @@ struct FinalGame: View {
                 VStack{
                     Spacer()
                     // substituir a foto depois
-                    Image("lataFinal")
+                    Image("lata1")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 182)
+                        .frame(height: UIScreen.main.bounds.height * 0.20)
                         .clipped()
                     Text("Você sobreviveu!")
-                        .font(.system(size: 30))
+                        .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.brancoColor)
                         .multilineTextAlignment(.center)
                     Text("Parabéns! Talvez não tenha restado dignidade, mas você conseguiu sobreviver a mais um Carnaval na 13.")
-                        .font(.system(size: 18))
-                        .fontWeight(.regular)
+                        .font(.body)
+                        .fontWeight(.medium)
                         .foregroundColor(.brancoColor)
                         .multilineTextAlignment(.center)
                         .frame(width: 250)
@@ -38,9 +38,9 @@ struct FinalGame: View {
                 }
                 
                 VStack {
-                    Text("Toque para jogar novamente.")
-                        .font(.system(size: 14))
-                        .fontWeight(.semibold)
+                    Text("Toque para jogar novamente")
+                        .font(.subheadline)
+                        .fontWeight(.regular)
                         .foregroundColor(.brancoColor)
                         .multilineTextAlignment(.center)
                         .padding()

@@ -44,7 +44,7 @@ struct ContentView2: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        return  CGFloat(cardsData.cards.count - 1 - id) * 10
+        return  CGFloat(cardsData.cards.count - 1 - id) * 8 // era 10
     }
     
     // Compute what the max ID in the given users array is.
@@ -60,8 +60,8 @@ struct ContentView2: View {
                     Spacer()
                     // status
                     VStack {
-                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(height: 50)
-                            .clipped()
+                        ProgressBar(health: $health, money: $money, drugs: $drugs).frame(minHeight: 45).frame(height: geometry.size.height*0.0558)
+                            //.clipped()
                     }.padding()
                     
                     ZStack {
@@ -70,9 +70,11 @@ struct ContentView2: View {
                             Image("logo2")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: geometry.size.width, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).opacity(0.3)
+                                .frame(width: geometry.size.width, height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).opacity(0.3)
                             
-                        }.frame(height: 500)
+                        }
+                        .frame(maxHeight: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(height: 500)
                         
                         ForEach(self.cardsData.cards, id: \.self) { cardss in
                             /// Using the pattern-match operator ~=, we can determine if our
@@ -98,14 +100,16 @@ struct ContentView2: View {
                                     
                                 }, health: $health, money: $money, drugs: $drugs, maxID: $maxIntID, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
+                                .frame(maxHeight: geometry.size.height*0.6, alignment: .top)
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
                                 .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
                                 
                             }
                         }
                     }
+                    .frame(height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     
-                    Spacer().frame(height: 50)
+                    Spacer().frame(height: 38)
                     
                     if !self.isCardShowingBack {
                         
@@ -122,16 +126,16 @@ struct ContentView2: View {
                                     Spacer()
                                     Text(leftOption)
                                         //.font(.custom("Raleway-Bold", size: 18))
-                                        .font(.system(size: 17)) // era 20
+                                        .font(.callout) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
                                         .lineLimit(2)
-                                        .padding(10)
+                                        .padding(7)
                                     Spacer()
                                 }
                                 
-                            }).frame(height: 65)
+                            }).frame(height: 55)
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
@@ -150,16 +154,16 @@ struct ContentView2: View {
                                 HStack {
                                     Spacer()
                                     Text(rightOption)
-                                        .font(.system(size: 17)) // era 20
+                                        .font(.callout) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
                                         .lineLimit(2)
-                                        .padding(10)
+                                        .padding(7)
                                     Spacer()
                                 }
                                 
-                            }).frame(height: 65)
+                            }).frame(height: 55)
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
@@ -182,16 +186,16 @@ struct ContentView2: View {
                                     Spacer()
                                     Text(end ? "Eita..." : "Bora Dale")
                                         //.font(.custom("Raleway-Bold", size: 18))
-                                        .font(.system(size: 17)) // era 20
+                                        .font(.callout) // era 20
                                         .fontWeight(.semibold)
                                         .foregroundColor(.brancoColor)
                                         .multilineTextAlignment(.center)
                                         .lineLimit(2)
-                                        .padding(10)
+                                        .padding(7)
                                     Spacer()
                                 }
                                 
-                            }).frame(height: 65)
+                            }).frame(height: 55)
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
@@ -200,7 +204,7 @@ struct ContentView2: View {
                        
                         
                     }
-                    Spacer().frame(height: 30)
+                    Spacer()
                     
                     
                     HStack {
@@ -208,12 +212,12 @@ struct ContentView2: View {
                             Image("lata")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(height: 50)
+                                .frame(height: (geometry.size.height<600) ? 36 : 50)
                                 .clipped()
                                 .cornerRadius(10)
                                 .padding(.trailing, -10)
-                            Text("Agite para o \nsucesso")
-                                .font(.system(size: 16))
+                            Text((geometry.size.height<600) ? "Agite para o sucesso" : "Agite para o \nsucesso")
+                                .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.pretoColor)
                                 .lineLimit(2)
@@ -259,6 +263,25 @@ struct ContentView2: View {
         .overlay(EndGame(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
         // trocar para a tela de ganhou
         .overlay(FinalGame(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+    }
+}
+
+struct ContentView2_PreviewProvider: PreviewProvider{
+    
+    @State static var active = false
+    
+    static var previews: some View{
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+          
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPod touch (7th generation)"))
+        
+        ContentView2(rootIsActive: $active)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
 }
 
