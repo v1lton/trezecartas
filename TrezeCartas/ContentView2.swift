@@ -230,7 +230,7 @@ struct ContentView2: View {
         }
         .onChange(of: end, perform: { value in
             if health == 0 && money == 0 &&  drugs == 0 {
-                self.description = "Assédio não é brincadeira. Aqui é só um jogo, mas pra assédio não existe espaço em nenhum lugar. Você foi cancelado!"
+                self.description = cardsData.blockEndingText
             } else if health == 0 {
                 self.description = "Bicha, nem assim tu sobrevive um rolê na 13! Bora se preparar pra o ano que vem pois o estrago vai ser grande!"
             } else if money == 0 {
