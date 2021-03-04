@@ -28,6 +28,7 @@ class Attributtes: Codable, ReflectedStringConvertible{
     }
     
 }
+
 class JSONCard: Attributtes{
     var id: Int
     var name: String
@@ -90,20 +91,20 @@ class CardData: ObservableObject {
     init(){
         shuffleCards()
 
-        guard let jsonPath = Bundle.main.path(forResource: "TeXeroCards", ofType: "txt") else { fatalError() }
-
-        do {
-            let jsonData = try String(contentsOfFile: jsonPath, encoding: String.Encoding.utf8).data(using: String.Encoding.utf8)!
-            let jsonArray = try JSONDecoder().decode([JSONCard].self, from: jsonData)
-            
-
-            for row in jsonArray {
-                print(row)
-            }
-        } catch{
-            print("fuck its a thursday")
-            print(error)
-        }
+//        guard let jsonPath = Bundle.main.path(forResource: "TeXeroCards", ofType: "txt") else { fatalError() }
+//
+//        do {
+//            let jsonData = try String(contentsOfFile: jsonPath, encoding: String.Encoding.utf8).data(using: String.Encoding.utf8)!
+//            let jsonArray = try JSONDecoder().decode([JSONCard].self, from: jsonData)
+//
+//
+//            for row in jsonArray {
+//                print(row)
+//            }
+//        } catch{
+//            print("its a thursday")
+//            print(error)
+//        }
         
     }
     
