@@ -1,0 +1,42 @@
+[
+ {
+   "ID": 1,
+   "name": "O Bloco da Lama",
+   "description": "Eita, olha a galera chegando do bloco da lama. Tá todo mundo coberto de lama dos pés a cabeça. E lá vem uma amiga tua, calma ela está querendo te abraçar?",
+   "left_text": "Abraçar a amiga",
+   "right_text": "Falar de longe",
+   "left_result": "{\n\"health_stats\" : -30,\n\"money_stats\" : 0,\n\"sobriety_stats\" : -10,\n\"is_among_friends\" : true,\n\"is_dirty\" : true\n}",
+   "right_result": "{\n\"health_stats\" : 10,\n\"money_stats\" : 0,\n\"sobriety_stats\" : 10\n}",
+   "image_name": "__bloco_da_lama",
+   "depends_from": null,
+   "initial_time": "9:00",
+   "end_time": "15:00",
+   "initial_year": 0,
+   "is_among_friends": null,
+   "is_dating": null,
+   "has_kissed": null,
+   "is_hurt": null,
+   "is_dirty": null,
+   "has_lost_phone": null
+ },
+ {
+   "ID": 1,
+   "name": "O Bloco da Lama",
+   "description": "Eita, olha a galera chegando do bloco da lama. Tá todo mundo coberto de lama dos pés a cabeça. E lá vem uma amiga tua, calma ela está querendo te abraçar?",
+   "left_text": "Abraçar a amiga",
+   "right_text": "Falar de longe",
+   "left_result": "{\n\"health_stats\" : -30,\n\"money_stats\" : 0,\n\"sobriety_stats\" : -10,\n\"is_among_friends\" : true,\n\"is_dirty\" : true\n}",
+   "right_result": "{\n\"health_stats\" : 10,\n\"money_stats\" : 0,\n\"sobriety_stats\" : 10\n}",
+   "image_name": "__bloco_da_lama",
+   "depends_from": null,
+   "initial_time": "9:00",
+   "end_time": "15:00",
+   "initial_year": 0,
+   "is_among_friends": null,
+   "is_dating": null,
+   "has_kissed": null,
+   "is_hurt": null,
+   "is_dirty": null,
+   "has_lost_phone": null
+ }
+]
