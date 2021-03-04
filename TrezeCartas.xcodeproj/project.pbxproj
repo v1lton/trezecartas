@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,9 @@
 		08EFE00425CF3BCD00086BFB /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */; };
 		08EFE00925CF3DD700086BFB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00825CF3DD700086BFB /* CardView.swift */; };
 		08EFE00E25CF4B7D00086BFB /* ContentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00D25CF4B7D00086BFB /* ContentView2.swift */; };
+		3568616A25F15B9500C2B261 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 3568616925F15B9500C2B261 /* CodableCSV */; };
+		3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3568617625F15EEC00C2B261 /* TeXeroCards.txt */; };
+		35CF7C5E25F178D1000B4BE0 /* ReflectedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF7C5D25F178D1000B4BE0 /* ReflectedStringConvertible.swift */; };
 		8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF225CDB48000D899D2 /* AppDelegate.swift */; };
 		8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF425CDB48000D899D2 /* SceneDelegate.swift */; };
 		8908FAF725CDB48000D899D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF625CDB48000D899D2 /* ContentView.swift */; };
@@ -55,6 +58,8 @@
 		08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
 		08EFE00825CF3DD700086BFB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		08EFE00D25CF4B7D00086BFB /* ContentView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView2.swift; sourceTree = "<group>"; };
+		3568617625F15EEC00C2B261 /* TeXeroCards.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TeXeroCards.txt; sourceTree = "<group>"; };
+		35CF7C5D25F178D1000B4BE0 /* ReflectedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectedStringConvertible.swift; sourceTree = "<group>"; };
 		8908FAEF25CDB48000D899D2 /* TrezeCartas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrezeCartas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8908FAF225CDB48000D899D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8908FAF425CDB48000D899D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3568616A25F15B9500C2B261 /* CodableCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +137,8 @@
 				08CA4FB525D4955400BFE2BE /* EndGame.swift */,
 				89A8E98F25D5BAD3005868A8 /* FinalGame.swift */,
 				0894A10725D4B15C0007B370 /* CardData.swift */,
+				35CF7C5D25F178D1000B4BE0 /* ReflectedStringConvertible.swift */,
+				3568617625F15EEC00C2B261 /* TeXeroCards.txt */,
 				08CA4FBA25D4A39E00BFE2BE /* StartGame.swift */,
 				08831D9225D1DB810090D3E9 /* ExtensionColor.swift */,
 				08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */,
@@ -185,6 +193,9 @@
 			dependencies = (
 			);
 			name = TrezeCartas;
+			packageProductDependencies = (
+				3568616925F15B9500C2B261 /* CodableCSV */,
+			);
 			productName = TrezeCartas;
 			productReference = 8908FAEF25CDB48000D899D2 /* TrezeCartas.app */;
 			productType = "com.apple.product-type.application";
@@ -256,6 +267,9 @@
 				Base,
 			);
 			mainGroup = 8908FAE625CDB48000D899D2;
+			packageReferences = (
+				3568616825F15B9500C2B261 /* XCRemoteSwiftPackageReference "CodableCSV" */,
+			);
 			productRefGroup = 8908FAF025CDB48000D899D2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -273,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8908FB0225CDB48200D899D2 /* LaunchScreen.storyboard in Resources */,
+				3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */,
 				8908FAFF25CDB48200D899D2 /* Preview Assets.xcassets in Resources */,
 				8908FAFC25CDB48200D899D2 /* Assets.xcassets in Resources */,
 			);
@@ -312,6 +327,7 @@
 				08EEAD9F25D44162002461DF /* ProgressBar.swift in Sources */,
 				0894A10825D4B15C0007B370 /* CardData.swift in Sources */,
 				08CA4FBB25D4A39E00BFE2BE /* StartGame.swift in Sources */,
+				35CF7C5E25F178D1000B4BE0 /* ReflectedStringConvertible.swift in Sources */,
 				8908FAF725CDB48000D899D2 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,6 +655,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3568616825F15B9500C2B261 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3568616925F15B9500C2B261 /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3568616825F15B9500C2B261 /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */ = {

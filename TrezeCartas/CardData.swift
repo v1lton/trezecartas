@@ -8,6 +8,80 @@
 import Foundation
 import SwiftUI
 
+class Attributtes: Codable, ReflectedStringConvertible{
+    var dependsFrom: Int?
+    var isAmongFriends: Bool?
+    var isDating: Bool?
+    var hasKissed: Bool?
+    var isHurt: Bool?
+    var isDirty: Bool?
+    var hasLostPhone: Bool?
+    
+    enum CodingKeys: String, CodingKey {
+        case dependsFrom = "depends_from"
+        case isAmongFriends = "is_among_friends"
+        case isDating = "is_dating"
+        case hasKissed = "has_kissed"
+        case isHurt = "is_hurt"
+        case isDirty = "is_dirty"
+        case hasLostPhone = "has_lost_phone"
+    }
+    
+}
+
+class JSONCard: Attributtes{
+    var id: Int
+    var name: String
+    var text: String
+    var leftText: String
+    var rightText: String
+    var leftResult: String
+    var rightResult: String
+    var imageName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "ID"
+        case name
+        case text = "description"
+        case leftText = "left_text"
+        case rightText = "right_text"
+        case leftResult = "left_result"
+        case rightResult = "right_result"
+        case imageName = "image_name"
+    }
+    
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.text = try container.decode(String.self, forKey: .text)
+        self.leftText = try container.decode(String.self, forKey: .leftText)
+        self.rightText = try container.decode(String.self, forKey: .rightText)
+        self.leftResult = try container.decode(String.self, forKey: .leftResult)
+        self.rightResult = try container.decode(String.self, forKey: .rightResult)
+        self.imageName = try container.decode(String.self, forKey: .imageName)
+        
+        try super.init(from: decoder)
+        
+        translateResults()
+    }
+    
+    func translateResults(){
+        do{
+            let jsonData = leftResult.data(using: String.Encoding.utf8)!
+            let json = try JSONDecoder().decode(Attributtes.self, from: jsonData)
+            print(json)
+            
+            
+        }
+        catch{
+            print(error)
+        }
+    }
+}
+
+
 class CardData: ObservableObject {
     
     @Published var cards = originalCards
@@ -16,7 +90,49 @@ class CardData: ObservableObject {
     var blockEndingText: String = ""
     init(){
         shuffleCards()
+
+//        guard let jsonPath = Bundle.main.path(forResource: "TeXeroCards", ofType: "txt") else { fatalError() }
+//
+//        do {
+//            let jsonData = try String(contentsOfFile: jsonPath, encoding: String.Encoding.utf8).data(using: String.Encoding.utf8)!
+//            let jsonArray = try JSONDecoder().decode([JSONCard].self, from: jsonData)
+//
+//
+//            for row in jsonArray {
+//                print(row)
+//            }
+//        } catch{
+//            print("its a thursday")
+//            print(error)
+//        }
         
+    }
+    
+    /**
+    Reads a multiline, tab-separated String and returns an Array<NSictionary>, taking column names from the first line or an explicit parameter
+    */
+    func JSONObjectFromTSV(tsvInputString:String, columnNames optionalColumnNames:[String]? = nil) -> Array<NSDictionary>
+    {
+      let lines = tsvInputString.components(separatedBy: "\n")
+      guard lines.isEmpty == false else { return [] }
+      
+      let columnNames = optionalColumnNames ?? lines[0].components(separatedBy: "\t")
+      var lineIndex = (optionalColumnNames != nil) ? 0 : 1
+      let columnCount = columnNames.count
+      var result = Array<NSDictionary>()
+      
+      for line in lines[lineIndex ..< lines.count] {
+        let fieldValues = line.components(separatedBy: "\t")
+        if fieldValues.count != columnCount {
+          //      NSLog("WARNING: header has %u columns but line %u has %u columns. Ignoring this line", columnCount, lineIndex,fieldValues.count)
+        }
+        else
+        {
+            result.append(NSDictionary(objects: fieldValues, forKeys: columnNames as [NSCopying]))
+        }
+        lineIndex = lineIndex + 1
+      }
+      return result
     }
     
     public func shuffleCards(){

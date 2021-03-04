@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct FinalGame: View {
     
     @Binding var shouldPopToRootView : Bool
