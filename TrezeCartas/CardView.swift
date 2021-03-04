@@ -105,6 +105,10 @@ struct CardView: View {
         self.money = self.money.clamped(to: 0...10)
         self.drugs = self.drugs.clamped(to: 0...10)
         
+        if health == 0 || money == 0 || drugs == 10 {
+            self.end.toggle()
+        }
+
         cardStatus = .back
         withAnimation {
             self.degrees -= 180
