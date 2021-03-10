@@ -26,10 +26,10 @@ struct CardView: View {
     
     private var card: Card
     private var onRemove: (_ user: Card) -> Void
-    
+        
     private var thresholdPercentage: CGFloat = 0.3 // when the user has draged 30% the width of the screen in either direction
     
-    private enum LeftRight: Int {
+    enum LeftRight: Int {
         case right, left, none
     }
     
@@ -66,15 +66,24 @@ struct CardView: View {
         LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), Color.black.opacity(0.0)]), startPoint: .bottom, endPoint: .top)
     }
     
-    func leftChoice() {
-        self.environment.attributes.healthStats! += card.leftStatus[0]
-        self.environment.attributes.moneyStats! += card.leftStatus[1]
+    func choice(direction: LeftRight){
+        
+        var sideChoice: [Int]
+        
+        if(direction == .left){
+            sideChoice = card.leftStatus
+        } else {
+            sideChoice = card.rightStatus
+        }
+        
+        self.environment.attributes.healthStats! += sideChoice[0]
+        self.environment.attributes.moneyStats! += sideChoice[1]
         if card.leftStatus[2] == 0 {
             self.environment.attributes.insanityStats! -= 1
         } else {
-            self.environment.attributes.insanityStats! += card.leftStatus[2]
+            self.environment.attributes.insanityStats! += sideChoice[2]
         }
-        // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
+        
         self.environment.attributes.healthStats! = self.environment.attributes.healthStats!.clamped(to: 0...10)
         self.environment.attributes.moneyStats! = self.environment.attributes.moneyStats!.clamped(to: 0...10)
         self.environment.attributes.insanityStats! = self.environment.attributes.insanityStats!.clamped(to: 0...10)
@@ -84,35 +93,12 @@ struct CardView: View {
         }
         cardStatus = .back
         withAnimation {
-            self.degrees += 180
+            let rotation: Double = (direction == .left ? 180 : -180)
+            
+            self.degrees += rotation
             self.isCardShowingBack = true
         }
         
-        environment.objectWillChange.send()
-    }
-    
-    func rightChoice() {
-        self.environment.attributes.healthStats! += card.rightStatus[0]
-        self.environment.attributes.moneyStats! += card.rightStatus[1]
-        if card.rightStatus[2] == 0 {
-            self.environment.attributes.insanityStats! -= 1
-        } else {
-            self.environment.attributes.insanityStats! += card.rightStatus[2]
-        }
-        // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
-        self.environment.attributes.healthStats! = self.environment.attributes.healthStats!.clamped(to: 0...10)
-        self.environment.attributes.moneyStats! = self.environment.attributes.moneyStats!.clamped(to: 0...10)
-        self.environment.attributes.insanityStats! = self.environment.attributes.insanityStats!.clamped(to: 0...10)
-        
-        if environment.attributes.healthStats! == 0 || environment.attributes.moneyStats! == 0 || environment.attributes.insanityStats! == 10 {
-            self.end.toggle()
-        }
-
-        cardStatus = .back
-        withAnimation {
-            self.degrees -= 180
-            self.isCardShowingBack = true
-        }
         environment.objectWillChange.send()
     }
     
@@ -221,7 +207,7 @@ struct CardView: View {
                             }.padding(.top, geometry.size.height*0.16)
                             Spacer()
                             HStack {
-                                // resposta direita
+                                
                                 if swipeStatus == .right {
                                     if card.rightStatus[0] != 0 {
                                         HStack{
@@ -355,13 +341,13 @@ struct CardView: View {
             .onChange(of: leftButton) { newValue in
                 if card.id == environment.maxID {
                     self.swipeStatus = .left
-                    self.leftChoice()
+                    self.choice(direction: .left)
                 }
             }
             .onChange(of: rightButton) { newValue in
                 if card.id == environment.maxID {
                     self.swipeStatus = .right
-                    self.rightChoice()
+                    self.choice(direction: .right)
                 }
             }
             .background(end ? Color.pretoColor : Color.roxoColor)
@@ -411,9 +397,9 @@ struct CardView: View {
                             }
                         } else if cardStatus == .front {
                             if swipeStatus == .right {
-                                rightChoice()
+                                self.choice(direction: .right)
                             } else if swipeStatus == .left {
-                                leftChoice()
+                                self.choice(direction: .left)
                             } else {
                                 self.translation = .zero
                             }
@@ -426,17 +412,6 @@ struct CardView: View {
         }
     }
 }
-
-//struct CardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardView(card: Card(id: 2, cardImage: UIImage(named: "teste")!, cardName: "O Boy Magia", cardText: "Você está pulando atrás de um bloco com seus amigos e o seu crush aparece no meio da multidão. Calma, ele está te chamando?", leftOption: "Encontrar o boy", rightOption: "Dar um tchauzinho", leftAnswer: "Você foi até o boy e ele já foi te beijando. PQP, o boy beija bem demais! Mas calma, onde foram parar o bloco e seus amigo? Acho que você se perdeu deles.", rightAnswer: "Você vê o boy acenando de volta, ele parece um pouco desapontado. Mas calma, não se desespere, logo ali o latão é 3 é 10! Bom que já afoga a mágoa com os amigos e segue o bloco.", leftStatus: [-2, 0, 0], rightStatus: [10, -1, 1]),
-//                 onRemove: { _ in
-//                    // do nothing
-//                 })
-//            .frame(height: 450)
-//            .padding()
-//    }
-//}
 
 /// codido da arte
 struct CardArt: View {
@@ -453,47 +428,33 @@ struct CardArt: View {
             VStack {
                 if complete {
                     HStack {
-                        Circle()
-                            .frame(width: 12, height: 12, alignment: .center)
-                            .foregroundColor(Color.azulColor)
-                            .padding(6)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 50)
-                                    .stroke(Color.amareloColor, lineWidth: 4.0)
-                            )
+                        CardCircle()
                         Spacer()
-                        Circle()
-                            .frame(width: 12, height: 12, alignment: .center)
-                            .foregroundColor(Color.azulColor)
-                            .padding(6)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 50)
-                                    .stroke(Color.amareloColor, lineWidth: 4.0)
-                            )
+                        CardCircle()
                     }
                 }
                 Spacer()
                 HStack {
-                    Circle()
-                        .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(Color.azulColor)
-                        .padding(6)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 50)
-                                .stroke(Color.amareloColor, lineWidth: 4.0)
-                        )
+                    CardCircle()
                     Spacer()
-                    Circle()
-                        .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(Color.azulColor)
-                        .padding(6)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 50)
-                                .stroke(Color.amareloColor, lineWidth: 4.0)
-                        )
+                    CardCircle()
                 }
             }
             
         }.padding()
+    }
+}
+
+struct CardCircle: View {
+    
+    var body: some View {
+        Circle()
+            .frame(width: 12, height: 12, alignment: .center)
+            .foregroundColor(Color.azulColor)
+            .padding(6)
+            .overlay(
+                RoundedRectangle(cornerRadius: 50)
+                    .stroke(Color.amareloColor, lineWidth: 4.0)
+            )
     }
 }
