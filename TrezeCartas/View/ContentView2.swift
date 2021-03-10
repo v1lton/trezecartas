@@ -290,9 +290,3 @@ struct ContentView2_PreviewProvider: PreviewProvider{
             .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
 }
-
-extension Comparable {
-    func clamped(to limits: ClosedRange<Self>) -> Self {
-        return min(max(self, limits.lowerBound), limits.upperBound)
-    }
-}
