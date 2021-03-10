@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ShakeGesture: View {
+struct ShakeGestureView: View {
     @State var blur: Float = 0.0
     @State private var message = "Unshaken"
     
@@ -28,19 +28,8 @@ struct ShakeGesture: View {
     }
 }
 
-struct ShakeGesture_Previews: PreviewProvider {
+struct ShakeGestureView_Previews: PreviewProvider {
     static var previews: some View {
-        ShakeGesture()
-    }
-}
-
-extension NSNotification.Name {
-    public static let deviceDidShakeNotification = NSNotification.Name("MyDeviceDidShakeNotification")
-}
-
-extension UIWindow {
-    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        super.motionEnded(motion, with: event)
-        NotificationCenter.default.post(name: .deviceDidShakeNotification, object: event)
+        ShakeGestureView()
     }
 }

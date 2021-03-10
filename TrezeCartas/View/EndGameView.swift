@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct EndGame: View {
+struct EndGameView: View {
 
 //    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 //    @EnvironmentObject var appState: AppState
@@ -78,7 +78,7 @@ struct EndGame: View {
     }
 }
 
-//struct EndGame_Previews: PreviewProvider {
+//struct EndGameView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        EndGame(description: "Você deu pt. Melhor sorte no próximo carnaval, se não tiver pandemia.")
 //    }

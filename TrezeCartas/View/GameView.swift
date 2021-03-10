@@ -8,7 +8,7 @@ import SwiftUI
 import AVFoundation
 import AudioToolbox
 
-struct ContentView2: View {
+struct GameView: View {
     @State var health = 10
     @State var money = 10
     @State var drugs = 0
@@ -60,7 +60,7 @@ struct ContentView2: View {
                     // status
                     VStack {
                         
-                        ProgressBar(health: $health, money: $money, drugs: $drugs, showAttributes: cardsData.maxID < 18).frame(minHeight: 45)
+                        ProgressBarView(health: $health, money: $money, drugs: $drugs, showAttributes: cardsData.maxID < 18).frame(minHeight: 45)
                             .frame(height: geometry.size.height*0.0558)
 
                     }
@@ -266,33 +266,27 @@ struct ContentView2: View {
                 
             }
         }
-        .overlay(EndGame(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+        .overlay(EndGameView(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
         // trocar para a tela de ganhou
-        .overlay(FinalGame(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+        .overlay(FinalGameView(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
 
-struct ContentView2_PreviewProvider: PreviewProvider{
+struct GameView_PreviewProvider: PreviewProvider{
     
     @State static var active = false
     
     static var previews: some View{
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
         
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
           
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPod touch (7th generation)"))
         
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-    }
-}
-
-extension Comparable {
-    func clamped(to limits: ClosedRange<Self>) -> Self {
-        return min(max(self, limits.lowerBound), limits.upperBound)
     }
 }
