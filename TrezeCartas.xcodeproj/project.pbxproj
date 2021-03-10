@@ -22,6 +22,7 @@
 		3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */; };
 		3E00D5F325F9290400BB0CC6 /* ExtensionClamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */; };
 		3E00D60725F92C4E00BB0CC6 /* ExtensionMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D60625F92C4E00BB0CC6 /* ExtensionMotion.swift */; };
+		3E00D61C25F935B500BB0CC6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3E00D61B25F935B500BB0CC6 /* FirebaseAnalytics */; };
 		8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF225CDB48000D899D2 /* AppDelegate.swift */; };
 		8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF425CDB48000D899D2 /* SceneDelegate.swift */; };
 		8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */; };
@@ -87,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E00D61C25F935B500BB0CC6 /* FirebaseAnalytics in Frameworks */,
 				3568616A25F15B9500C2B261 /* CodableCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +243,7 @@
 			name = TrezeCartas;
 			packageProductDependencies = (
 				3568616925F15B9500C2B261 /* CodableCSV */,
+				3E00D61B25F935B500BB0CC6 /* FirebaseAnalytics */,
 			);
 			productName = TrezeCartas;
 			productReference = 8908FAEF25CDB48000D899D2 /* TrezeCartas.app */;
@@ -315,6 +318,7 @@
 			mainGroup = 8908FAE625CDB48000D899D2;
 			packageReferences = (
 				3568616825F15B9500C2B261 /* XCRemoteSwiftPackageReference "CodableCSV" */,
+				3E00D61A25F935B500BB0CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 8908FAF025CDB48000D899D2 /* Products */;
 			projectDirPath = "";
@@ -715,6 +719,14 @@
 				minimumVersion = 0.6.5;
 			};
 		};
+		3E00D61A25F935B500BB0CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -722,6 +734,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3568616825F15B9500C2B261 /* XCRemoteSwiftPackageReference "CodableCSV" */;
 			productName = CodableCSV;
+		};
+		3E00D61B25F935B500BB0CC6 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3E00D61A25F935B500BB0CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 
