@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-struct ProgressBar: View {
+struct ProgressBarView: View {
     @Binding var health: Int
     @Binding var money: Int
     @Binding var drugs: Int
@@ -86,13 +86,13 @@ struct ProgressBar: View {
 }
 
 
-struct ProgressBar_PreviewProvider: PreviewProvider{
+struct ProgressBarView_PreviewProvider: PreviewProvider{
     static var previews: some View{
-        ProgressBar(health: .constant(4), money: .constant(4), drugs: .constant(10), showAttributes: true).frame(height: 50)
+        ProgressBarView(health: .constant(4), money: .constant(4), drugs: .constant(10), showAttributes: true).frame(height: 50)
             .clipped()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
         
-        ProgressBar(health: .constant(4), money: .constant(4), drugs: .constant(10), showAttributes: true).frame(height: 50)
+        ProgressBarView(health: .constant(4), money: .constant(4), drugs: .constant(10), showAttributes: true).frame(height: 50)
             .clipped()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
     }

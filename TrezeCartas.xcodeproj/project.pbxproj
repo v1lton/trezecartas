@@ -10,17 +10,18 @@
 		0872A21325D30C0C00E2A466 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0872A21225D30C0C00E2A466 /* Card.swift */; };
 		08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08831D9225D1DB810090D3E9 /* ExtensionColor.swift */; };
 		0894A10825D4B15C0007B370 /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894A10725D4B15C0007B370 /* CardData.swift */; };
-		08CA4FB625D4955400BFE2BE /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA4FB525D4955400BFE2BE /* EndGame.swift */; };
-		08CA4FBB25D4A39E00BFE2BE /* StartGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA4FBA25D4A39E00BFE2BE /* StartGame.swift */; };
-		08EEAD9F25D44162002461DF /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EEAD9E25D44162002461DF /* ProgressBar.swift */; };
-		08EFE00425CF3BCD00086BFB /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */; };
+		08CA4FB625D4955400BFE2BE /* EndGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA4FB525D4955400BFE2BE /* EndGameView.swift */; };
+		08CA4FBB25D4A39E00BFE2BE /* StartGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA4FBA25D4A39E00BFE2BE /* StartGameView.swift */; };
+		08EEAD9F25D44162002461DF /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EEAD9E25D44162002461DF /* ProgressBarView.swift */; };
+		08EFE00425CF3BCD00086BFB /* ShakeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00325CF3BCD00086BFB /* ShakeGestureView.swift */; };
 		08EFE00925CF3DD700086BFB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00825CF3DD700086BFB /* CardView.swift */; };
 		08EFE00E25CF4B7D00086BFB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00D25CF4B7D00086BFB /* GameView.swift */; };
 		3568616A25F15B9500C2B261 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 3568616925F15B9500C2B261 /* CodableCSV */; };
 		3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3568617625F15EEC00C2B261 /* TeXeroCards.txt */; };
-		35CF7C5E25F178D1000B4BE0 /* ReflectedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF7C5D25F178D1000B4BE0 /* ReflectedStringConvertible.swift */; };
+		35CF7C5E25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */; };
 		3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */; };
 		3E00D5F325F9290400BB0CC6 /* ExtensionClamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */; };
+		3E00D60725F92C4E00BB0CC6 /* ExtensionMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D60625F92C4E00BB0CC6 /* ExtensionMotion.swift */; };
 		8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF225CDB48000D899D2 /* AppDelegate.swift */; };
 		8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF425CDB48000D899D2 /* SceneDelegate.swift */; };
 		8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */; };
@@ -29,7 +30,7 @@
 		8908FB0225CDB48200D899D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8908FB0025CDB48200D899D2 /* LaunchScreen.storyboard */; };
 		8908FB0D25CDB48200D899D2 /* TrezeCartasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FB0C25CDB48200D899D2 /* TrezeCartasTests.swift */; };
 		8908FB1825CDB48200D899D2 /* TrezeCartasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FB1725CDB48200D899D2 /* TrezeCartasUITests.swift */; };
-		89A8E99025D5BAD3005868A8 /* FinalGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A8E98F25D5BAD3005868A8 /* FinalGame.swift */; };
+		89A8E99025D5BAD3005868A8 /* FinalGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A8E98F25D5BAD3005868A8 /* FinalGameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,16 +54,17 @@
 		0872A21225D30C0C00E2A466 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		08831D9225D1DB810090D3E9 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		0894A10725D4B15C0007B370 /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
-		08CA4FB525D4955400BFE2BE /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
-		08CA4FBA25D4A39E00BFE2BE /* StartGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGame.swift; sourceTree = "<group>"; };
-		08EEAD9E25D44162002461DF /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
-		08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
+		08CA4FB525D4955400BFE2BE /* EndGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameView.swift; sourceTree = "<group>"; };
+		08CA4FBA25D4A39E00BFE2BE /* StartGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameView.swift; sourceTree = "<group>"; };
+		08EEAD9E25D44162002461DF /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		08EFE00325CF3BCD00086BFB /* ShakeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGestureView.swift; sourceTree = "<group>"; };
 		08EFE00825CF3DD700086BFB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		08EFE00D25CF4B7D00086BFB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		3568617625F15EEC00C2B261 /* TeXeroCards.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TeXeroCards.txt; sourceTree = "<group>"; };
-		35CF7C5D25F178D1000B4BE0 /* ReflectedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectedStringConvertible.swift; sourceTree = "<group>"; };
+		35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionReflectedStringConvertible.swift; sourceTree = "<group>"; };
 		3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCornerRadius.swift; sourceTree = "<group>"; };
 		3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionClamped.swift; sourceTree = "<group>"; };
+		3E00D60625F92C4E00BB0CC6 /* ExtensionMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMotion.swift; sourceTree = "<group>"; };
 		8908FAEF25CDB48000D899D2 /* TrezeCartas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrezeCartas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8908FAF225CDB48000D899D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8908FAF425CDB48000D899D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,7 +79,7 @@
 		8908FB1325CDB48200D899D2 /* TrezeCartasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrezeCartasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8908FB1725CDB48200D899D2 /* TrezeCartasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrezeCartasUITests.swift; sourceTree = "<group>"; };
 		8908FB1925CDB48200D899D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89A8E98F25D5BAD3005868A8 /* FinalGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalGame.swift; sourceTree = "<group>"; };
+		89A8E98F25D5BAD3005868A8 /* FinalGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,13 +119,13 @@
 		3E00D5DD25F926A200BB0CC6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				08EEAD9E25D44162002461DF /* ProgressBar.swift */,
-				08CA4FBA25D4A39E00BFE2BE /* StartGame.swift */,
 				08EFE00825CF3DD700086BFB /* CardView.swift */,
+				08CA4FB525D4955400BFE2BE /* EndGameView.swift */,
+				89A8E98F25D5BAD3005868A8 /* FinalGameView.swift */,
 				08EFE00D25CF4B7D00086BFB /* GameView.swift */,
-				08CA4FB525D4955400BFE2BE /* EndGame.swift */,
-				89A8E98F25D5BAD3005868A8 /* FinalGame.swift */,
-				08EFE00325CF3BCD00086BFB /* ShakeGesture.swift */,
+				08EEAD9E25D44162002461DF /* ProgressBarView.swift */,
+				08EFE00325CF3BCD00086BFB /* ShakeGestureView.swift */,
+				08CA4FBA25D4A39E00BFE2BE /* StartGameView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,10 +133,11 @@
 		3E00D5DE25F926E300BB0CC6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */,
 				08831D9225D1DB810090D3E9 /* ExtensionColor.swift */,
 				3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */,
-				35CF7C5D25F178D1000B4BE0 /* ReflectedStringConvertible.swift */,
-				3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */,
+				35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */,
+				3E00D60625F92C4E00BB0CC6 /* ExtensionMotion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,19 +363,20 @@
 				8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */,
 				3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */,
 				0872A21325D30C0C00E2A466 /* Card.swift in Sources */,
-				08EFE00425CF3BCD00086BFB /* ShakeGesture.swift in Sources */,
+				08EFE00425CF3BCD00086BFB /* ShakeGestureView.swift in Sources */,
+				3E00D60725F92C4E00BB0CC6 /* ExtensionMotion.swift in Sources */,
 				3E00D5F325F9290400BB0CC6 /* ExtensionClamped.swift in Sources */,
-				08CA4FB625D4955400BFE2BE /* EndGame.swift in Sources */,
+				08CA4FB625D4955400BFE2BE /* EndGameView.swift in Sources */,
 				8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */,
 				08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */,
-				89A8E99025D5BAD3005868A8 /* FinalGame.swift in Sources */,
+				89A8E99025D5BAD3005868A8 /* FinalGameView.swift in Sources */,
 				8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */,
 				08EFE00E25CF4B7D00086BFB /* GameView.swift in Sources */,
 				08EFE00925CF3DD700086BFB /* CardView.swift in Sources */,
-				08EEAD9F25D44162002461DF /* ProgressBar.swift in Sources */,
+				08EEAD9F25D44162002461DF /* ProgressBarView.swift in Sources */,
 				0894A10825D4B15C0007B370 /* CardData.swift in Sources */,
-				08CA4FBB25D4A39E00BFE2BE /* StartGame.swift in Sources */,
-				35CF7C5E25F178D1000B4BE0 /* ReflectedStringConvertible.swift in Sources */,
+				08CA4FBB25D4A39E00BFE2BE /* StartGameView.swift in Sources */,
+				35CF7C5E25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

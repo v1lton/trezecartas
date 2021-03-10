@@ -60,7 +60,7 @@ struct GameView: View {
                     // status
                     VStack {
                         
-                        ProgressBar(health: $health, money: $money, drugs: $drugs, showAttributes: cardsData.maxID < 18).frame(minHeight: 45)
+                        ProgressBarView(health: $health, money: $money, drugs: $drugs, showAttributes: cardsData.maxID < 18).frame(minHeight: 45)
                             .frame(height: geometry.size.height*0.0558)
 
                     }
@@ -266,9 +266,9 @@ struct GameView: View {
                 
             }
         }
-        .overlay(EndGame(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+        .overlay(EndGameView(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
         // trocar para a tela de ganhou
-        .overlay(FinalGame(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+        .overlay(FinalGameView(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
 

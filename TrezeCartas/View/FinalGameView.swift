@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-struct FinalGame: View {
+
+struct FinalGameView: View {
     
     @Binding var shouldPopToRootView : Bool
     
@@ -66,11 +67,11 @@ struct FinalGame: View {
     }
 }
 
-//struct FinalGame_Previews: PreviewProvider {
+//struct FinalGameView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        Group {
-//            FinalGame()
-//            FinalGame()
+//            FinalGameView()
+//            FinalGameView()
 //                .previewDevice("iPhone SE (2nd generation)")
 //        }
 //    }

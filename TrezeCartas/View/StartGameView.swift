@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct StartGame: View {
+struct StartGameView: View {
     
     //@EnvironmentObject var appState: AppState
     @State var isPresented = false
@@ -67,9 +67,9 @@ struct StartGame: View {
     }
 }
 
-struct StartGame_Previews: PreviewProvider {
+struct StartGameView_Previews: PreviewProvider {
     static var previews: some View {
-        StartGame()
+        StartGameView()
     }
 }
 
