@@ -13,10 +13,8 @@ struct CardView: View {
     @State private var cardStatus: Cards = .none
     @State var degrees: Double = 0.0
     
-    @ObservedObject var cardData: CardData
-    @Binding var health: Int
-    @Binding var money: Int
-    @Binding var drugs: Int
+    @ObservedObject var environment: GameEnvironment
+
     @State var isPresented = false
     @Binding var leftOption: String
     @Binding var rightOption: String
@@ -40,14 +38,13 @@ struct CardView: View {
     }
     
 
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, health: Binding<Int>, money: Binding<Int>, drugs: Binding<Int>, cardData: CardData, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>, leftButton: Binding<Bool>, rightButton: Binding<Bool>, pass: Binding<Bool>) {
+    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, environment: GameEnvironment, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>, leftButton: Binding<Bool>, rightButton: Binding<Bool>, pass: Binding<Bool>) {
 
         self.card = card
         self.onRemove = onRemove
-        self._health = health
-        self._money = money
-        self._drugs = drugs
-        self.cardData = cardData
+        
+        self.environment = environment
+        
         self._leftOption = leftOption
         self._rightOption = rightOption
         self._end = end
@@ -70,19 +67,19 @@ struct CardView: View {
     }
     
     func leftChoice() {
-        self.health += card.leftStatus[0]
-        self.money += card.leftStatus[1]
+        self.environment.attributes.healthStats! += card.leftStatus[0]
+        self.environment.attributes.moneyStats! += card.leftStatus[1]
         if card.leftStatus[2] == 0 {
-            self.drugs -= 1
+            self.environment.attributes.insanityStats! -= 1
         } else {
-            self.drugs += card.leftStatus[2]
+            self.environment.attributes.insanityStats! += card.leftStatus[2]
         }
         // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
-        self.health = self.health.clamped(to: 0...10)
-        self.money = self.money.clamped(to: 0...10)
-        self.drugs = self.drugs.clamped(to: 0...10)
+        self.environment.attributes.healthStats! = self.environment.attributes.healthStats!.clamped(to: 0...10)
+        self.environment.attributes.moneyStats! = self.environment.attributes.moneyStats!.clamped(to: 0...10)
+        self.environment.attributes.insanityStats! = self.environment.attributes.insanityStats!.clamped(to: 0...10)
         
-        if health == 0 || money == 0 || drugs == 10 {
+        if environment.attributes.healthStats! == 0 || environment.attributes.moneyStats! == 0 || environment.attributes.insanityStats! == 10 {
             self.end.toggle()
         }
         cardStatus = .back
@@ -90,22 +87,24 @@ struct CardView: View {
             self.degrees += 180
             self.isCardShowingBack = true
         }
+        
+        environment.objectWillChange.send()
     }
     
     func rightChoice() {
-        self.health += card.rightStatus[0]
-        self.money += card.rightStatus[1]
+        self.environment.attributes.healthStats! += card.rightStatus[0]
+        self.environment.attributes.moneyStats! += card.rightStatus[1]
         if card.rightStatus[2] == 0 {
-            self.drugs -= 1
+            self.environment.attributes.insanityStats! -= 1
         } else {
-            self.drugs += card.rightStatus[2]
+            self.environment.attributes.insanityStats! += card.rightStatus[2]
         }
         // limitar entre 0 e 10, nao sei se vai ficar muito custoso kk
-        self.health = self.health.clamped(to: 0...10)
-        self.money = self.money.clamped(to: 0...10)
-        self.drugs = self.drugs.clamped(to: 0...10)
+        self.environment.attributes.healthStats! = self.environment.attributes.healthStats!.clamped(to: 0...10)
+        self.environment.attributes.moneyStats! = self.environment.attributes.moneyStats!.clamped(to: 0...10)
+        self.environment.attributes.insanityStats! = self.environment.attributes.insanityStats!.clamped(to: 0...10)
         
-        if health == 0 || money == 0 || drugs == 10 {
+        if environment.attributes.healthStats! == 0 || environment.attributes.moneyStats! == 0 || environment.attributes.insanityStats! == 10 {
             self.end.toggle()
         }
 
@@ -114,6 +113,7 @@ struct CardView: View {
             self.degrees -= 180
             self.isCardShowingBack = true
         }
+        environment.objectWillChange.send()
     }
     
     var body: some View {
@@ -338,8 +338,8 @@ struct CardView: View {
                     ZStack {
                         Rectangle().fill(Color.black).opacity(0.25)
                         CardArt(complete: true)
-                    }.onChange(of: cardData.maxID) { newValue in
-                        if card.id == cardData.maxID {
+                    }.onChange(of: environment.maxID) { newValue in
+                        if card.id == environment.maxID {
                             withAnimation(.easeIn(duration: 0.2)) {
                                 self.isCardShowingBack = false
                             }
@@ -353,13 +353,13 @@ struct CardView: View {
                 }
             }
             .onChange(of: leftButton) { newValue in
-                if card.id == cardData.maxID {
+                if card.id == environment.maxID {
                     self.swipeStatus = .left
                     self.leftChoice()
                 }
             }
             .onChange(of: rightButton) { newValue in
-                if card.id == cardData.maxID {
+                if card.id == environment.maxID {
                     self.swipeStatus = .right
                     self.rightChoice()
                 }
@@ -373,7 +373,7 @@ struct CardView: View {
             .rotationEffect(.degrees(Double((cardStatus == .front ? self.translation.width : -self.translation.width) / geometry.size.width) * 25), anchor: .bottom)
             .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
             .onAppear {
-                if card.id == cardData.maxID {
+                if card.id == environment.maxID {
                     cardStatus = .front
                     self.leftOption = card.leftOption
                     self.rightOption = card.rightOption

@@ -10,12 +10,8 @@ import SwiftUI
 
 struct EndGameView: View {
 
-//    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-//    @EnvironmentObject var appState: AppState
-//    @Environment(\.presentationMode) var presentationMode
     @Binding var shouldPopToRootView : Bool
     @Binding var description: String
-//    @State var isPresented = false
     
     var body: some View {
         GeometryReader { geometry in

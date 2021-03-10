@@ -10,9 +10,9 @@ import SwiftUI
 import UIKit
 
 struct ProgressBarView: View {
-    @Binding var health: Int
-    @Binding var money: Int
-    @Binding var drugs: Int
+    
+    @ObservedObject var environment: GameEnvironment
+    
     var showAttributes: Bool
     
     var body: some View {
@@ -26,7 +26,7 @@ struct ProgressBarView: View {
                         .opacity(showAttributes ? 0.4 : 0)
                         .animation(.easeInOut(duration: 0.6))
                     
-                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(health))*(0.1*geometry.size.height), geometry.size.height))
+                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(environment.attributes.healthStats!))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.rosaColor)
                         .animation(.linear)
                         .opacity(showAttributes ? 1 : 0)
@@ -46,7 +46,7 @@ struct ProgressBarView: View {
                         .opacity(showAttributes ? 0.4 : 0)
                         .animation(.easeInOut(duration: 0.6))
                     
-                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(money))*(0.1*geometry.size.height), geometry.size.height))
+                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(environment.attributes.moneyStats!))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.amareloColor)
                         .animation(.linear)
                         .opacity(showAttributes ? 1 : 0)
@@ -66,7 +66,7 @@ struct ProgressBarView: View {
                         .opacity(showAttributes ? 0.4 : 0)
                         .animation(.easeInOut(duration: 0.6))
                     
-                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(drugs))*(0.1*geometry.size.height), geometry.size.height))
+                    Rectangle().frame(width: geometry.size.height*1.15, height: min(CGFloat(Float(environment.attributes.insanityStats!))*(0.1*geometry.size.height), geometry.size.height))
                         .foregroundColor(Color.azulColor)
                         .animation(.linear)
                         .opacity(showAttributes ? 1 : 0)
@@ -88,11 +88,11 @@ struct ProgressBarView: View {
 
 struct ProgressBarView_PreviewProvider: PreviewProvider{
     static var previews: some View{
-        ProgressBarView(health: .constant(4), money: .constant(4), drugs: .constant(10), showAttributes: true).frame(height: 50)
+        ProgressBarView(environment: GameEnvironment(), showAttributes: true).frame(height: 50)
             .clipped()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
         
-        ProgressBarView(health: .constant(4), money: .constant(4), drugs: .constant(10), showAttributes: true).frame(height: 50)
+        ProgressBarView(environment: GameEnvironment(), showAttributes: true).frame(height: 50)
             .clipped()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
     }

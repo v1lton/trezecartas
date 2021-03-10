@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0872A21325D30C0C00E2A466 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0872A21225D30C0C00E2A466 /* Card.swift */; };
 		08831D9325D1DB810090D3E9 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08831D9225D1DB810090D3E9 /* ExtensionColor.swift */; };
-		0894A10825D4B15C0007B370 /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894A10725D4B15C0007B370 /* CardData.swift */; };
+		0894A10825D4B15C0007B370 /* GameEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894A10725D4B15C0007B370 /* GameEnvironment.swift */; };
 		08CA4FB625D4955400BFE2BE /* EndGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA4FB525D4955400BFE2BE /* EndGameView.swift */; };
 		08CA4FBB25D4A39E00BFE2BE /* StartGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA4FBA25D4A39E00BFE2BE /* StartGameView.swift */; };
 		08EEAD9F25D44162002461DF /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EEAD9E25D44162002461DF /* ProgressBarView.swift */; };
@@ -54,7 +54,7 @@
 /* Begin PBXFileReference section */
 		0872A21225D30C0C00E2A466 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		08831D9225D1DB810090D3E9 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
-		0894A10725D4B15C0007B370 /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
+		0894A10725D4B15C0007B370 /* GameEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEnvironment.swift; sourceTree = "<group>"; };
 		08CA4FB525D4955400BFE2BE /* EndGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameView.swift; sourceTree = "<group>"; };
 		08CA4FBA25D4A39E00BFE2BE /* StartGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameView.swift; sourceTree = "<group>"; };
 		08EEAD9E25D44162002461DF /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		3E00D5DF25F926EF00BB0CC6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0894A10725D4B15C0007B370 /* CardData.swift */,
+				0894A10725D4B15C0007B370 /* GameEnvironment.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -192,8 +192,8 @@
 				8908FAFD25CDB48200D899D2 /* Preview Content */,
 				3E00D5DE25F926E300BB0CC6 /* Extensions */,
 				3E00D5DC25F9269200BB0CC6 /* Model */,
-				3E00D5DD25F926A200BB0CC6 /* View */,
 				3E00D5DF25F926EF00BB0CC6 /* ViewModel */,
+				3E00D5DD25F926A200BB0CC6 /* View */,
 				3E00D5E925F9283C00BB0CC6 /* Resources */,
 			);
 			path = TrezeCartas;
@@ -378,7 +378,7 @@
 				08EFE00E25CF4B7D00086BFB /* GameView.swift in Sources */,
 				08EFE00925CF3DD700086BFB /* CardView.swift in Sources */,
 				08EEAD9F25D44162002461DF /* ProgressBarView.swift in Sources */,
-				0894A10825D4B15C0007B370 /* CardData.swift in Sources */,
+				0894A10825D4B15C0007B370 /* GameEnvironment.swift in Sources */,
 				08CA4FBB25D4A39E00BFE2BE /* StartGameView.swift in Sources */,
 				35CF7C5E25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift in Sources */,
 			);
@@ -551,7 +551,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
-				DEVELOPMENT_TEAM = SJND557DN4;
+				DEVELOPMENT_TEAM = P63952MS7L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrezeCartas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -574,7 +574,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
-				DEVELOPMENT_TEAM = SJND557DN4;
+				DEVELOPMENT_TEAM = P63952MS7L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrezeCartas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;

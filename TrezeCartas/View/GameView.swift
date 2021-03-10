@@ -9,9 +9,9 @@ import AVFoundation
 import AudioToolbox
 
 struct GameView: View {
-    @State var health = 10
-    @State var money = 10
-    @State var drugs = 0
+    
+    @ObservedObject var environment = GameEnvironment()
+    
     @State var leftOption: String = ""
     @State var rightOption: String = ""
     @State var leftButton = false
@@ -23,8 +23,7 @@ struct GameView: View {
     @Binding var rootIsActive : Bool
     @State var end = false
     @State var description = ""
-    
-    @ObservedObject var cardsData = CardData()
+
     @State var isCardShowingBack = false
     
     
@@ -34,7 +33,7 @@ struct GameView: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardWidth(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        let offset: CGFloat = CGFloat(cardsData.cards.count - 1 - id) * 10
+        let offset: CGFloat = CGFloat(environment.cards.count - 1 - id) * 10
         return geometry.size.width - offset
     }
     
@@ -43,12 +42,12 @@ struct GameView: View {
     ///   - geometry: The geometry proxy of the parent
     ///   - id: The ID of the current user
     private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        return  CGFloat(cardsData.cards.count - 1 - id) * 8 // era 10
+        return  CGFloat(environment.cards.count - 1 - id) * 8 // era 10
     }
     
     // Compute what the max ID in the given users array is.
     private var maxID: Int {
-        return self.cardsData.cards.map { $0.id }.max() ?? 0
+        return self.environment.cards.map { $0.id }.max() ?? 0
     }
     
     var body: some View {
@@ -60,7 +59,7 @@ struct GameView: View {
                     // status
                     VStack {
                         
-                        ProgressBarView(health: $health, money: $money, drugs: $drugs, showAttributes: cardsData.maxID < 18).frame(minHeight: 45)
+                        ProgressBarView(environment: environment, showAttributes: environment.maxID < 18).frame(minHeight: 45)
                             .frame(height: geometry.size.height*0.0558)
 
                     }
@@ -78,7 +77,7 @@ struct GameView: View {
                         .frame(maxHeight: geometry.size.height*0.6, alignment: .center)
                         .frame(height: 500)
                         
-                        ForEach(self.cardsData.cards, id: \.self) { cardss in
+                        ForEach(self.environment.cards, id: \.self) { cardss in
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
                             if (self.maxID - 3)...self.maxID ~= cardss.id {
@@ -89,19 +88,19 @@ struct GameView: View {
                                         self.isPresentedGameOver.toggle()
                                         
                                         UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                        self.cardsData.shuffleCards()
+                                        self.environment.shuffleCards()
                                     } else {
-                                        cardsData.maxID -= 1 // reduz o id maximo
+                                        environment.maxID -= 1 // reduz o id maximo
                                         if maxID == 0 {
                                             self.isPresentedFinished.toggle()
                                             
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                            self.cardsData.shuffleCards()
+                                            self.environment.shuffleCards()
                                         }
-                                        self.cardsData.cards.removeAll { $0.id == removedCard.id }
+                                        self.environment.cards.removeAll { $0.id == removedCard.id }
                                     }
                                     
-                                }, health: $health, money: $money, drugs: $drugs, cardData: cardsData, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
+                                }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
                                 .frame(maxHeight: geometry.size.height*0.6, alignment: .top)
                                 .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
@@ -227,7 +226,7 @@ struct GameView: View {
                                 .padding(.top, 4.0)
                         }.padding()
                     }
-                    .opacity(cardsData.maxID < 16 ? 1 : 0)
+                    .opacity(environment.maxID < 16 ? 1 : 0)
                     .animation(.easeInOut(duration: 0.6))
                     .opacity(end ? 0 : 1)
                     //Spacer()
@@ -235,22 +234,21 @@ struct GameView: View {
             }
         }
         .onChange(of: end, perform: { value in
-            if health == 0 && money == 0 &&  drugs == 0 {
-                self.description = cardsData.blockEndingText
-            } else if health == 0 {
+            if environment.attributes.isGameOver() {
+                self.description = environment.blockEndingText
+            } else if environment.attributes.healthStats == 0 {
                 self.description = "Bicha, nem assim tu sobrevive um rolê na 13! Bora se preparar pra o ano que vem pois o estrago vai ser grande!"
-            } else if money == 0 {
+            } else if environment.attributes.moneyStats == 0 {
                 self.description = "Bicha, cadê teu aqué? Se tu gastar demais não consegue voltar pra casa, demônia!"
-            } else if drugs == 10 {
+            } else if environment.attributes.insanityStats == 10 {
                 self.description = "Viado, tu já desse pt de novo, foi? Melhor sorte no próximo carnaval, se não tiver pandemia."
             }
         })
         .saturation(end ? 0 : 1)
         .navigationTitle(Text(""))
-        //.navigationBarHidden(true)
         .navigationBarBackButtonHidden(end ? true : false)
         .preferredColorScheme(.light)
-        .blur(radius: CGFloat(drugs)/2)
+        .blur(radius: CGFloat(environment.attributes.insanityStats!)/2)
         .padding()
         .background(Color.brancoColor)
         .edgesIgnoringSafeArea(.all)
@@ -258,9 +256,9 @@ struct GameView: View {
             //self.drugs += 1
             if !end {
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-                self.drugs += 1
+                self.environment.attributes.insanityStats! += 1
             }
-            if drugs == 10 {
+            if environment.attributes.insanityStats! == 10 {
                 self.description = "Viado, tu já desse pt de novo, foi? Melhor sorte no próximo carnaval, se não tiver pandemia."
                 self.isPresentedGameOver.toggle()
                 

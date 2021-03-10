@@ -8,87 +8,22 @@
 import Foundation
 import SwiftUI
 
-class Attributtes: Codable, ReflectedStringConvertible{
-    var dependsFrom: Int?
-    var isAmongFriends: Bool?
-    var isDating: Bool?
-    var hasKissed: Bool?
-    var isHurt: Bool?
-    var isDirty: Bool?
-    var hasLostPhone: Bool?
-    
-    enum CodingKeys: String, CodingKey {
-        case dependsFrom = "depends_from"
-        case isAmongFriends = "is_among_friends"
-        case isDating = "is_dating"
-        case hasKissed = "has_kissed"
-        case isHurt = "is_hurt"
-        case isDirty = "is_dirty"
-        case hasLostPhone = "has_lost_phone"
-    }
-    
-}
 
-class JSONCard: Attributtes{
-    var id: Int
-    var name: String
-    var text: String
-    var leftText: String
-    var rightText: String
-    var leftResult: String
-    var rightResult: String
-    var imageName: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "ID"
-        case name
-        case text = "description"
-        case leftText = "left_text"
-        case rightText = "right_text"
-        case leftResult = "left_result"
-        case rightResult = "right_result"
-        case imageName = "image_name"
-    }
-    
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(Int.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.text = try container.decode(String.self, forKey: .text)
-        self.leftText = try container.decode(String.self, forKey: .leftText)
-        self.rightText = try container.decode(String.self, forKey: .rightText)
-        self.leftResult = try container.decode(String.self, forKey: .leftResult)
-        self.rightResult = try container.decode(String.self, forKey: .rightResult)
-        self.imageName = try container.decode(String.self, forKey: .imageName)
-        
-        try super.init(from: decoder)
-        
-        translateResults()
-    }
-    
-    func translateResults(){
-        do{
-            let jsonData = leftResult.data(using: String.Encoding.utf8)!
-            let json = try JSONDecoder().decode(Attributtes.self, from: jsonData)
-            print(json)
-            
-            
-        }
-        catch{
-            print(error)
-        }
-    }
-}
-
-
-class CardData: ObservableObject {
+class GameEnvironment: ObservableObject {
     
     @Published var cards = originalCards
     @Published var maxID = originalCards.count - 1
     
+    @Published var attributes: Attributtes
+    
     var blockEndingText: String = ""
+    
+    
+    
     init(){
+        
+        attributes = Attributtes()
+        
         shuffleCards()
 
 //        guard let jsonPath = Bundle.main.path(forResource: "TeXeroCards", ofType: "txt") else { fatalError() }
@@ -137,11 +72,11 @@ class CardData: ObservableObject {
     
     public func shuffleCards(){
         //pegar todas as cartas originais
-        var shuffledCards = CardData.originalCards.shuffled()
+        var shuffledCards = GameEnvironment.originalCards.shuffled()
         
         //adicionar apenas uma carta de bloqueamento
-        let blockCard = CardData.blockCards.randomElement()!
-        blockEndingText = CardData.blockEndings[blockCard.id]
+        let blockCard = GameEnvironment.blockCards.randomElement()!
+        blockEndingText = GameEnvironment.blockEndings[blockCard.id]
         
         shuffledCards.append(blockCard)
         shuffledCards.shuffle()
@@ -156,10 +91,10 @@ class CardData: ObservableObject {
         
         //adicionar cartas iniciais
         if !UserDefaults.standard.bool(forKey: "has_completed_onboarding_once_key"){
-            shuffledCards.insert(contentsOf: CardData.onboardingCards.reversed(), at: shuffledCards.count)
+            shuffledCards.insert(contentsOf: GameEnvironment.onboardingCards.reversed(), at: shuffledCards.count)
         }
         else{
-            shuffledCards.insert(CardData.onboardingCards[0], at: shuffledCards.count)
+            shuffledCards.insert(GameEnvironment.onboardingCards[0], at: shuffledCards.count)
         }
 
         
