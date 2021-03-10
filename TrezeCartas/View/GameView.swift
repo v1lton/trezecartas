@@ -8,7 +8,7 @@ import SwiftUI
 import AVFoundation
 import AudioToolbox
 
-struct ContentView2: View {
+struct GameView: View {
     @State var health = 10
     @State var money = 10
     @State var drugs = 0
@@ -272,21 +272,21 @@ struct ContentView2: View {
     }
 }
 
-struct ContentView2_PreviewProvider: PreviewProvider{
+struct GameView_PreviewProvider: PreviewProvider{
     
     @State static var active = false
     
     static var previews: some View{
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
         
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
           
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPod touch (7th generation)"))
         
-        ContentView2(rootIsActive: $active)
+        GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
 }
