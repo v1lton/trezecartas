@@ -107,9 +107,9 @@ struct CardView: View {
             VStack(alignment: .center) {
                 
                 if cardStatus == .front {
-                    /// card pergunta
+                    /// Card de Pergunta
                     ZStack(alignment: self.swipeStatus == .right ? .bottomLeading : .bottomTrailing) {
-                        /// chamada do codigo para a arte da carta
+                        /// Arte da carta
                         CardArt(complete: false)
                         
                         VStack(alignment: .center) {
@@ -184,7 +184,7 @@ struct CardView: View {
 
                     
                 } else if cardStatus == .back {
-                    /// card resposta
+                    /// Card de Resposta
                     ZStack {
                         CardArt(complete: true)
                         
@@ -212,110 +212,27 @@ struct CardView: View {
                                     if card.rightStatus[0] != 0 {
                                         CardBackStatus(imageStatus: "coracao", arrowDegrees: (card.rightStatus[0] <= 0 ? 180 : 0), spacerFrameWidth: 3)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-//                                        HStack{
-//                                            Image("coracao")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.08)
-//                                            Spacer()
-//                                                .frame(width: 3)
-//                                            Image("seta")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.02)
-//                                                .rotation3DEffect(.degrees(card.rightStatus[0] <= 0 ? 180 : 0), axis: (x: 0, y: 0, z: 1))
-//                                        }.padding(.horizontal, 10)
                                     }
                                     if card.rightStatus[1] != 0 {
                                         CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (card.rightStatus[1] <= 0 ? 180 : 0), spacerFrameWidth: 0)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-//                                        HStack{
-//                                            Image("dinheiro")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.08)
-//                                            Spacer()
-//                                                .frame(width: 0)
-//                                            Image("seta")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.02)
-//                                                .rotation3DEffect(.degrees(card.rightStatus[1] <= 0 ? 180 : 0), axis: (x: 0, y: 0, z: 1))
-//                                                .padding(.leading, -5)
-//                                        }.padding(.horizontal, 10)
                                     }
                                     if card.rightStatus[2] != 0 {
                                         CardBackStatus(imageStatus: "noia", arrowDegrees: (card.rightStatus[2] <= 0 ? 180 : 0), spacerFrameWidth: 1)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-//                                        HStack{
-//                                            Image("noia")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.08)
-//                                            Spacer()
-//                                                .frame(width: 1)
-//                                            Image("seta")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.02)
-//                                                .rotation3DEffect(.degrees(card.rightStatus[2] <= 0 ? 180 : 0), axis: (x: 0, y: 0, z: 1))
-//                                        }.padding(.horizontal, 10)
                                     }
                                 } else {
-                                    // resposta esquerda
                                     if card.leftStatus[0] != 0 {
                                         CardBackStatus(imageStatus: "coracao", arrowDegrees: (card.leftStatus[0] <= 0 ? 180 : 0), spacerFrameWidth: 3)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-//                                        HStack{
-//                                            Image("coracao")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.08)
-//                                            Spacer()
-//                                                .frame(width: 3)
-//                                            Image("seta")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.02)
-//                                                .rotation3DEffect(.degrees(card.leftStatus[0] <= 0 ? 180 : 0), axis: (x: 0, y: 0, z: 1))
-//
-//                                        }.padding(.horizontal, 10)
                                     }
                                     if card.leftStatus[1] != 0 {
                                         CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (card.leftStatus[1] <= 0 ? 180 : 0), spacerFrameWidth: 0)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-//                                        HStack{
-//                                            Image("dinheiro")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.08)
-//                                            Spacer()
-//                                                .frame(width: 0)
-//                                            Image("seta")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.02)
-//                                                .rotation3DEffect(.degrees(card.leftStatus[1] <= 0 ? 180 : 0), axis: (x: 0, y: 0, z: 1))
-//
-//                                        }.padding(.horizontal, 10)
                                     }
                                     if card.leftStatus[2] != 0 {
                                         CardBackStatus(imageStatus: "noia", arrowDegrees: (card.leftStatus[2] <= 0 ? 180 : 0), spacerFrameWidth: 1)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-//                                        HStack{
-//                                            Image("noia")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.08)
-//                                            Spacer()
-//                                                .frame(width: 1)
-//                                            Image("seta")
-//                                                .resizable()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(height: geometry.size.height*0.02)
-//                                                .rotation3DEffect(.degrees(card.leftStatus[2] <= 0 ? 180 : 0), axis: (x: 0, y: 0, z: 1))
-//
-//                                        }.padding(.horizontal, 10)
                                     }
                                     
                                 }
@@ -425,7 +342,7 @@ struct CardView: View {
     }
 }
 
-/// CardBackStatus
+/// Atributos na Carta de Resposta
 struct CardBackStatus: View {
     var imageStatus: String
     var arrowDegrees: Double
@@ -452,7 +369,7 @@ struct CardBackStatus: View {
 }
 
 
-/// codido da arte
+/// Arte da Carta
 struct CardArt: View {
     var complete: Bool
     
