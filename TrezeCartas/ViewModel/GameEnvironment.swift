@@ -21,10 +21,8 @@ class GameEnvironment: ObservableObject {
     
     
     init(){
-        
         attributes = Attributtes()
-        
-        shuffleCards()
+        reset()
 
 //        guard let jsonPath = Bundle.main.path(forResource: "TeXeroCards", ofType: "txt") else { fatalError() }
 //
@@ -43,6 +41,12 @@ class GameEnvironment: ObservableObject {
         
     }
     
+    func reset() {
+        attributes = Attributtes()
+        
+        shuffleCards()
+        self.objectWillChange.send()
+    }
     /**
     Reads a multiline, tab-separated String and returns an Array<NSictionary>, taking column names from the first line or an explicit parameter
     */

@@ -88,6 +88,7 @@ struct GameView: View {
                                         self.isPresentedGameOver.toggle()
                                         
                                         UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
+                                        self.environment.reset()
                                         self.environment.shuffleCards()
                                     } else {
                                         environment.maxID -= 1 // reduz o id maximo
