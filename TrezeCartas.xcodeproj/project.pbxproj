@@ -23,6 +23,7 @@
 		3E00D5F325F9290400BB0CC6 /* ExtensionClamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */; };
 		3E00D60725F92C4E00BB0CC6 /* ExtensionMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D60625F92C4E00BB0CC6 /* ExtensionMotion.swift */; };
 		3E00D61C25F935B500BB0CC6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3E00D61B25F935B500BB0CC6 /* FirebaseAnalytics */; };
+		3E1D712725FAAF80007A1A0E /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D712625FAAF80007A1A0E /* ConfigurationView.swift */; };
 		8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF225CDB48000D899D2 /* AppDelegate.swift */; };
 		8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF425CDB48000D899D2 /* SceneDelegate.swift */; };
 		8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */; };
@@ -66,6 +67,7 @@
 		3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCornerRadius.swift; sourceTree = "<group>"; };
 		3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionClamped.swift; sourceTree = "<group>"; };
 		3E00D60625F92C4E00BB0CC6 /* ExtensionMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMotion.swift; sourceTree = "<group>"; };
+		3E1D712625FAAF80007A1A0E /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		8908FAEF25CDB48000D899D2 /* TrezeCartas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrezeCartas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8908FAF225CDB48000D899D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8908FAF425CDB48000D899D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				08EEAD9E25D44162002461DF /* ProgressBarView.swift */,
 				08EFE00325CF3BCD00086BFB /* ShakeGestureView.swift */,
 				08CA4FBA25D4A39E00BFE2BE /* StartGameView.swift */,
+				3E1D712625FAAF80007A1A0E /* ConfigurationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8908FAFA25CDB48000D899D2 /* TrezeCartas.xcdatamodeld in Sources */,
+				3E1D712725FAAF80007A1A0E /* ConfigurationView.swift in Sources */,
 				3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */,
 				0872A21325D30C0C00E2A466 /* Card.swift in Sources */,
 				08EFE00425CF3BCD00086BFB /* ShakeGestureView.swift in Sources */,
