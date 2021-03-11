@@ -77,11 +77,12 @@ struct GameView: View {
                         .frame(maxHeight: geometry.size.height*0.6, alignment: .center)
                         .frame(height: 500)
                         
-                        ForEach(self.environment.cards, id: \.self) { cardss in
+                        ForEach(0..<self.environment.cards.count, id: \.self) { index in
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
-                            if (self.maxID - 3)...self.maxID ~= cardss.id {
-                                CardView(card: cardss, onRemove: { removedCard in
+                            if let card = self.environment.cards[index]{
+                            if (self.maxID - 3)...self.maxID ~= card.id {
+                                CardView(card: card, onRemove: { removedCard in
                                     // Remove that card from our array
                                     if end {
                                         print("terminou")
@@ -104,13 +105,14 @@ struct GameView: View {
                                 }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
                                 .frame(maxHeight: geometry.size.height*0.6, alignment: .top)
-                                .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
-                                .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
+                                .frame(width: self.getCardWidth(geometry, id: card.id), height: 500)
+                                .offset(x: 0, y: self.getCardOffset(geometry, id: card.id))
                                 
+                            }
                             }
                         }
                     }
-                    .frame(height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(height: geometry.size.height*0.6, alignment: .center)
                     
                     Spacer().frame(height: 38)
                     
