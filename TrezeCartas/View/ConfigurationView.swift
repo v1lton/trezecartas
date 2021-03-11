@@ -18,11 +18,10 @@ struct ConfigurationView: View {
         GeometryReader { geometry in
             
             ZStack {
-                Rectangle()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                //Rectangle()
+                   // .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 
-                VStack(alignment: .center){
-                    
+                VStack {
                     HStack {
                         Spacer()
                         Text("Configurações")
@@ -42,7 +41,6 @@ struct ConfigurationView: View {
                     
                     
                     VStack {
-                        
                         Toggle(isOn: $isAcessibilityOn) {
                             Text("Botões de Acessibilidade")
                                 .font(.callout)
@@ -52,10 +50,8 @@ struct ConfigurationView: View {
                                 .lineLimit(2)
                             
                         }
-                        .padding()
+                        //.padding()
                         .toggleStyle(SwitchToggleStyle(tint: Color.azulColor))
-                        
-                        
                         .frame(height: 55)
                         
                         Divider()
@@ -69,15 +65,22 @@ struct ConfigurationView: View {
                                 .lineLimit(2)
                             
                         }
-                        .padding()
+                        //.padding()
                         .toggleStyle(SwitchToggleStyle(tint: Color.azulColor))
                         .frame(height: 55)
                         
-                    }
+                    }.padding(.horizontal)
+                    .padding(.vertical, 6)
                     .clipped()
                     .background(Color.brancoColor)
                     .cornerRadius(10)
                     .offset(x: 0, y: -30)
+                }
+                .padding()
+                
+                VStack(alignment: .center){
+                    
+                    Spacer()
                     
                     Button(action: {
                         // dismiss
@@ -124,7 +127,8 @@ struct ConfigurationView: View {
                 .padding()
                 
             }
-            .edgesIgnoringSafeArea(.all)
+            .background(Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).opacity(0.5))
+            
             
             
         }
