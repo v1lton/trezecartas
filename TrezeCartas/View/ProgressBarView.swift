@@ -59,7 +59,7 @@ struct ProgressBarView: View {
                     
                 }
                 
-                // noia
+                // insanidade
                 ZStack(alignment: .bottom) {
                     Rectangle().frame(width: geometry.size.height*1.15, height: geometry.size.height)
                         .foregroundColor(Color(UIColor.lightGray))
