@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ConfigurationView: View {
     
-    @Binding var rootIsActive : Bool
+    @Binding var shouldPopToRootView : Bool
+    @Binding var showConfig: Bool
     
     @State var isAcessibilityOn : Bool = true
     @State var isSoundOn : Bool = true
@@ -18,8 +19,6 @@ struct ConfigurationView: View {
         GeometryReader { geometry in
             
             ZStack {
-                //Rectangle()
-                   // .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 
                 VStack {
                     HStack {
@@ -84,7 +83,7 @@ struct ConfigurationView: View {
                     
                     Button(action: {
                         // dismiss
-                        
+                        self.showConfig.toggle()
                     }, label: {
                         HStack {
                             Spacer()
@@ -104,8 +103,8 @@ struct ConfigurationView: View {
                     .cornerRadius(10)
                     
                     Button(action: {
-                        // pop to root -> rootIsActive
-                        
+                        // pop to root
+                        self.shouldPopToRootView = false
                     }, label: {
                         HStack {
                             Spacer()
@@ -127,9 +126,6 @@ struct ConfigurationView: View {
                 .padding()
                 
             }
-            .background(Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).opacity(0.5))
-            
-            
             
         }
     }
@@ -137,6 +133,65 @@ struct ConfigurationView: View {
 
 struct ConfigurationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigurationView(rootIsActive: .constant(true))
+        //ConfigurationView(rootIsActive: .constant(true))
+        Testeeeee()
+    }
+}
+
+struct Testeeeee: View {
+    
+    @State var showConfig: Bool = false
+    
+    var body: some View {
+        ZStack {
+            VStack {
+                Button(action: {
+                    self.showConfig.toggle()
+                }, label: {
+                    Image(systemName: "gear")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color.brancoColor)
+                        .padding(6)
+                })
+                .clipped()
+                .background(Color.roxoClaroColor)
+                .cornerRadius(10)
+                .padding()
+                
+                Button(action: {
+                    self.showConfig.toggle()
+                }, label: {
+                    HStack {
+                        Spacer()
+                        Text("mostrar config")
+                            .font(.callout)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.brancoColor)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(2)
+                            .padding(7)
+                        Spacer()
+                    }
+                    
+                }).frame(height: 55)
+                .clipped()
+                .background(Color.azulColor)
+                .cornerRadius(10)
+                .padding()
+                
+            }
+            
+            VStack {
+                Spacer()
+                ConfigurationView(shouldPopToRootView: .constant(true), showConfig: $showConfig)
+                    .offset(y: self.showConfig ? 0 : UIScreen.main.bounds.height)
+                    
+            }
+            .background((self.showConfig ? Color.black.opacity(0.5) : Color.clear).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
+            .edgesIgnoringSafeArea(.top)
+            
+        }.animation(.default)
     }
 }
