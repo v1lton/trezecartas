@@ -23,11 +23,12 @@ struct GameView: View {
     @Binding var rootIsActive : Bool
     @State var end = false
     @State var description = ""
-
+    
     @State var isCardShowingBack = false
     
-    
     @State var areButtonsActive = true
+    @State var showConfig = false
+    
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
@@ -52,8 +53,8 @@ struct GameView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack (alignment: .center){
-                
+            ZStack {
+                                
                 VStack {
                     Spacer()
                     // status
@@ -61,7 +62,7 @@ struct GameView: View {
                         
                         ProgressBarView(environment: environment, showAttributes: environment.maxID < 18).frame(minHeight: 45)
                             .frame(height: geometry.size.height*0.0558)
-
+                        
                     }
                     .padding()
                     
@@ -85,11 +86,9 @@ struct GameView: View {
                                 CardView(card: card, onRemove: { removedCard in
                                     // Remove that card from our array
                                     if end {
-                                        //print("terminou")
                                         self.isPresentedGameOver.toggle()
                                         
                                         UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                        print("terminou pooooo")
                                         self.environment.reset()
                                     } else {
                                         environment.changeCardPriority()
@@ -98,7 +97,6 @@ struct GameView: View {
                                             self.isPresentedFinished.toggle()
                                             
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                            print("terminou pooooorrrrrrra")
                                             self.environment.reset()
                                         }
                                         else{
@@ -106,13 +104,7 @@ struct GameView: View {
                                         }
                                     }
                                     
-                                }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
-                                .animation(.spring())
-                                .frame(maxHeight: geometry.size.height*0.6, alignment: .top)
-                                .frame(width: self.getCardWidth(geometry, id: card.id), height: 500)
-                                .offset(x: 0, y: self.getCardOffset(geometry, id: card.id))
-                                
-                            }
+                                }
                             }
                         }
                     }
@@ -179,38 +171,38 @@ struct GameView: View {
                             .disabled(!areButtonsActive)
                         }
                         
-                       
+                        
                     } else {
                         
                         //HStack {
+                        
+                        Button(action: {
+                            self.pass.toggle()
+                            self.areButtonsActive = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                self.areButtonsActive = true
+                            }
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Text(end ? "Eita..." : "Bora Dale")
+                                    //.font(.custom("Raleway-Bold", size: 18))
+                                    .font(.callout) // era 20
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.brancoColor)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                                    .padding(7)
+                                Spacer()
+                            }
                             
-                            Button(action: {
-                                self.pass.toggle()
-                                self.areButtonsActive = false
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                    self.areButtonsActive = true
-                                }
-                            }, label: {
-                                HStack {
-                                    Spacer()
-                                    Text(end ? "Eita..." : "Bora Dale")
-                                        //.font(.custom("Raleway-Bold", size: 18))
-                                        .font(.callout) // era 20
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.brancoColor)
-                                        .multilineTextAlignment(.center)
-                                        .lineLimit(2)
-                                        .padding(7)
-                                    Spacer()
-                                }
-                                
-                            }).frame(height: 55)
-                            .clipped()
-                            .background(Color.roxoClaroColor)
-                            .cornerRadius(10)
-                            .disabled(!self.areButtonsActive)
-                            
-                       
+                        }).frame(height: 55)
+                        .clipped()
+                        .background(Color.roxoClaroColor)
+                        .cornerRadius(10)
+                        .disabled(!self.areButtonsActive)
+                        
+                        
                         
                     }
                     Spacer()
@@ -238,7 +230,50 @@ struct GameView: View {
                     .opacity(end ? 0 : 1)
                     //Spacer()
                 }
+                
+                
+                VStack (alignment: .trailing) {
+                    HStack {
+                        Spacer()
+                        
+                        Button(action: {
+                            self.showConfig.toggle()
+                        }, label: {
+                            Image(systemName: "pause")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.roxoColor)
+                                .padding(6)
+                        })
+                        .padding(.top, UIScreen.main.bounds.height*0.025)
+                    }
+                
+                    Spacer()
+                    
+                }
+                            
+                
+                ZStack {
+                    
+                    
+                    VStack {
+                        Spacer()
+                        ConfigurationView(shouldPopToRootView: $rootIsActive, showConfig: $showConfig, isPause: true)
+                            .offset(y: self.showConfig ? 0 : UIScreen.main.bounds.height)
+                            .padding(.bottom)
+                        
+                    }
+                    
+                    .background(VisualEffectView(effect: UIBlurEffect(style: .dark))
+                                    .edgesIgnoringSafeArea(.all)
+                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .opacity((self.showConfig ? 1 : 0)))
+                }
+                
+                
             }
+            .animation(.default)
         }
         .onChange(of: end, perform: { value in
             if environment.attributes.isGameOver() {
@@ -272,7 +307,6 @@ struct GameView: View {
             }
         }
         .overlay(EndGameView(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
-        // trocar para a tela de ganhou
         .overlay(FinalGameView(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
@@ -286,11 +320,17 @@ struct GameView_PreviewProvider: PreviewProvider{
         
         GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-          
+        
         GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPod touch (7th generation)"))
         
         GameView(rootIsActive: $active)
             .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
+}
+
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }

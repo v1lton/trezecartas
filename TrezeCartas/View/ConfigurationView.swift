@@ -15,6 +15,8 @@ struct ConfigurationView: View {
     @State var isAcessibilityOn : Bool = true
     @State var isSoundOn : Bool = true
     
+    var isPause: Bool
+    
     var body: some View {
         GeometryReader { geometry in
             
@@ -23,7 +25,7 @@ struct ConfigurationView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        Text("Configurações")
+                        Text(isPause ? "Pause" : "Configurações")
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(.brancoColor)
@@ -75,7 +77,6 @@ struct ConfigurationView: View {
                     .cornerRadius(10)
                     .offset(x: 0, y: -30)
                 }
-                .padding()
                 
                 VStack(alignment: .center){
                     
@@ -87,7 +88,7 @@ struct ConfigurationView: View {
                     }, label: {
                         HStack {
                             Spacer()
-                            Text("Continuar")
+                            Text(isPause ? "Continuar" : "Voltar")
                                 .font(.callout)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.brancoColor)
@@ -102,28 +103,29 @@ struct ConfigurationView: View {
                     .background(Color.azulColor)
                     .cornerRadius(10)
                     
-                    Button(action: {
-                        // pop to root
-                        self.shouldPopToRootView = false
-                    }, label: {
-                        HStack {
-                            Spacer()
-                            Text("Retornar ao Menu")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.rosaColor)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(2)
-                                .padding(7)
-                            Spacer()
-                        }
-                        
-                    }).frame(height: 55)
-                    .clipped()
-                    .background(Color.brancoColor)
-                    .cornerRadius(10)
+                    if isPause {
+                        Button(action: {
+                            // pop to root
+                            self.shouldPopToRootView = false
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Text("Retornar ao Menu")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.rosaColor)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                                    .padding(7)
+                                Spacer()
+                            }
+                            
+                        }).frame(height: 55)
+                        .clipped()
+                        .background(Color.brancoColor)
+                        .cornerRadius(10)
+                    }
                 }
-                .padding()
                 
             }
             
@@ -185,7 +187,7 @@ struct Testeeeee: View {
             
             VStack {
                 Spacer()
-                ConfigurationView(shouldPopToRootView: .constant(true), showConfig: $showConfig)
+                ConfigurationView(shouldPopToRootView: .constant(true), showConfig: $showConfig, isPause: true)
                     .offset(y: self.showConfig ? 0 : UIScreen.main.bounds.height)
                     
             }

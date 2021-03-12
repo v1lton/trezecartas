@@ -220,34 +220,34 @@ struct CardView: View {
                             Spacer()
                             HStack(alignment: .center) {
                                 if let choice = getSideChoice(direction: swipeStatus){
-                                if swipeStatus == .right {
-                                    if choice.healthStats! != 0 {
-                                        CardBackStatus(imageStatus: "coracao", arrowDegrees: (choice.healthStats! <= 0 ? 180 : 0), spacerFrameWidth: 3)
-                                            .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
+                                    if swipeStatus == .right {
+                                        if choice.healthStats! != 0 {
+                                            CardBackStatus(imageStatus: "coracao", arrowDegrees: (choice.healthStats! <= 0 ? 180 : 0), spacerFrameWidth: 3)
+                                                .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
+                                        }
+                                        if choice.moneyStats! != 0 {
+                                            CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (choice.moneyStats! <= 0 ? 180 : 0), spacerFrameWidth: 0)
+                                                .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
+                                        }
+                                        if choice.insanityStats! != 0 {
+                                            CardBackStatus(imageStatus: "noia", arrowDegrees: (choice.insanityStats! <= 0 ? 180 : 0), spacerFrameWidth: 1)
+                                                .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
+                                        }
+                                    } else {
+                                        if choice.healthStats! != 0 {
+                                            CardBackStatus(imageStatus: "coracao", arrowDegrees: (choice.healthStats! <= 0 ? 180 : 0), spacerFrameWidth: 3)
+                                                .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
+                                        }
+                                        if choice.moneyStats! != 0 {
+                                            CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (choice.moneyStats! <= 0 ? 180 : 0), spacerFrameWidth: 0)
+                                                .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
+                                        }
+                                        if choice.insanityStats! != 0 {
+                                            CardBackStatus(imageStatus: "noia", arrowDegrees: (choice.insanityStats! <= 0 ? 180 : 0), spacerFrameWidth: 1)
+                                                .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
+                                        }
+                                        
                                     }
-                                    if choice.moneyStats! != 0 {
-                                        CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (choice.moneyStats! <= 0 ? 180 : 0), spacerFrameWidth: 0)
-                                            .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-                                    }
-                                    if choice.insanityStats! != 0 {
-                                        CardBackStatus(imageStatus: "noia", arrowDegrees: (choice.insanityStats! <= 0 ? 180 : 0), spacerFrameWidth: 1)
-                                            .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-                                    }
-                                } else {
-                                    if choice.healthStats! != 0 {
-                                        CardBackStatus(imageStatus: "coracao", arrowDegrees: (choice.healthStats! <= 0 ? 180 : 0), spacerFrameWidth: 3)
-                                            .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-                                    }
-                                    if choice.moneyStats! != 0 {
-                                        CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (choice.moneyStats! <= 0 ? 180 : 0), spacerFrameWidth: 0)
-                                            .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-                                    }
-                                    if choice.insanityStats! != 0 {
-                                        CardBackStatus(imageStatus: "noia", arrowDegrees: (choice.insanityStats! <= 0 ? 180 : 0), spacerFrameWidth: 1)
-                                            .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
-                                    }
-                                    
-                                }
                                 }
                                 
                             }.padding(.bottom, geometry.size.height*0.16)
