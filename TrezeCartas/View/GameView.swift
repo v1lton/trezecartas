@@ -173,9 +173,7 @@ struct GameView: View {
                         
                         
                     } else {
-                        
-                        //HStack {
-                        
+                                                
                         Button(action: {
                             self.pass.toggle()
                             self.areButtonsActive = false
@@ -201,8 +199,6 @@ struct GameView: View {
                         .background(Color.roxoClaroColor)
                         .cornerRadius(10)
                         .disabled(!self.areButtonsActive)
-                        
-                        
                         
                     }
                     Spacer()
@@ -230,8 +226,7 @@ struct GameView: View {
                     .opacity(end ? 0 : 1)
                     //Spacer()
                 }
-                
-                
+                                
                 VStack (alignment: .trailing) {
                     HStack {
                         Spacer()
@@ -250,12 +245,9 @@ struct GameView: View {
                     }
                 
                     Spacer()
-                    
                 }
-                            
                 
                 ZStack {
-                    
                     
                     VStack {
                         Spacer()
