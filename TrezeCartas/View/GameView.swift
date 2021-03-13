@@ -54,7 +54,7 @@ struct GameView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                                
+                
                 VStack {
                     Spacer()
                     // status
@@ -173,7 +173,7 @@ struct GameView: View {
                         
                         
                     } else {
-                                                
+                        
                         Button(action: {
                             self.pass.toggle()
                             self.areButtonsActive = false
@@ -226,7 +226,7 @@ struct GameView: View {
                     .opacity(end ? 0 : 1)
                     //Spacer()
                 }
-                                
+                
                 VStack (alignment: .trailing) {
                     HStack {
                         Spacer()
@@ -243,26 +243,22 @@ struct GameView: View {
                         })
                         .padding(.top, UIScreen.main.bounds.height*0.025)
                     }
-                
+                    
                     Spacer()
                 }
                 
-                ZStack {
-                    
-                    VStack {
-                        Spacer()
-                        ConfigurationView(shouldPopToRootView: $rootIsActive, showConfig: $showConfig, isPause: true)
-                            .offset(y: self.showConfig ? 0 : UIScreen.main.bounds.height)
-                            .padding(.bottom)
-                        
-                    }
-                    
-                    .background(VisualEffectView(effect: UIBlurEffect(style: .dark))
-                                    .edgesIgnoringSafeArea(.all)
-                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                    .opacity((self.showConfig ? 1 : 0)))
+                /// config / pause
+                VStack {
+                    Spacer()
+                    ConfigurationView(shouldPopToRootView: $rootIsActive, showConfig: $showConfig, isPause: true)
+                        .offset(y: self.showConfig ? 0 : UIScreen.main.bounds.height)
+                        .padding(.bottom)
+                        .padding(.bottom) // sao dois mesmo hehe
                 }
-                
+                .background(VisualEffectView(effect: UIBlurEffect(style: .dark))
+                                .edgesIgnoringSafeArea(.all)
+                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .opacity((self.showConfig ? 1 : 0)))
                 
             }
             .animation(.default)
