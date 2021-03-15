@@ -68,10 +68,10 @@ struct CardView: View {
     func getSideChoice(direction: LeftRight) -> Attributtes?{
         var sideChoice: Attributtes
     
-        do{
+        do {
             if(direction == .left){
                 sideChoice = try card.getResult(direction: .left)
-            }else {
+            } else {
                 sideChoice = try card.getResult(direction: .right)
             }
             return sideChoice
@@ -79,9 +79,10 @@ struct CardView: View {
         catch{
             print(error)
         return nil
-    }
+        }
     
     }
+    
     func choice(direction: LeftRight){
         
         var sideChoice: Attributtes?
@@ -114,6 +115,17 @@ struct CardView: View {
         environment.objectWillChange.send()
     }
     
+    func getImageSize() -> (CGFloat, CGFloat){
+        
+        // iPod Touch ou SE
+        if UIScreen.main.bounds.height < 600 {
+            return (UIScreen.main.bounds.width * 0.75, UIScreen.main.bounds.height * 0.25)
+        } else {
+            return (UIScreen.main.bounds.width * 0.797, UIScreen.main.bounds.height * 0.223)
+        }
+        
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
@@ -129,7 +141,7 @@ struct CardView: View {
                                 Image(card.imageName)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: UIScreen.main.bounds.width * 0.797, height: UIScreen.main.bounds.height * 0.223, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .frame(width: self.getImageSize().0, height: self.getImageSize().1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                     .cornerRadius(10)
                                     .padding([.top, .leading, .trailing])
                                     .padding([.top, .leading, .trailing], 10)
