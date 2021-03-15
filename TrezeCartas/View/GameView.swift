@@ -29,6 +29,8 @@ struct GameView: View {
     @State var areButtonsActive = true
     @State var showConfig = false
     
+    @AppStorage("acessibility") var isAcessibilityOn : Bool = false
+    
     /// Return the CardViews width for the given offset in the array
     /// - Parameters:
     ///   - geometry: The geometry proxy of the parent
@@ -66,6 +68,10 @@ struct GameView: View {
                     }
                     .padding()
                     
+                    if !isAcessibilityOn {
+                        Spacer().frame(height: 38)
+                    }
+                    
                     ZStack {
                         
                         VStack {
@@ -102,7 +108,13 @@ struct GameView: View {
                                         else{
                                             self.environment.cards.removeLast()
                                         }
+                                        
                                     }
+                                    }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
+                                    .animation(.spring())
+                                    .frame(maxHeight: geometry.size.height*(isAcessibilityOn ? 0.6 : 0.7), alignment: .top)
+                                    .frame(width: self.getCardWidth(geometry, id: card.id), height: 535)
+                                    .offset(x: 0, y: self.getCardOffset(geometry, id: card.id))
                                     
                                 }
                             }
@@ -112,20 +124,78 @@ struct GameView: View {
                     
                     Spacer().frame(height: 38)
                     
-                    if !self.isCardShowingBack {
-                        
-                        HStack {
+                    if isAcessibilityOn {
+                        if !self.isCardShowingBack {
+                            
+                            HStack {
+                                
+                                Button(action: {
+                                    self.areButtonsActive = false
+                                    self.leftButton.toggle()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        self.areButtonsActive = true
+                                    }
+                                }, label: {
+                                    HStack {
+                                        Spacer()
+                                        Text(leftOption)
+                                            //.font(.custom("Raleway-Bold", size: 18))
+                                            .font(.callout) // era 20
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.brancoColor)
+                                            .multilineTextAlignment(.center)
+                                            .lineLimit(2)
+                                            .padding(7)
+                                        Spacer()
+                                    }
+                                    
+                                }).frame(height: 55)
+                                .clipped()
+                                .background(Color.roxoClaroColor)
+                                .cornerRadius(10)
+                                .disabled(!areButtonsActive)
+                                
+                                Spacer()
+                                    .frame(width: 7)
+                                
+                                Button(action: {
+                                    self.areButtonsActive = false
+                                    self.rightButton.toggle()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                        self.areButtonsActive = true
+                                    }
+                                }, label: {
+                                    HStack {
+                                        Spacer()
+                                        Text(rightOption)
+                                            .font(.callout) // era 20
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.brancoColor)
+                                            .multilineTextAlignment(.center)
+                                            .lineLimit(2)
+                                            .padding(7)
+                                        Spacer()
+                                    }
+                                    
+                                }).frame(height: 55)
+                                .clipped()
+                                .background(Color.roxoClaroColor)
+                                .cornerRadius(10)
+                                .disabled(!areButtonsActive)
+                            }
+                            
+                        } else {
                             
                             Button(action: {
+                                self.pass.toggle()
                                 self.areButtonsActive = false
-                                self.leftButton.toggle()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                                     self.areButtonsActive = true
                                 }
                             }, label: {
                                 HStack {
                                     Spacer()
-                                    Text(leftOption)
+                                    Text(end ? "Eita..." : "Bora Dale")
                                         //.font(.custom("Raleway-Bold", size: 18))
                                         .font(.callout) // era 20
                                         .fontWeight(.semibold)
@@ -140,66 +210,9 @@ struct GameView: View {
                             .clipped()
                             .background(Color.roxoClaroColor)
                             .cornerRadius(10)
-                            .disabled(!areButtonsActive)
+                            .disabled(!self.areButtonsActive)
                             
-                            Spacer()
-                                .frame(width: 7)
-                            
-                            Button(action: {
-                                self.areButtonsActive = false
-                                self.rightButton.toggle()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                    self.areButtonsActive = true
-                                }
-                            }, label: {
-                                HStack {
-                                    Spacer()
-                                    Text(rightOption)
-                                        .font(.callout) // era 20
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.brancoColor)
-                                        .multilineTextAlignment(.center)
-                                        .lineLimit(2)
-                                        .padding(7)
-                                    Spacer()
-                                }
-                                
-                            }).frame(height: 55)
-                            .clipped()
-                            .background(Color.roxoClaroColor)
-                            .cornerRadius(10)
-                            .disabled(!areButtonsActive)
                         }
-                        
-                        
-                    } else {
-                        
-                        Button(action: {
-                            self.pass.toggle()
-                            self.areButtonsActive = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                self.areButtonsActive = true
-                            }
-                        }, label: {
-                            HStack {
-                                Spacer()
-                                Text(end ? "Eita..." : "Bora Dale")
-                                    //.font(.custom("Raleway-Bold", size: 18))
-                                    .font(.callout) // era 20
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.brancoColor)
-                                    .multilineTextAlignment(.center)
-                                    .lineLimit(2)
-                                    .padding(7)
-                                Spacer()
-                            }
-                            
-                        }).frame(height: 55)
-                        .clipped()
-                        .background(Color.roxoClaroColor)
-                        .cornerRadius(10)
-                        .disabled(!self.areButtonsActive)
-                        
                     }
                     Spacer()
                     

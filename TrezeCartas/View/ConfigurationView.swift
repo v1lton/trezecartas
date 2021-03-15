@@ -12,8 +12,8 @@ struct ConfigurationView: View {
     @Binding var shouldPopToRootView : Bool
     @Binding var showConfig: Bool
     
-    @State var isAcessibilityOn : Bool = true
-    @State var isSoundOn : Bool = true
+    @AppStorage("acessibility") var isAcessibilityOn : Bool = false
+    @AppStorage("sound") var isSoundOn : Bool = true
     
     var isPause: Bool
     
