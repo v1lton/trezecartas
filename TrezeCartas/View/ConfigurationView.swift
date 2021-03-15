@@ -64,11 +64,14 @@ struct ConfigurationView: View {
                                 .foregroundColor(.pretoColor)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(2)
+                                .opacity(0.4)
                             
                         }
                         //.padding()
                         .toggleStyle(SwitchToggleStyle(tint: Color.azulColor))
                         .frame(height: 55)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .opacity(0.7)
                         
                     }.padding(.horizontal)
                     .padding(.vertical, 6)
