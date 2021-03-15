@@ -97,18 +97,8 @@ struct CardView: View {
             print(error)
             return
         }
-        
-        self.environment.attributes.healthStats! += sideChoice!.healthStats!
-        self.environment.attributes.moneyStats! += sideChoice!.moneyStats!
-        if sideChoice!.insanityStats == 0 {
-            self.environment.attributes.insanityStats! -= 1
-        } else {
-            self.environment.attributes.insanityStats! += sideChoice!.insanityStats!
-        }
-        
-        self.environment.attributes.healthStats! = self.environment.attributes.healthStats!.clamped(to: 0...10)
-        self.environment.attributes.moneyStats! = self.environment.attributes.moneyStats!.clamped(to: 0...10)
-        self.environment.attributes.insanityStats! = self.environment.attributes.insanityStats!.clamped(to: 0...10)
+        print("CHEGOU AQUI ", direction)
+        self.environment.changeEnvironment(result: sideChoice!)
         
         if environment.attributes.healthStats! == 0 || environment.attributes.moneyStats! == 0 || environment.attributes.insanityStats! == 10 {
             self.end.toggle()

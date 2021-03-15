@@ -81,7 +81,7 @@ struct GameView: View {
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
                             if let card = self.environment.cards[index]{
-                            if (self.maxID - 3)...self.maxID ~= card.id {
+                                if (self.environment.maxID - 3)...self.environment.maxID ~= card.id {
                                 CardView(card: card, onRemove: { removedCard in
                                     // Remove that card from our array
                                     if end {
@@ -92,14 +92,21 @@ struct GameView: View {
                                         self.environment.reset()
                                         self.environment.shuffleCards()
                                     } else {
-                                        environment.maxID -= 1 // reduz o id maximo
-                                        if maxID == 0 {
+                                        print("antes: ", environment.cards.map{$0.uid})
+                                        environment.changeCardPriority()
+                                        
+                                        //environment.maxID -= 1 // reduz o id maximo
+                                        if environment.maxID == 0 {
                                             self.isPresentedFinished.toggle()
                                             
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                            self.environment.shuffleCards()
+                                            self.environment.reset()
                                         }
-                                        self.environment.cards.removeAll { $0.id == removedCard.id }
+                                        print("depois: ", environment.cards.map{$0.uid})
+                                        print("max id: ", self.environment.maxID)
+                                        self.environment.cards.removeLast()
+                                        
+                                        print("remover: ", environment.cards.map{$0.uid})
                                     }
                                     
                                 }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
@@ -238,7 +245,7 @@ struct GameView: View {
         }
         .onChange(of: end, perform: { value in
             if environment.attributes.isGameOver() {
-                self.description = environment.blockEndingText
+                self.description = environment.attributes.endGame ?? "Vacilou Grandão, mermão."
             } else if environment.attributes.healthStats == 0 {
                 self.description = "Bicha, nem assim tu sobrevive um rolê na 13! Bora se preparar pra o ano que vem pois o estrago vai ser grande!"
             } else if environment.attributes.moneyStats == 0 {
