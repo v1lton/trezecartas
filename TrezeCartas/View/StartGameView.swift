@@ -52,15 +52,16 @@ struct StartGameView: View {
                             Button(action: {
                                 self.showConfig.toggle()
                             }, label: {
-                                Image(systemName: "gear")
+                                Image(systemName: "ellipsis.circle.fill")
                                     .resizable()
                                     .scaledToFit()
+                                    .frame(minHeight: 25)
                                     .frame(height: UIScreen.main.bounds.height*0.035)
-                                    .foregroundColor(Color.roxoColor)
-                                    .padding(6)
+                                    .foregroundColor(Color.roxoClaroColor)
+                                    //.padding(6)
                             })
                             .padding()
-                            .padding(.top, UIScreen.main.bounds.height*0.005)
+                            .padding(.top, UIScreen.main.bounds.height > 800 ? UIScreen.main.bounds.height*0.02 : 0)
                         }
                         
                         Spacer()
@@ -91,6 +92,7 @@ struct StartGameView: View {
                 }
             }
             .edgesIgnoringSafeArea(.all)
+            .background(Color.brancoColor)
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }

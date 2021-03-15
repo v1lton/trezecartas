@@ -247,14 +247,17 @@ struct GameView: View {
                         Button(action: {
                             self.showConfig.toggle()
                         }, label: {
-                            Image(systemName: "pause")
+                            Image(systemName: "pause.circle.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color.roxoColor)
-                                .padding(6)
+                                .frame(minHeight: 25)
+                                .frame(height: UIScreen.main.bounds.height*0.035)
+                                .foregroundColor(Color.roxoClaroColor)
+                                //.padding(6)
                         })
-                        .padding(.top, UIScreen.main.bounds.height*0.025)
+                        .padding(.top)
+                        .padding(.top, UIScreen.main.bounds.height > 800 ? UIScreen.main.bounds.height*0.02 : 0)
+                        
                     }
                     
                     Spacer()
