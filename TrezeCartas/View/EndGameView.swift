@@ -13,6 +13,8 @@ struct EndGameView: View {
     @Binding var shouldPopToRootView : Bool
     @Binding var description: String
     
+    @ObservedObject var environment : GameEnvironment
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom){
@@ -59,6 +61,8 @@ struct EndGameView: View {
             .background(Color.black)
             .onTapGesture {
                 //presentationMode.wrappedValue.dismiss()
+                self.environment.reset()
+                self.environment.objectWillChange.send()
                 self.shouldPopToRootView = false
             }
 //            .onChange(of: isPresented, perform: { value in

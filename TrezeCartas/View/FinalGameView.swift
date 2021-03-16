@@ -10,6 +10,7 @@ import SwiftUI
 struct FinalGameView: View {
     
     @Binding var shouldPopToRootView : Bool
+    @ObservedObject var environment : GameEnvironment
     
     var body: some View {
         GeometryReader { geometry in
@@ -58,6 +59,8 @@ struct FinalGameView: View {
             .background(Color("roxoClaro"))
             .onTapGesture {
                 //presentationMode.wrappedValue.dismiss()
+                self.environment.reset()
+                self.environment.objectWillChange.send()
                 self.shouldPopToRootView = false
             }
             

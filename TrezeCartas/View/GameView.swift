@@ -239,6 +239,7 @@ struct GameView: View {
                     .opacity(end ? 0 : 1)
                     //Spacer()
                 }
+                .blur(radius: CGFloat(environment.attributes.insanityStats!)/2)
                 
                 VStack (alignment: .trailing) {
                     HStack {
@@ -257,7 +258,8 @@ struct GameView: View {
                         })
                         .padding(.top)
                         .padding(.top, UIScreen.main.bounds.height > 800 ? UIScreen.main.bounds.height*0.02 : 0)
-                        
+                        .disabled(end)
+                        .opacity(end ? 0 : 1)
                     }
                     
                     Spacer()
@@ -266,7 +268,7 @@ struct GameView: View {
                 /// config / pause
                 VStack {
                     Spacer()
-                    ConfigurationView(shouldPopToRootView: $rootIsActive, showConfig: $showConfig, isPause: true)
+                    ConfigurationView(shouldPopToRootView: $rootIsActive, showConfig: $showConfig, environment: environment, isPause: true)
                         .offset(y: self.showConfig ? 0 : UIScreen.main.bounds.height)
                         .padding(.bottom)
                         .padding(.bottom) // sao dois mesmo hehe
@@ -294,7 +296,7 @@ struct GameView: View {
         .navigationTitle(Text(""))
         .navigationBarBackButtonHidden(end ? true : false)
         .preferredColorScheme(.light)
-        .blur(radius: CGFloat(environment.attributes.insanityStats!)/2)
+        //.blur(radius: CGFloat(environment.attributes.insanityStats!)/2)
         .padding()
         .background(Color.brancoColor)
         .edgesIgnoringSafeArea(.all)
@@ -309,9 +311,10 @@ struct GameView: View {
                 self.isPresentedGameOver.toggle()
                 
             }
+            self.environment.objectWillChange.send()
         }
-        .overlay(EndGameView(shouldPopToRootView: self.$rootIsActive, description: $description).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
-        .overlay(FinalGameView(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+        .overlay(EndGameView(shouldPopToRootView: self.$rootIsActive, description: $description, environment: environment).opacity(isPresentedGameOver ? 1 : 0).animation(.easeInOut(duration: 0.3)))
+        .overlay(FinalGameView(shouldPopToRootView: self.$rootIsActive, environment: environment).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
 struct GameView_PreviewProvider: PreviewProvider{
