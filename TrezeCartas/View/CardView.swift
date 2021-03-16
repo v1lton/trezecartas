@@ -23,9 +23,8 @@ struct CardView: View {
     @Binding var rightButton: Bool
     @Binding var pass: Bool
     @Binding var end : Bool
-    
-    private var card: Card
-    private var onRemove: (_ user: Card) -> Void
+    private var card: JSONCard
+    private var onRemove: (_ user: JSONCard) -> Void
         
     private var thresholdPercentage: CGFloat = 0.3 // when the user has draged 30% the width of the screen in either direction
     
@@ -38,7 +37,7 @@ struct CardView: View {
     }
     
 
-    init(card: Card, onRemove: @escaping (_ user: Card) -> Void, environment: GameEnvironment, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>, leftButton: Binding<Bool>, rightButton: Binding<Bool>, pass: Binding<Bool>) {
+    init(card: JSONCard, onRemove: @escaping (_ user: JSONCard) -> Void, environment: GameEnvironment, leftOption: Binding<String>, rightOption: Binding<String>, end: Binding<Bool>, isCardShowingBack: Binding<Bool>, leftButton: Binding<Bool>, rightButton: Binding<Bool>, pass: Binding<Bool>) {
 
         self.card = card
         self.onRemove = onRemove
@@ -66,27 +65,40 @@ struct CardView: View {
         LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), Color.black.opacity(0.0)]), startPoint: .bottom, endPoint: .top)
     }
     
+    func getSideChoice(direction: LeftRight) -> Attributtes?{
+        var sideChoice: Attributtes
+    
+        do{
+            if(direction == .left){
+                sideChoice = try card.getResult(direction: .left)
+            }else {
+                sideChoice = try card.getResult(direction: .right)
+            }
+            return sideChoice
+        }
+        catch{
+            print(error)
+        return nil
+    }
+    
+    }
     func choice(direction: LeftRight){
         
-        var sideChoice: [Int]
+        var sideChoice: Attributtes?
         
-        if(direction == .left){
-            sideChoice = card.leftStatus
-        } else {
-            sideChoice = card.rightStatus
+        do{
+            if(direction == .left){
+                sideChoice = try card.getResult(direction: .left)
+            }else {
+                sideChoice = try card.getResult(direction: .right)
+            }
         }
-        
-        self.environment.attributes.healthStats! += sideChoice[0]
-        self.environment.attributes.moneyStats! += sideChoice[1]
-        if sideChoice[2] == 0 {
-            self.environment.attributes.insanityStats! -= 1
-        } else {
-            self.environment.attributes.insanityStats! += sideChoice[2]
+        catch{
+            print(error)
+            return
         }
-        
-        self.environment.attributes.healthStats! = self.environment.attributes.healthStats!.clamped(to: 0...10)
-        self.environment.attributes.moneyStats! = self.environment.attributes.moneyStats!.clamped(to: 0...10)
-        self.environment.attributes.insanityStats! = self.environment.attributes.insanityStats!.clamped(to: 0...10)
+        print("CHEGOU AQUI ", direction)
+        self.environment.changeEnvironment(result: sideChoice!)
         
         if environment.attributes.healthStats! == 0 || environment.attributes.moneyStats! == 0 || environment.attributes.insanityStats! == 10 {
             self.end.toggle()
@@ -114,27 +126,27 @@ struct CardView: View {
                         
                         VStack(alignment: .center) {
                             VStack {
-                                Image(uiImage: card.cardImage)
+                                Image(card.imageName)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: UIScreen.main.bounds.width * 0.797, height: UIScreen.main.bounds.height * 0.223, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                     .cornerRadius(10)
                                     .padding([.top, .leading, .trailing])
                                     .padding([.top, .leading, .trailing], 10)
-                                    .clipShape(Rectangle(), style: /*@START_MENU_TOKEN@*/FillStyle()/*@END_MENU_TOKEN@*/)
+                                    .clipShape(Rectangle(), style: FillStyle())
                             }
                             .clipped()
                            
                                 
                             Spacer()
                             VStack(alignment: .center, spacing: 0){
-                                Text("\(card.cardName)")
+                                Text("\(card.name)")
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(.amareloColor)
                                     .multilineTextAlignment(.center)
                                     .padding(.bottom, 10.0)
-                                Text("\(card.cardText)")
+                                Text("\(card.text)")
                                     .font(.body)
                                     .fontWeight(.medium)
                                     .foregroundColor(.brancoColor)
@@ -149,7 +161,7 @@ struct CardView: View {
                         if self.swipeStatus == .left {
                             Rectangle()
                                 .fill(gradient)
-                            Text("\(card.leftOption)")
+                            Text("\(card.leftText)")
                                 .font(.body)
                                 .fontWeight(.bold)
                                 .lineLimit(2)
@@ -165,7 +177,7 @@ struct CardView: View {
                         } else if self.swipeStatus == .right {
                             Rectangle()
                                 .fill(gradient)
-                            Text("\(card.rightOption)")
+                            Text("\(card.rightText)")
                                 .font(.body)
                                 .fontWeight(.bold)
                                 .lineLimit(2)
@@ -180,7 +192,7 @@ struct CardView: View {
                                 .rotationEffect(Angle.degrees(25))
                         }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
 
                     
                 } else if cardStatus == .back {
@@ -190,13 +202,13 @@ struct CardView: View {
                         
                         VStack(alignment: .center, spacing: 0) {
                             VStack(alignment: .center, spacing: 0){
-                                Text("\(card.cardName)")
+                                Text("\(card.name)")
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(.amareloColor)
                                     .multilineTextAlignment(.center)
                                     .padding(.bottom, 10.0)
-                                Text(swipeStatus == .left ? "\(card.leftAnswer)" : "\(card.rightAnswer)")
+                                Text(swipeStatus == .left ? "\(card.leftResultText)" : "\(card.rightResultText)")
                                     .font(.body)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.brancoColor)
@@ -207,34 +219,35 @@ struct CardView: View {
                             }.padding(.top, geometry.size.height*0.16)
                             Spacer()
                             HStack(alignment: .center) {
-                                
+                                if let choice = getSideChoice(direction: swipeStatus){
                                 if swipeStatus == .right {
-                                    if card.rightStatus[0] != 0 {
-                                        CardBackStatus(imageStatus: "coracao", arrowDegrees: (card.rightStatus[0] <= 0 ? 180 : 0), spacerFrameWidth: 3)
+                                    if choice.healthStats! != 0 {
+                                        CardBackStatus(imageStatus: "coracao", arrowDegrees: (choice.healthStats! <= 0 ? 180 : 0), spacerFrameWidth: 3)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
                                     }
-                                    if card.rightStatus[1] != 0 {
-                                        CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (card.rightStatus[1] <= 0 ? 180 : 0), spacerFrameWidth: 0)
+                                    if choice.moneyStats! != 0 {
+                                        CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (choice.moneyStats! <= 0 ? 180 : 0), spacerFrameWidth: 0)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
                                     }
-                                    if card.rightStatus[2] != 0 {
-                                        CardBackStatus(imageStatus: "noia", arrowDegrees: (card.rightStatus[2] <= 0 ? 180 : 0), spacerFrameWidth: 1)
+                                    if choice.insanityStats! != 0 {
+                                        CardBackStatus(imageStatus: "noia", arrowDegrees: (choice.insanityStats! <= 0 ? 180 : 0), spacerFrameWidth: 1)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
                                     }
                                 } else {
-                                    if card.leftStatus[0] != 0 {
-                                        CardBackStatus(imageStatus: "coracao", arrowDegrees: (card.leftStatus[0] <= 0 ? 180 : 0), spacerFrameWidth: 3)
+                                    if choice.healthStats! != 0 {
+                                        CardBackStatus(imageStatus: "coracao", arrowDegrees: (choice.healthStats! <= 0 ? 180 : 0), spacerFrameWidth: 3)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
                                     }
-                                    if card.leftStatus[1] != 0 {
-                                        CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (card.leftStatus[1] <= 0 ? 180 : 0), spacerFrameWidth: 0)
+                                    if choice.moneyStats! != 0 {
+                                        CardBackStatus(imageStatus: "dinheiro", arrowDegrees: (choice.moneyStats! <= 0 ? 180 : 0), spacerFrameWidth: 0)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
                                     }
-                                    if card.leftStatus[2] != 0 {
-                                        CardBackStatus(imageStatus: "noia", arrowDegrees: (card.leftStatus[2] <= 0 ? 180 : 0), spacerFrameWidth: 1)
+                                    if choice.insanityStats! != 0 {
+                                        CardBackStatus(imageStatus: "noia", arrowDegrees: (choice.insanityStats! <= 0 ? 180 : 0), spacerFrameWidth: 1)
                                             .frame(width: geometry.size.width*0.20, height: geometry.size.height*0.08)
                                     }
                                     
+                                }
                                 }
                                 
                             }.padding(.bottom, geometry.size.height*0.16)
@@ -259,8 +272,8 @@ struct CardView: View {
                                 self.isCardShowingBack = false
                             }
                             cardStatus = .front
-                            self.leftOption = card.leftOption
-                            self.rightOption = card.rightOption
+                            self.leftOption = card.leftText
+                            self.rightOption = card.rightText
                         }
                         
                     }
@@ -280,7 +293,6 @@ struct CardView: View {
                 }
             }
             .background(end ? Color.pretoColor : Color.roxoColor)
-            //.saturation(end ? 0 : 1)
             .cornerRadius(10)
             .shadow(radius: 5)
             .animation(.interactiveSpring())
@@ -290,8 +302,8 @@ struct CardView: View {
             .onAppear {
                 if card.id == environment.maxID {
                     cardStatus = .front
-                    self.leftOption = card.leftOption
-                    self.rightOption = card.rightOption
+                    self.leftOption = card.leftText
+                    self.rightOption = card.rightText
                 }
             }
             .gesture(

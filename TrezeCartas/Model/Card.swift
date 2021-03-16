@@ -8,31 +8,35 @@
 import Foundation
 import SwiftUI
 
-class Attributtes: Codable, ReflectedStringConvertible{
+class Attributtes: Codable, ReflectedStringConvertible, CustomStringConvertible{
     
     var healthStats: Int?
     var moneyStats: Int?
     var insanityStats: Int?
     
     var dependsFrom: Int?
+    
     var isAmongFriends: Bool?
-    var isDating: Bool?
+    var isDrunk: Bool?
     var hasKissed: Bool?
-    var isHurt: Bool?
+    var isTired: Bool?
     var isDirty: Bool?
-    var hasLostPhone: Bool?
+    var brokenHeart: Bool?
+    
+    var endGame: String?
     
     enum CodingKeys: String, CodingKey {
         case healthStats = "health_stats"
         case moneyStats = "money_stats"
-        case insanityStats = "insanityStats"
+        case insanityStats = "insanity_stats"
         case dependsFrom = "depends_from"
         case isAmongFriends = "is_among_friends"
-        case isDating = "is_dating"
+        case isDrunk = "is_drunk"
         case hasKissed = "has_kissed"
-        case isHurt = "is_hurt"
+        case isTired = "is_tired"
         case isDirty = "is_dirty"
-        case hasLostPhone = "has_lost_phone"
+        case brokenHeart = "broken_heart"
+        case endGame = "end_game"
     }
     
     init(){
@@ -45,10 +49,31 @@ class Attributtes: Codable, ReflectedStringConvertible{
         return healthStats == 0 && moneyStats == 0 &&  insanityStats == 0
     }
     
+    func mirror() -> [String : Bool]{
+        
+        let properties = Mirror(reflecting: self).children
+        
+        let boolNonNullProperties = properties.compactMap{($0.label , $0.value) as? (String , Bool)}
+        
+        let dict = boolNonNullProperties.reduce([String : Bool]()){dict, item in
+            var dict = dict
+            dict[item.0] = item.1
+            return dict
+        }
+        
+        return dict
+    }
+    
 }
 
+
+
 class JSONCard: Attributtes{
-    var id: Int
+    
+    
+    var uid: Int
+    
+    var id: Int = 0
     var name: String
     var text: String
     var leftText: String
@@ -59,8 +84,9 @@ class JSONCard: Attributtes{
     var leftResultText: String
     var imageName: String
     
+    
     enum CodingKeys: String, CodingKey {
-        case id = "ID"
+        case uid = "ID"
         case name
         case text = "description"
         case leftText = "left_text"
@@ -75,7 +101,7 @@ class JSONCard: Attributtes{
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(Int.self, forKey: .id)
+        self.uid = try container.decode(Int.self, forKey: .uid)
         self.name = try container.decode(String.self, forKey: .name)
         self.text = try container.decode(String.self, forKey: .text)
         self.leftText = try container.decode(String.self, forKey: .leftText)
@@ -88,37 +114,74 @@ class JSONCard: Attributtes{
         
         try super.init(from: decoder)
         
-        translateResults()
     }
     
-    func translateResults(){
-        do{
+    private override init(){
+        self.id = 0
+        self.uid = Int(randomString(length: 5))!
+        self.name = randomString(length: 5)
+        self.text = randomString(length: 5)
+        self.leftText = randomString(length: 5)
+        self.rightText = randomString(length: 5)
+        self.leftResult = randomString(length: 5)
+        self.rightResult = randomString(length: 5)
+        self.leftResultText = randomString(length: 5)
+        self.rightResultText = randomString(length: 5)
+        self.imageName = "XeroV1_Ilu_19Sede"
+        super.init()
+    }
+    class func placebo() -> JSONCard{
+        return JSONCard()
+    }
+    
+    
+    func change(new: JSONCard){
+        self.uid = new.uid
+        self.name = new.name
+        self.text = new.text
+        self.leftText = new.leftText
+        self.rightText = new.rightText
+        self.leftResult = new.leftResult
+        self.rightResult = new.rightResult
+        self.leftResultText = new.leftResultText
+        self.rightResultText = new.rightResultText
+        self.imageName = new.imageName
+        self.healthStats = new.healthStats
+        self.moneyStats = new.moneyStats
+        self.insanityStats = new.insanityStats
+        
+    }
+    
+    func getResult(direction: CardView.LeftRight) throws -> Attributtes{
+        
+        if direction == .left{
             let jsonData = leftResult.data(using: String.Encoding.utf8)!
             let json = try JSONDecoder().decode(Attributtes.self, from: jsonData)
-            print(json)
             
-            
+            return json
         }
-        catch{
-            print(error)
+        else if direction == .right{
+            let jsonData = rightResult.data(using: String.Encoding.utf8)!
+            let json = try JSONDecoder().decode(Attributtes.self, from: jsonData)
+            
+            return json
+        }
+        else{
+            return Attributtes()
         }
     }
-}
-
-struct Card: Hashable, CustomStringConvertible {
-    var id: Int
-    
-    let cardImage: UIImage
-    let cardName: String
-    let cardText: String
-    let leftOption: String
-    let rightOption: String
-    let leftAnswer: String
-    let rightAnswer: String
-    let leftStatus: [Int]
-    let rightStatus: [Int]
     
     var description: String {
-        return "\(cardName), id: \(id)"
+        return "\(name), id: \(id)"
+    }
+    
+    func with(id: Int) -> JSONCard{
+        self.id = id
+        return self
     }
 }
+func randomString(length: Int) -> String {
+  let letters = "0123456789"
+  return String((0..<length).map{ _ in letters.randomElement()! })
+}
+

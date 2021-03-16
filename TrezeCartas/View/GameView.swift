@@ -77,40 +77,46 @@ struct GameView: View {
                         .frame(maxHeight: geometry.size.height*0.6, alignment: .center)
                         .frame(height: 500)
                         
-                        ForEach(self.environment.cards, id: \.self) { cardss in
+                        ForEach(0..<self.environment.cards.count, id: \.self) { index in
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
-                            if (self.maxID - 3)...self.maxID ~= cardss.id {
-                                CardView(card: cardss, onRemove: { removedCard in
+                            if let card = self.environment.cards[index]{
+                                if (self.environment.maxID - 3)...self.environment.maxID ~= card.id {
+                                CardView(card: card, onRemove: { removedCard in
                                     // Remove that card from our array
                                     if end {
-                                        print("terminou")
+                                        //print("terminou")
                                         self.isPresentedGameOver.toggle()
                                         
                                         UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
+                                        print("terminou pooooo")
                                         self.environment.reset()
-                                        self.environment.shuffleCards()
                                     } else {
-                                        environment.maxID -= 1 // reduz o id maximo
-                                        if maxID == 0 {
+                                        environment.changeCardPriority()
+                                        
+                                        if environment.maxID == 0 {
                                             self.isPresentedFinished.toggle()
                                             
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                            self.environment.shuffleCards()
+                                            print("terminou pooooorrrrrrra")
+                                            self.environment.reset()
                                         }
-                                        self.environment.cards.removeAll { $0.id == removedCard.id }
+                                        else{
+                                            self.environment.cards.removeLast()
+                                        }
                                     }
                                     
                                 }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                 .animation(.spring())
                                 .frame(maxHeight: geometry.size.height*0.6, alignment: .top)
-                                .frame(width: self.getCardWidth(geometry, id: cardss.id), height: 500)
-                                .offset(x: 0, y: self.getCardOffset(geometry, id: cardss.id))
+                                .frame(width: self.getCardWidth(geometry, id: card.id), height: 500)
+                                .offset(x: 0, y: self.getCardOffset(geometry, id: card.id))
                                 
+                            }
                             }
                         }
                     }
-                    .frame(height: geometry.size.height*0.6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(height: geometry.size.height*0.6, alignment: .center)
                     
                     Spacer().frame(height: 38)
                     
@@ -236,7 +242,7 @@ struct GameView: View {
         }
         .onChange(of: end, perform: { value in
             if environment.attributes.isGameOver() {
-                self.description = environment.blockEndingText
+                self.description = environment.attributes.endGame ?? "Vacilou Grandão, mermão."
             } else if environment.attributes.healthStats == 0 {
                 self.description = "Bicha, nem assim tu sobrevive um rolê na 13! Bora se preparar pra o ano que vem pois o estrago vai ser grande!"
             } else if environment.attributes.moneyStats == 0 {
@@ -270,7 +276,6 @@ struct GameView: View {
         .overlay(FinalGameView(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
-
 struct GameView_PreviewProvider: PreviewProvider{
     
     @State static var active = false
