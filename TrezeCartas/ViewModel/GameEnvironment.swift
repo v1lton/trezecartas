@@ -67,7 +67,6 @@ class GameEnvironment: ObservableObject {
             allCards.removeAll(where: {[0,1].contains($0.uid)})
             
         } catch{
-            print("its a thursday")
             print(error)
         }
         
@@ -77,6 +76,9 @@ class GameEnvironment: ObservableObject {
     
     func changeEnvironment(result: Attributtes){
         
+        if let endGame = result.endGame{
+            self.attributes.endGame = endGame
+        }
         
         self.attributes.healthStats! += result.healthStats!
         self.attributes.moneyStats! += result.moneyStats!
@@ -99,9 +101,7 @@ class GameEnvironment: ObservableObject {
         
         self.attributes.dependsFrom = result.dependsFrom
         
-        if let endGame = result.endGame{
-            self.attributes.endGame = endGame
-        }
+
         //changeCardPriority()
         
     }

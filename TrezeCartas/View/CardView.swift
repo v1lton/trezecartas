@@ -93,12 +93,12 @@ struct CardView: View {
             }else {
                 sideChoice = try card.getResult(direction: .right)
             }
+            sideChoice?.endGame = card.endGame
         }
         catch{
             print(error)
             return
         }
-        print("CHEGOU AQUI ", direction)
         self.environment.changeEnvironment(result: sideChoice!)
         
         if environment.attributes.healthStats! == 0 || environment.attributes.moneyStats! == 0 || environment.attributes.insanityStats! == 10 {

@@ -149,6 +149,7 @@ class JSONCard: Attributtes{
         self.healthStats = new.healthStats
         self.moneyStats = new.moneyStats
         self.insanityStats = new.insanityStats
+        self.endGame = new.endGame
         
     }
     
