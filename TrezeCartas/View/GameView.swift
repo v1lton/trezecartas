@@ -89,25 +89,21 @@ struct GameView: View {
                                         self.isPresentedGameOver.toggle()
                                         
                                         UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
+                                        print("terminou pooooo")
                                         self.environment.reset()
-                                        self.environment.shuffleCards()
                                     } else {
-                                        //print("antes: ", environment.cards.map{$0.uid})
                                         environment.changeCardPriority()
                                         
-                                        //environment.maxID -= 1 // reduz o id maximo
                                         if environment.maxID == 0 {
                                             self.isPresentedFinished.toggle()
                                             
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
+                                            print("terminou pooooorrrrrrra")
                                             self.environment.reset()
                                         }
-                                        //print("depois: ", environment.cards.map{$0.uid})
-                                        //print("max id: ", self.environment.maxID)
-                                        self.environment.cards.removeLast()
-                                        
-                                        //print("remover: ", environment.cards.map{$0.uid})
-                                        
+                                        else{
+                                            self.environment.cards.removeLast()
+                                        }
                                     }
                                     
                                 }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
