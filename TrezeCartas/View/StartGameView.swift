@@ -13,6 +13,7 @@ struct StartGameView: View {
     //@EnvironmentObject var appState: AppState
     @State var isPresented = false
     @Namespace var namespace
+    @State var showConfig = false
     
     var body: some View {
         NavigationView {
@@ -24,12 +25,6 @@ struct StartGameView: View {
                     
                     VStack{
                         Spacer()
-                        // coloquei essa carta aqui pra nao ficar sem nada, mas tem que decidir o que vai ter na carta inicial
-                        //                    CardArt(complete: true)
-                        //                        .frame(height: 450)
-                        //                        .background(Color.roxoColor)
-                        //                        .cornerRadius(10)
-                        //                        .padding()
                         
                         Image("logo2")
                             .resizable()
@@ -50,14 +45,54 @@ struct StartGameView: View {
                             .frame(height: 60)
                     }
                     
+                    VStack (alignment: .trailing) {
+                        HStack {
+                            Spacer()
+                            
+                            Button(action: {
+                                self.showConfig.toggle()
+                            }, label: {
+                                Image(systemName: "ellipsis.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(minHeight: 25)
+                                    .frame(height: UIScreen.main.bounds.height*0.035)
+                                    .foregroundColor(Color.roxoClaroColor)
+                                    //.padding(6)
+                            })
+                            .padding()
+                            .padding(.top, UIScreen.main.bounds.height > 800 ? UIScreen.main.bounds.height*0.02 : 0)
+                        }
+                        
+                        Spacer()
+                    }
+                    
+                    /// config
+                    VStack {
+                        Spacer()
+                        ConfigurationView(shouldPopToRootView: .constant(false), showConfig: $showConfig, isPause: false)
+                            .offset(y: self.showConfig ? 0 : UIScreen.main.bounds.height)
+                            .padding()
+                            //.padding(.bottom)
+                    }
+                    .background(VisualEffectView(effect: UIBlurEffect(style: .dark))
+                                    .edgesIgnoringSafeArea(.all)
+                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .opacity((self.showConfig ? 1 : 0)))
+                    
                 }
+                .padding()
+                .animation(.default)
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .background(Color.brancoColor)
                 .onTapGesture {
-                    self.isPresented.toggle()
+                    if !showConfig {
+                        self.isPresented.toggle()
+                    }
                 }
             }
             .edgesIgnoringSafeArea(.all)
+            .background(Color.brancoColor)
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }
