@@ -89,27 +89,27 @@ struct GameView: View {
                             /// user.id falls within the range of 6...9
                             if let card = self.environment.cards[index]{
                                 if (self.environment.maxID - 3)...self.environment.maxID ~= card.id {
-                                CardView(card: card, onRemove: { removedCard in
-                                    // Remove that card from our array
-                                    if end {
-                                        self.isPresentedGameOver.toggle()
-                                        
-                                        UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                        self.environment.reset()
-                                    } else {
-                                        environment.changeCardPriority()
-                                        
-                                        if environment.maxID == 0 {
-                                            self.isPresentedFinished.toggle()
+                                    CardView(card: card, onRemove: { removedCard in
+                                        // Remove that card from our array
+                                        if end {
+                                            self.isPresentedGameOver.toggle()
                                             
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
                                             self.environment.reset()
+                                        } else {
+                                            environment.changeCardPriority()
+                                            
+                                            if environment.maxID == 0 {
+                                                self.isPresentedFinished.toggle()
+                                                
+                                                UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
+                                                self.environment.reset()
+                                            }
+                                            else{
+                                                self.environment.cards.removeLast()
+                                            }
+                                            
                                         }
-                                        else{
-                                            self.environment.cards.removeLast()
-                                        }
-                                        
-                                    }
                                     }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
                                     .animation(.spring())
                                     .frame(maxHeight: geometry.size.height*(isAcessibilityOn ? 0.6 : 0.7), alignment: .top)
@@ -253,7 +253,7 @@ struct GameView: View {
                                 .frame(minHeight: 25)
                                 .frame(height: UIScreen.main.bounds.height*0.035)
                                 .foregroundColor(Color.roxoClaroColor)
-                                //.padding(6)
+                            //.padding(6)
                         })
                         .padding(.top)
                         .padding(.top, UIScreen.main.bounds.height > 800 ? UIScreen.main.bounds.height*0.02 : 0)
