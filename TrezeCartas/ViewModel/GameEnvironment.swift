@@ -40,27 +40,33 @@ class GameEnvironment: ObservableObject {
             allCards = try JSONDecoder().decode([JSONCard].self, from: jsonData)
             
             
-            let initialCard = allCards.filter{$0.dependsFrom == nil}.randomElement()!
+            let initialCard: JSONCard
+            let idToAdd: Int
+            if UserDefaults.standard.bool(forKey: "has_completed_onboarding_once_key"){
+                initialCard = allCards.first(where: {$0.uid == 1})!
+                idToAdd = 1
+            }
+            else{
+                initialCard = allCards.first(where: {$0.uid == 0})!
+                idToAdd = 4
+            }
             
-            maxID = 14
             
-            cards = (0...13).map{_ in
+            maxID = 14 + idToAdd
+            
+            cards = (0...maxID - 1).map{_ in
                 return JSONCard.placebo()
             }
             
             cards.append(initialCard)
             
-            for i in 0 ..<  allCards.count {
-                allCards[i].id = i
-            }
-            
             for i in 0 ..<  cards.count {
                 cards[i].id = i
             }
-            allCards.removeAll(where: {$0.uid == initialCard.uid})
+            
+            allCards.removeAll(where: {[0,1].contains($0.uid)})
             
         } catch{
-            print("its a thursday")
             print(error)
         }
         
@@ -70,6 +76,9 @@ class GameEnvironment: ObservableObject {
     
     func changeEnvironment(result: Attributtes){
         
+        if let endGame = result.endGame{
+            self.attributes.endGame = endGame
+        }
         
         self.attributes.healthStats! += result.healthStats!
         self.attributes.moneyStats! += result.moneyStats!
@@ -92,9 +101,7 @@ class GameEnvironment: ObservableObject {
         
         self.attributes.dependsFrom = result.dependsFrom
         
-        if let endGame = result.endGame{
-            self.attributes.endGame = endGame
-        }
+
         //changeCardPriority()
         
     }
@@ -158,8 +165,6 @@ class GameEnvironment: ObservableObject {
             //print("all cards depois: ", allCards.map{$0.uid}.sorted())
             self.objectWillChange.send()
         }
-        //cards[cards.count-2] = cardPriority[selectedIndex].0.with(id: cards.count-2)
-        
             
     }
     
