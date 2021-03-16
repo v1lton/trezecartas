@@ -189,7 +189,7 @@
    "left_result_text": "Ei, ooo que tt acc conte sendo? 4s CoZax tt04 1/2 Ex tttttrrrr ãããããããããã nH4z. EEEiEiiiaifo, vvoou C T4 wW3ell? 4Xho Ki é BbBoOm nN User eSsasSs coooo us4sS 100 Xab3R D1 0nD véio\nEh drègui ihhhhhhhh",
    "right_result_text": "Você provavelmente fez a melhor escolha. É bom saber a procedência do que você está colocando do seu corpo, não é? Se tu quer tanto um docinho, aquele boy tá vendendo pirulito verde, corre lá pra comprar!",
    "left_result": "{\n  \"health_stats\" : -1,\n  \"money_stats\" : 0,\n  \"insanity_stats\" : 3,\n  \"is_drunk\" : true\n}",
-   "right_result": "{\n  \"health_stats\" : 1,\n  \"money_stats\" : -3,\n  \"insanity_stats\" : 1\n  \"is_drunk\" : true\n}",
+   "right_result": "{\n  \"health_stats\" : 1,\n  \"money_stats\" : -3,\n  \"insanity_stats\" : 1,\n  \"is_drunk\" : true\n}",
    "depends_from": null,
    "is_among_friends": true,
    "has_kissed": null,

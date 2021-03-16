@@ -39,30 +39,31 @@ class GameEnvironment: ObservableObject {
             let jsonData = try String(contentsOfFile: jsonPath, encoding: String.Encoding.utf8).data(using: String.Encoding.utf8)!
             allCards = try JSONDecoder().decode([JSONCard].self, from: jsonData)
             
-            allCards.shuffle()
             
+            let initialCard = allCards.filter{$0.dependsFrom == nil}.randomElement()!
+            
+            maxID = 14
+            
+            cards = (0...13).map{_ in
+                return JSONCard.placebo()
+            }
+            
+            cards.append(initialCard)
             
             for i in 0 ..<  allCards.count {
                 allCards[i].id = i
             }
-//            repeat{
-//                allCards.shuffle()
-//            }while allCards[allCards.count-1].dependsFrom != nil
-            //var c: [JSONCard] = (0...15).map{_ in JSONCard.placebo()}
             
-            cards = (0...14).map{allCards[$0]}
-                //.append(allCards.shuffled().first(where: {$0.dependsFrom == nil})!)
-            
-            maxID = 14
-                        
-            allCards.removeAll(where: {$0.uid == cards[maxID].uid})
+            for i in 0 ..<  cards.count {
+                cards[i].id = i
+            }
+            allCards.removeAll(where: {$0.uid == initialCard.uid})
             
         } catch{
             print("its a thursday")
             print(error)
         }
         
-        //shuffleCards()
         self.objectWillChange.send()
     }
 
@@ -107,17 +108,17 @@ class GameEnvironment: ObservableObject {
                 $0.uid == self.attributes.dependsFrom
             }){
                 print(self.attributes)
-                print("Índice Selecionado (FAST)", card.uid, ", Carta: ", card.name)
+                //print("Índice Selecionado (FAST)", card.uid, ", Carta: ", card.name)
                 self.maxID -= 1
                 cards[maxID].change(new: card)
-//                for index in 0..<cards.count{
-//                    cards[index].id = index
-//                }
+
                 self.attributes.dependsFrom = nil
                 self.objectWillChange.send()
+                //print("all cards antes (fast): ", allCards.map{$0.uid}.sorted())
                 allCards.removeAll(where: {cardToRemove in
                     cardToRemove.uid == card.uid
                 })
+                //print("all cards depois (fast): ", allCards.map{$0.uid}.sorted())
             }
             else{
                 self.maxID -= 1
@@ -125,22 +126,15 @@ class GameEnvironment: ObservableObject {
             }
             return
         }
-        print("all cards count: ", allCards.count)
+        //print("all cards count: ", allCards.count)
         var cardPriority: [(JSONCard, Double)] = allCards.filter{$0.dependsFrom == nil}.map{ card in
             return(card, 1)
         }
         
-//        if attributes.endGame != nil{
-//            cardPriority.removeAll(where: {$0.0.endGame != nil})
-//        }
-        
         let cardsCount = cardPriority.count
-        print("Count of priorities", cardsCount)
-        //print("Environment Properties")
+
         let enviromentProperties = self.attributes.mirror()
-        //for propierty in enviromentProperties{
-        //    print("\"\(propierty.key)\": \(propierty.value)")
-        //}
+
         for index in 0..<cardPriority.count{
             let card = cardPriority[index]
             let cardProperties = card.0.mirror()
@@ -153,16 +147,15 @@ class GameEnvironment: ObservableObject {
         }
         
         if let selectedIndex = randomNumber(probabilities: cardPriority.map{$0.1}){
-            print("Índice Selecionado ", cardPriority[selectedIndex].0.uid, ", Carta: ", cardPriority[selectedIndex].0.name)
+            //print("Índice Selecionado ", cardPriority[selectedIndex].0.uid, ", Carta: ", cardPriority[selectedIndex].0.name)
             self.maxID -= 1
             cards[maxID].change(new: cardPriority[selectedIndex].0)
-//            for index in 0..<cards.count{
-//                cards[index].id = index
-//            }
+
+            //print("all cards antes: ", allCards.map{$0.uid}.sorted())
             allCards.removeAll(where: {cardToRemove in
                 cardToRemove.uid == cardPriority[selectedIndex].0.uid
             })
-            
+            //print("all cards depois: ", allCards.map{$0.uid}.sorted())
             self.objectWillChange.send()
         }
         //cards[cards.count-2] = cardPriority[selectedIndex].0.with(id: cards.count-2)

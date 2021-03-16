@@ -69,6 +69,8 @@ class Attributtes: Codable, ReflectedStringConvertible, CustomStringConvertible{
 
 
 class JSONCard: Attributtes{
+    
+    
     var uid: Int
     
     var id: Int = 0
@@ -115,7 +117,7 @@ class JSONCard: Attributtes{
     }
     
     private override init(){
-        
+        self.id = 0
         self.uid = Int(randomString(length: 5))!
         self.name = randomString(length: 5)
         self.text = randomString(length: 5)

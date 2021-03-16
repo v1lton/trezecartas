@@ -85,14 +85,14 @@ struct GameView: View {
                                 CardView(card: card, onRemove: { removedCard in
                                     // Remove that card from our array
                                     if end {
-                                        print("terminou")
+                                        //print("terminou")
                                         self.isPresentedGameOver.toggle()
                                         
                                         UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
                                         self.environment.reset()
                                         self.environment.shuffleCards()
                                     } else {
-                                        print("antes: ", environment.cards.map{$0.uid})
+                                        //print("antes: ", environment.cards.map{$0.uid})
                                         environment.changeCardPriority()
                                         
                                         //environment.maxID -= 1 // reduz o id maximo
@@ -102,11 +102,12 @@ struct GameView: View {
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
                                             self.environment.reset()
                                         }
-                                        print("depois: ", environment.cards.map{$0.uid})
-                                        print("max id: ", self.environment.maxID)
+                                        //print("depois: ", environment.cards.map{$0.uid})
+                                        //print("max id: ", self.environment.maxID)
                                         self.environment.cards.removeLast()
                                         
-                                        print("remover: ", environment.cards.map{$0.uid})
+                                        //print("remover: ", environment.cards.map{$0.uid})
+                                        
                                     }
                                     
                                 }, environment: environment, leftOption: $leftOption, rightOption: $rightOption, end: $end, isCardShowingBack: $isCardShowingBack, leftButton: $leftButton, rightButton: $rightButton, pass: $pass)
@@ -279,7 +280,6 @@ struct GameView: View {
         .overlay(FinalGameView(shouldPopToRootView: self.$rootIsActive).opacity(isPresentedFinished ? 1 : 0).animation(.easeInOut(duration: 0.3)))
     }
 }
-
 struct GameView_PreviewProvider: PreviewProvider{
     
     @State static var active = false
