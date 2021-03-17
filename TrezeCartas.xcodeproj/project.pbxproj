@@ -22,7 +22,6 @@
 		3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */; };
 		3E00D5F325F9290400BB0CC6 /* ExtensionClamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5F225F9290400BB0CC6 /* ExtensionClamped.swift */; };
 		3E00D60725F92C4E00BB0CC6 /* ExtensionMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D60625F92C4E00BB0CC6 /* ExtensionMotion.swift */; };
-		3E00D61C25F935B500BB0CC6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3E00D61B25F935B500BB0CC6 /* FirebaseAnalytics */; };
 		3E1D712725FAAF80007A1A0E /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D712625FAAF80007A1A0E /* ConfigurationView.swift */; };
 		8908FAF325CDB48000D899D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF225CDB48000D899D2 /* AppDelegate.swift */; };
 		8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908FAF425CDB48000D899D2 /* SceneDelegate.swift */; };
@@ -90,7 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E00D61C25F935B500BB0CC6 /* FirebaseAnalytics in Frameworks */,
 				3568616A25F15B9500C2B261 /* CodableCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,7 +244,6 @@
 			name = TrezeCartas;
 			packageProductDependencies = (
 				3568616925F15B9500C2B261 /* CodableCSV */,
-				3E00D61B25F935B500BB0CC6 /* FirebaseAnalytics */,
 			);
 			productName = TrezeCartas;
 			productReference = 8908FAEF25CDB48000D899D2 /* TrezeCartas.app */;
@@ -553,7 +550,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
 				DEVELOPMENT_TEAM = SJND557DN4;
 				ENABLE_PREVIEWS = YES;
@@ -563,6 +560,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -576,7 +574,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
 				DEVELOPMENT_TEAM = SJND557DN4;
 				ENABLE_PREVIEWS = YES;
@@ -586,6 +584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = academy.TrezeCartas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -738,11 +737,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3568616825F15B9500C2B261 /* XCRemoteSwiftPackageReference "CodableCSV" */;
 			productName = CodableCSV;
-		};
-		3E00D61B25F935B500BB0CC6 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3E00D61A25F935B500BB0CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 
