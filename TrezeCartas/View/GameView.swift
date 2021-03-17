@@ -48,11 +48,6 @@ struct GameView: View {
         return  CGFloat(environment.cards.count - 1 - id) * 8 // era 10
     }
     
-    // Compute what the max ID in the given users array is.
-    private var maxID: Int {
-        return self.environment.cards.map { $0.id }.max() ?? 0
-    }
-    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -62,7 +57,7 @@ struct GameView: View {
                     // status
                     VStack {
                         
-                        ProgressBarView(environment: environment, showAttributes: environment.maxID < 18).frame(minHeight: 45)
+                        ProgressBarView(environment: environment, showAttributes: environment.maxID < 19).frame(minHeight: 45)
                             .frame(height: geometry.size.height*0.0558)
                         
                     }
@@ -234,7 +229,7 @@ struct GameView: View {
                                 .padding(.top, 4.0)
                         }.padding()
                     }
-                    .opacity(environment.maxID < 16 ? 1 : 0)
+                    .opacity(environment.maxID < 17 ? 1 : 0)
                     .animation(.easeInOut(duration: 0.6))
                     .opacity(end ? 0 : 1)
                     //Spacer()

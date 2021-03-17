@@ -52,7 +52,7 @@ class GameEnvironment: ObservableObject {
             }
             
             
-            maxID = 14 + idToAdd
+            maxID = 15 + idToAdd
             
             cards = (0...maxID - 1).map{_ in
                 return JSONCard.placebo()
@@ -136,6 +136,9 @@ class GameEnvironment: ObservableObject {
         //print("all cards count: ", allCards.count)
         var cardPriority: [(JSONCard, Double)] = allCards.filter{$0.dependsFrom == nil}.map{ card in
             return(card, 1)
+        }
+        if self.attributes.endGame != nil{
+            cardPriority = cardPriority.filter{$0.0.endGame == nil}
         }
         
         let cardsCount = cardPriority.count

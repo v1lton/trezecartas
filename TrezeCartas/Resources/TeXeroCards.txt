@@ -248,7 +248,7 @@
    "right_text": "Me fez sedento",
    "left_result_text": "Será que o boy tá me olhando? Será que eu chego nele? Será que eu tô com muita cara de doido? Será que ele está olhando pra outra pessoa? Que rolê é esse? De onde veio toda essa gente? Acho que você está ficando noiado...",
    "right_result_text": "Bicha, que boy é esse? Tais doida pra dar uns beijos. Mas calma lá, ele tá beijando uma boyzinha? Eita, tá beijando um boyzinho também! Tais sedento pra ser o próximo, né? Mas esse diabo já faiscou novamente e sumiu no meio da multidão. Agora só próximo carnaval.",
-   "left_result": "{\n  \"health_stats\" : -3,\n  \"money_stats\" : -1,\n  \"insanity_stats\" : 2 }",
+   "left_result": "{\n  \"health_stats\" : -3,\n  \"money_stats\" : -1,\n  \"insanity_stats\" : 2\n}",
    "right_result": "{\n  \"health_stats\" : -1,\n  \"money_stats\" : 0,\n  \"insanity_stats\" : 0,\n  \"broken_heart\" : true\n}",
    "depends_from": null,
    "is_among_friends": null,

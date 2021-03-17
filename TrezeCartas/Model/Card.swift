@@ -139,18 +139,30 @@ class JSONCard: Attributtes{
         self.uid = new.uid
         self.name = new.name
         self.text = new.text
-        self.leftText = new.leftText
-        self.rightText = new.rightText
-        self.leftResult = new.leftResult
-        self.rightResult = new.rightResult
-        self.leftResultText = new.leftResultText
-        self.rightResultText = new.rightResultText
+
         self.imageName = new.imageName
         self.healthStats = new.healthStats
         self.moneyStats = new.moneyStats
         self.insanityStats = new.insanityStats
         self.endGame = new.endGame
         
+        //swap left-right
+        if [true,false].randomElement()!{
+            self.leftText = new.rightText
+            self.rightText = new.leftText
+            self.leftResult = new.rightResult
+            self.rightResult = new.leftResult
+            self.leftResultText = new.rightResultText
+            self.rightResultText = new.leftResultText
+        }
+        else{
+            self.leftText = new.leftText
+            self.rightText = new.rightText
+            self.leftResult = new.leftResult
+            self.rightResult = new.rightResult
+            self.leftResultText = new.leftResultText
+            self.rightResultText = new.rightResultText
+        }
     }
     
     func getResult(direction: CardView.LeftRight) throws -> Attributtes{
