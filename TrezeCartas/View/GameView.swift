@@ -48,6 +48,23 @@ struct GameView: View {
         return  CGFloat(environment.cards.count - 1 - id) * 8 // era 10
     }
     
+    private func setStatusShake() {
+        let random = Double.random(in: 0...100)
+        if random < 29 {
+            self.environment.attributes.healthStats! += 1
+        } else if random < 58 {
+            self.environment.attributes.moneyStats! += 1
+        } else if random < 68 {
+            self.environment.attributes.healthStats! += 2
+        } else if random < 78 {
+            self.environment.attributes.moneyStats! += 2
+        } else {
+            self.environment.attributes.healthStats! -= 1
+            self.environment.attributes.moneyStats! -= 1
+        }
+        self.environment.attributes.insanityStats! += 1
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -79,7 +96,7 @@ struct GameView: View {
                         .frame(maxHeight: geometry.size.height*0.6, alignment: .center)
                         .frame(height: 500)
                         
-                        ForEach(0..<self.environment.cards.count, id: \.self) { index in
+                        ForEach(1..<self.environment.cards.count, id: \.self) { index in //era 0 em vez de 1
                             /// Using the pattern-match operator ~=, we can determine if our
                             /// user.id falls within the range of 6...9
                             if let card = self.environment.cards[index]{
@@ -90,7 +107,7 @@ struct GameView: View {
                                             self.isPresentedGameOver.toggle()
                                             
                                             UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                            self.environment.reset()
+                                            //self.environment.reset()
                                         } else {
                                             environment.changeCardPriority()
                                             
@@ -98,7 +115,7 @@ struct GameView: View {
                                                 self.isPresentedFinished.toggle()
                                                 
                                                 UserDefaults.standard.setValue(true, forKey: "has_completed_onboarding_once_key")
-                                                self.environment.reset()
+                                                //self.environment.reset()
                                             }
                                             else{
                                                 self.environment.cards.removeLast()
@@ -299,7 +316,8 @@ struct GameView: View {
             //self.drugs += 1
             if !end {
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-                self.environment.attributes.insanityStats! += 1
+                //self.environment.attributes.insanityStats! += 1
+                self.setStatusShake()
             }
             if environment.attributes.insanityStats! == 10 {
                 self.description = "Viado, tu já desse pt de novo, foi? Melhor sorte no próximo carnaval, se não tiver pandemia."
