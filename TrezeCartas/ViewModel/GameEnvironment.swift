@@ -189,11 +189,24 @@ class GameEnvironment: ObservableObject {
         return (probabilities.count - 1)
     }
     
-    static let blockEndings: [String] = [
-        "Assédio não é brincadeira. Aqui é só um jogo, mas para assédio não existe espaço em nenhum lugar. Você foi cancelado!",
-        "Não é mais tempo de ficar reforçando qualquer tipo de estereótipo, dentro ou fora de jogo, viu?! Você foi cancelado!",
-        "Já tá na hora de perder esses teus preconceitos, não é? Afinal, preconceito bom é aquele que não existe, nem em jogo. Você foi cancelado!"
+    func setStatusShake() {
+
+        switch Double.random(in: 0...100) {
+        case 0..<29:
+            self.attributes.healthStats! += 1
+        case 30..<58:
+            self.attributes.moneyStats! += 1
+        case 59..<68:
+            self.attributes.healthStats! += 2
+        case 69..<78:
+            self.attributes.moneyStats! += 2
+        default:
+            self.attributes.healthStats! -= 1
+            self.attributes.moneyStats! -= 1
+        }
         
-    ]
+        self.attributes.insanityStats! += 1
+    
+    }
     
 }

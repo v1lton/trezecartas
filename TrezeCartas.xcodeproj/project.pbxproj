@@ -16,7 +16,6 @@
 		08EFE00425CF3BCD00086BFB /* ShakeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00325CF3BCD00086BFB /* ShakeGestureView.swift */; };
 		08EFE00925CF3DD700086BFB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00825CF3DD700086BFB /* CardView.swift */; };
 		08EFE00E25CF4B7D00086BFB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00D25CF4B7D00086BFB /* GameView.swift */; };
-		3568616A25F15B9500C2B261 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 3568616925F15B9500C2B261 /* CodableCSV */; };
 		3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3568617625F15EEC00C2B261 /* TeXeroCards.txt */; };
 		35CF7C5E25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */; };
 		3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */; };
@@ -89,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3568616A25F15B9500C2B261 /* CodableCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +241,6 @@
 			);
 			name = TrezeCartas;
 			packageProductDependencies = (
-				3568616925F15B9500C2B261 /* CodableCSV */,
 			);
 			productName = TrezeCartas;
 			productReference = 8908FAEF25CDB48000D899D2 /* TrezeCartas.app */;
@@ -552,7 +549,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
-				DEVELOPMENT_TEAM = SJND557DN4;
+				DEVELOPMENT_TEAM = P63952MS7L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrezeCartas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -576,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrezeCartas/Preview Content\"";
-				DEVELOPMENT_TEAM = SJND557DN4;
+				DEVELOPMENT_TEAM = P63952MS7L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrezeCartas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -731,14 +728,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3568616925F15B9500C2B261 /* CodableCSV */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3568616825F15B9500C2B261 /* XCRemoteSwiftPackageReference "CodableCSV" */;
-			productName = CodableCSV;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8908FAF825CDB48000D899D2 /* TrezeCartas.xcdatamodeld */ = {

@@ -48,23 +48,6 @@ struct GameView: View {
         return  CGFloat(environment.cards.count - 1 - id) * 8 // era 10
     }
     
-    private func setStatusShake() {
-        let random = Double.random(in: 0...100)
-        if random < 29 {
-            self.environment.attributes.healthStats! += 1
-        } else if random < 58 {
-            self.environment.attributes.moneyStats! += 1
-        } else if random < 68 {
-            self.environment.attributes.healthStats! += 2
-        } else if random < 78 {
-            self.environment.attributes.moneyStats! += 2
-        } else {
-            self.environment.attributes.healthStats! -= 1
-            self.environment.attributes.moneyStats! -= 1
-        }
-        self.environment.attributes.insanityStats! += 1
-    }
-    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -317,7 +300,7 @@ struct GameView: View {
             if !end {
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                 //self.environment.attributes.insanityStats! += 1
-                self.setStatusShake()
+                self.environment.setStatusShake()
             }
             if environment.attributes.insanityStats! == 10 {
                 self.description = "Viado, tu já desse pt de novo, foi? Melhor sorte no próximo carnaval, se não tiver pandemia."
