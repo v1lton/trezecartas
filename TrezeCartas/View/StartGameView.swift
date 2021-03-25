@@ -88,6 +88,7 @@ struct StartGameView: View {
                 .onTapGesture {
                     if !showConfig {
                         self.isPresented.toggle()
+                        AudioPreview.shared.play(name: "card_shuffle", delay: 0.5)
                     }
                 }
             }

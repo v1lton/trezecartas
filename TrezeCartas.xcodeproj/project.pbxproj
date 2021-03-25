@@ -16,6 +16,13 @@
 		08EFE00425CF3BCD00086BFB /* ShakeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00325CF3BCD00086BFB /* ShakeGestureView.swift */; };
 		08EFE00925CF3DD700086BFB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00825CF3DD700086BFB /* CardView.swift */; };
 		08EFE00E25CF4B7D00086BFB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFE00D25CF4B7D00086BFB /* GameView.swift */; };
+		3508A8B0260D17550069A9DF /* AudioPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508A8AF260D17550069A9DF /* AudioPreview.swift */; };
+		3508A8B6260D18570069A9DF /* background_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8B5260D18570069A9DF /* background_sound.wav */; };
+		3508A8BB260D18F50069A9DF /* card_shuffle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8BA260D18F50069A9DF /* card_shuffle.wav */; };
+		3508A8C0260D18FB0069A9DF /* card_flip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8BF260D18FB0069A9DF /* card_flip.wav */; };
+		3508A8C4260D19940069A9DF /* card_flip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8BF260D18FB0069A9DF /* card_flip.wav */; };
+		3508A8C5260D19940069A9DF /* card_shuffle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8BA260D18F50069A9DF /* card_shuffle.wav */; };
+		3508A8C6260D19940069A9DF /* background_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8B5260D18570069A9DF /* background_sound.wav */; };
 		3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3568617625F15EEC00C2B261 /* TeXeroCards.txt */; };
 		35CF7C5E25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */; };
 		3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */; };
@@ -60,6 +67,10 @@
 		08EFE00325CF3BCD00086BFB /* ShakeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGestureView.swift; sourceTree = "<group>"; };
 		08EFE00825CF3DD700086BFB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		08EFE00D25CF4B7D00086BFB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		3508A8AF260D17550069A9DF /* AudioPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPreview.swift; sourceTree = "<group>"; };
+		3508A8B5260D18570069A9DF /* background_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_sound.wav; sourceTree = "<group>"; };
+		3508A8BA260D18F50069A9DF /* card_shuffle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = card_shuffle.wav; sourceTree = "<group>"; };
+		3508A8BF260D18FB0069A9DF /* card_flip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = card_flip.wav; sourceTree = "<group>"; };
 		3568617625F15EEC00C2B261 /* TeXeroCards.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TeXeroCards.txt; sourceTree = "<group>"; };
 		35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionReflectedStringConvertible.swift; sourceTree = "<group>"; };
 		3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCornerRadius.swift; sourceTree = "<group>"; };
@@ -147,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				0894A10725D4B15C0007B370 /* GameEnvironment.swift */,
+				3508A8AF260D17550069A9DF /* AudioPreview.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -154,7 +166,10 @@
 		3E00D5E925F9283C00BB0CC6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3508A8BF260D18FB0069A9DF /* card_flip.wav */,
+				3508A8BA260D18F50069A9DF /* card_shuffle.wav */,
 				3568617625F15EEC00C2B261 /* TeXeroCards.txt */,
+				3508A8B5260D18570069A9DF /* background_sound.wav */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -333,9 +348,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3508A8B6260D18570069A9DF /* background_sound.wav in Resources */,
 				8908FB0225CDB48200D899D2 /* LaunchScreen.storyboard in Resources */,
 				3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */,
 				8908FAFF25CDB48200D899D2 /* Preview Assets.xcassets in Resources */,
+				3508A8BB260D18F50069A9DF /* card_shuffle.wav in Resources */,
+				3508A8C0260D18FB0069A9DF /* card_flip.wav in Resources */,
 				8908FAFC25CDB48200D899D2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +362,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3508A8C4260D19940069A9DF /* card_flip.wav in Resources */,
+				3508A8C5260D19940069A9DF /* card_shuffle.wav in Resources */,
+				3508A8C6260D19940069A9DF /* background_sound.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +396,7 @@
 				8908FAF525CDB48000D899D2 /* SceneDelegate.swift in Sources */,
 				08EFE00E25CF4B7D00086BFB /* GameView.swift in Sources */,
 				08EFE00925CF3DD700086BFB /* CardView.swift in Sources */,
+				3508A8B0260D17550069A9DF /* AudioPreview.swift in Sources */,
 				08EEAD9F25D44162002461DF /* ProgressBarView.swift in Sources */,
 				0894A10825D4B15C0007B370 /* GameEnvironment.swift in Sources */,
 				08CA4FBB25D4A39E00BFE2BE /* StartGameView.swift in Sources */,
