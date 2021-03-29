@@ -33,7 +33,7 @@ class AudioPreview{
         }
     }
     
-    func play(name: String, delay: Double){
+    func play(name: String, volume: Float, delay: Double){
         guard let url = Bundle.main.url(forResource: name, withExtension: "wav") else {
             print("No file with specified name exists")
             return }
@@ -43,7 +43,7 @@ class AudioPreview{
             
             actionPlayer = try AVAudioPlayer(contentsOf: url)
             actionPlayer!.prepareToPlay()
-            actionPlayer!.volume = 0.2
+            actionPlayer!.volume = volume
             
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 self.actionPlayer!.play()

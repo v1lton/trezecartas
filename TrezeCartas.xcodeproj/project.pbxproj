@@ -23,6 +23,8 @@
 		3508A8C4260D19940069A9DF /* card_flip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8BF260D18FB0069A9DF /* card_flip.wav */; };
 		3508A8C5260D19940069A9DF /* card_shuffle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8BA260D18F50069A9DF /* card_shuffle.wav */; };
 		3508A8C6260D19940069A9DF /* background_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3508A8B5260D18570069A9DF /* background_sound.wav */; };
+		3544852B261242E1009B3983 /* latinha.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3544852A261242E1009B3983 /* latinha.wav */; };
+		3544852F261242EC009B3983 /* latinha.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3544852A261242E1009B3983 /* latinha.wav */; };
 		3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3568617625F15EEC00C2B261 /* TeXeroCards.txt */; };
 		35CF7C5E25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */; };
 		3E00D5EE25F928A000BB0CC6 /* ExtensionCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */; };
@@ -71,6 +73,7 @@
 		3508A8B5260D18570069A9DF /* background_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_sound.wav; sourceTree = "<group>"; };
 		3508A8BA260D18F50069A9DF /* card_shuffle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = card_shuffle.wav; sourceTree = "<group>"; };
 		3508A8BF260D18FB0069A9DF /* card_flip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = card_flip.wav; sourceTree = "<group>"; };
+		3544852A261242E1009B3983 /* latinha.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = latinha.wav; sourceTree = "<group>"; };
 		3568617625F15EEC00C2B261 /* TeXeroCards.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TeXeroCards.txt; sourceTree = "<group>"; };
 		35CF7C5D25F178D1000B4BE0 /* ExtensionReflectedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionReflectedStringConvertible.swift; sourceTree = "<group>"; };
 		3E00D5ED25F928A000BB0CC6 /* ExtensionCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCornerRadius.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 		3E00D5E925F9283C00BB0CC6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3544852A261242E1009B3983 /* latinha.wav */,
 				3508A8BF260D18FB0069A9DF /* card_flip.wav */,
 				3508A8BA260D18F50069A9DF /* card_shuffle.wav */,
 				3568617625F15EEC00C2B261 /* TeXeroCards.txt */,
@@ -348,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3544852B261242E1009B3983 /* latinha.wav in Resources */,
 				3508A8B6260D18570069A9DF /* background_sound.wav in Resources */,
 				8908FB0225CDB48200D899D2 /* LaunchScreen.storyboard in Resources */,
 				3568617725F15EEC00C2B261 /* TeXeroCards.txt in Resources */,
@@ -362,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3544852F261242EC009B3983 /* latinha.wav in Resources */,
 				3508A8C4260D19940069A9DF /* card_flip.wav in Resources */,
 				3508A8C5260D19940069A9DF /* card_shuffle.wav in Resources */,
 				3508A8C6260D19940069A9DF /* background_sound.wav in Resources */,

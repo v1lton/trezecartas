@@ -24,7 +24,7 @@ class GameEnvironment: ObservableObject {
     
     init(){
         
-        AudioPreview.shared.backgroundPlayer!.play()
+        //AudioPreview.shared.backgroundPlayer!.play()
         
         attributes = Attributtes()
 
@@ -79,7 +79,7 @@ class GameEnvironment: ObservableObject {
     
     func changeEnvironment(result: Attributtes){
         
-        AudioPreview.shared.play(name: "card_flip", delay: 0)
+        AudioPreview.shared.play(name: "card_flip", volume: 0.2, delay: 0)
         
         if let endGame = result.endGame{
             self.attributes.endGame = endGame
@@ -114,7 +114,7 @@ class GameEnvironment: ObservableObject {
     
     func changeCardPriority(){
         
-        AudioPreview.shared.play(name: "card_flip", delay: 0)
+        //AudioPreview.shared.play(name: "card_flip", volume: 0.14, delay: 0)
         
         if self.attributes.dependsFrom != nil{
             if let card = self.allCards.first(where: {
@@ -196,7 +196,7 @@ class GameEnvironment: ObservableObject {
     }
     
     func setStatusShake() {
-
+        AudioPreview.shared.play(name: "latinha", volume: 0.2, delay: 0)
         switch Double.random(in: 0...100) {
         case 0..<29:
             self.attributes.healthStats! += 1
